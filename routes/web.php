@@ -8,19 +8,14 @@ use App\Models\UndurDiriDo;
 use App\Models\TahunAkademik;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/mahasiswa', function () {
-//     $mahasiswas = Mahasiswa::all();
-//     return view('mahasiswa.index', compact('mahasiswas'));
-// });
+// UNDUR DIRI
 Route::get('/undur_diri_do', [UndurDiriDoController::class, 'index'])->name('undur_diri_do.index');
 Route::post('/undur-diri/store', [UndurDiriDoController::class, 'store'])->name('undur-diri.store');
 Route::put('/undur-diri/{id}', [UndurDiriDoController::class, 'update'])->name('undur-diri.update');
 Route::delete('/undur-diri/{id}', [UndurDiriDoController::class, 'destroy'])->name('undur-diri.destroy');
+// UNDUR DIRI
     
+// MAHASISWA
 Route::get('/mahasiswa', function () {
     $mahasiswas = Mahasiswa::all();
     $tahunAkademiks = TahunAkademik::all();
@@ -41,6 +36,7 @@ Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name(
 Route::get('/mahasiswa/cari', [MahasiswaController::class, 'cari'])->name('mahasiswa.cari');
 
 Route::get('/mahasiswa/filter', [MahasiswaController::class, 'filter'])->name('mahasiswa.filter');
+// MAHASISWA
 
 // ->middleware(['auth', 'verified'])->name('dashboard');
 
