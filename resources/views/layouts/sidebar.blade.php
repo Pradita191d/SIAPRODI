@@ -1,7 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <span class="brand-link">
+
         <img src="{{ asset('dist/img/Logo-PNC.png') }}" alt="AdminLTE Logo" class="brand-image " style="opacity: .8">
+
         <span class="brand-text font-weight-light">SIAPRO</span>
     </span>
 
@@ -10,7 +12,9 @@
         <!-- Sidebar user panel (optional) -->
         <div class="pb-3 mt-3 mb-3 user-panel d-flex">
             <div class="info">
+
                 <label class="d-block text-white">Welcome {{ Auth::user()->role ?? 'Admin' }}</label>
+
             </div>
         </div>
 
@@ -21,11 +25,12 @@
 
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
+
 
                 <!-- Parent Menu -->
                 <li class="nav-item has-treeview">
@@ -71,6 +76,7 @@
                         <p>Sertikom Mahasiswa</p>
                     </a>
                 </li>
+
                 <!-- Parent Menu -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\mahasiswaController;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\RKAController;
 use App\Http\Controllers\SertMahController;
 use App\Http\Controllers\TaController;
 use App\Http\Controllers\TorController;
 use App\Http\Controllers\UndurDiriDoController;
+
 use App\Models\Mahasiswa;
 use App\Models\UndurDiriDo;
 use App\Models\TahunAkademik;
@@ -32,6 +34,7 @@ Route::get('/lihat_mahasiswa/{id_mahasiswa}', function ($id_mahasiswa) {
     $mahasiswa = Mahasiswa::where('id_mahasiswa', $id_mahasiswa)->firstOrFail();
     return view('mahasiswa.lihat', compact('mahasiswa'));
 })->name('mahasiswa.lihat');
+
 
 Route::post('/tambah_mahasiswa', [mahasiswaController::class, 'store'])->name('mahasiswa.store');
 

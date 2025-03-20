@@ -17,6 +17,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/datatables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Bootstrap CSS (jika menggunakan Bootstrap) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -50,6 +57,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/id.js"></script>
+
     <!-- Make sure this path is correct -->
     <title>SIAPRO</title>
 
@@ -175,7 +183,6 @@
             </ul>
         </div>
     @endif
-
 
     @stack('scripts')
 
