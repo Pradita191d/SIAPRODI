@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "content-hash": "a7eb6303f71c4dc00d9cd5e959420be7",
+
     "packages": [
         {
             "name": "brick/math",
@@ -1998,6 +1999,76 @@
             "time": "2024-08-09T21:24:39+00:00"
         },
         {
+            "name": "league/fractal",
+            "version": "0.20.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/fractal.git",
+                "reference": "573ca2e0e348a7fe573a3e8fbc29a6588ece8c4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/573ca2e0e348a7fe573a3e8fbc29a6588ece8c4e",
+                "reference": "573ca2e0e348a7fe573a3e8fbc29a6588ece8c4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.5",
+                "illuminate/contracts": "~5.0",
+                "laminas/laminas-paginator": "~2.12",
+                "mockery/mockery": "^1.3",
+                "pagerfanta/pagerfanta": "~1.0.0|~4.0.0",
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "~3.4",
+                "vimeo/psalm": "^4.30"
+            },
+            "suggest": {
+                "illuminate/pagination": "The Illuminate Pagination component.",
+                "laminas/laminas-paginator": "Laminas Framework Paginator",
+                "pagerfanta/pagerfanta": "Pagerfanta Paginator"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.20.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "me@philsturgeon.uk",
+                    "homepage": "http://philsturgeon.uk/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle the output of complex data structures ready for API output.",
+            "homepage": "http://fractal.thephpleague.com/",
+            "keywords": [
+                "api",
+                "json",
+                "league",
+                "rest"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/fractal/issues",
+                "source": "https://github.com/thephpleague/fractal/tree/0.20.2"
+            },
+            "time": "2025-02-14T21:33:14+00:00"
+        },
+        {
             "name": "league/mime-type-detection",
             "version": "1.16.0",
             "source": {
@@ -2228,46 +2299,100 @@
             "time": "2024-12-08T08:18:47+00:00"
         },
         {
-            "name": "maatwebsite/excel",
-            "version": "3.1.64",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
-                "reference": "e25d44a2d91da9179cd2d7fec952313548597a79"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/e25d44a2d91da9179cd2d7fec952313548597a79",
-                "reference": "e25d44a2d91da9179cd2d7fec952313548597a79",
-                "shasum": ""
-            },
-            "require": {
-                "composer/semver": "^3.3",
-                "ext-json": "*",
-                "illuminate/support": "5.8.*||^6.0||^7.0||^8.0||^9.0||^10.0||^11.0||^12.0",
-                "php": "^7.0||^8.0",
-                "phpoffice/phpspreadsheet": "^1.29.9",
-                "psr/simple-cache": "^1.0||^2.0||^3.0"
-            },
-            "require-dev": {
-                "laravel/scout": "^7.0||^8.0||^9.0||^10.0",
-                "orchestra/testbench": "^6.0||^7.0||^8.0||^9.0||^10.0",
-                "predis/predis": "^1.1"
+{
+    "name": "livewire/livewire",
+    "version": "v3.6.2",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/livewire/livewire.git",
+        "reference": "8f8914731f5eb43b6bb145d87c8d5a9edfc89313"
+    },
+    "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/livewire/livewire/zipball/8f8914731f5eb43b6bb145d87c8d5a9edfc89313",
+        "reference": "8f8914731f5eb43b6bb145d87c8d5a9edfc89313",
+        "shasum": ""
+    },
+    "require": {
+        "illuminate/database": "^10.0|^11.0|^12.0",
+        "illuminate/routing": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/validation": "^10.0|^11.0|^12.0",
+        "laravel/prompts": "^0.1.24|^0.2|^0.3",
+        "league/mime-type-detection": "^1.9",
+        "php": "^8.1",
+        "symfony/console": "^6.0|^7.0",
+        "symfony/http-kernel": "^6.2|^7.0"
+    },
+    "require-dev": {
+        "calebporzio/sushi": "^2.1",
+        "laravel/framework": "^10.15.0|^11.0|^12.0",
+        "mockery/mockery": "^1.3.1",
+        "orchestra/testbench": "^8.21.0|^9.0|^10.0",
+        "orchestra/testbench-dusk": "^8.24|^9.1|^10.0",
+        "phpunit/phpunit": "^10.4|^11.5",
+        "psy/psysh": "^0.11.22|^0.12"
+    }
+},
+{
+    "name": "maatwebsite/excel",
+    "version": "3.1.64",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
+        "reference": "e25d44a2d91da9179cd2d7fec952313548597a79"
+    },
+    "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/e25d44a2d91da9179cd2d7fec952313548597a79",
+        "reference": "e25d44a2d91da9179cd2d7fec952313548597a79",
+        "shasum": ""
+    },
+    "require": {
+        "composer/semver": "^3.3",
+        "ext-json": "*",
+        "illuminate/support": "5.8.*||^6.0||^7.0||^8.0||^9.0||^10.0||^11.0||^12.0",
+        "php": "^7.0||^8.0",
+        "phpoffice/phpspreadsheet": "^1.29.9",
+        "psr/simple-cache": "^1.0||^2.0||^3.0"
+    },
+    "require-dev": {
+        "laravel/scout": "^7.0||^8.0||^9.0||^10.0",
+        "orchestra/testbench": "^6.0||^7.0||^8.0||^9.0||^10.0",
+        "predis/predis": "^1.1"
+    }
+}
+
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "aliases": {
-                        "Excel": "Maatwebsite\\Excel\\Facades\\Excel"
-                    },
-                    "providers": [
-                        "Maatwebsite\\Excel\\ExcelServiceProvider"
+{
+    "aliases": {
+        "Livewire": "Livewire\\Livewire",
+        "Excel": "Maatwebsite\\Excel\\Facades\\Excel"
+    },
+    "providers": [
+        "Livewire\\LivewireServiceProvider",
+        "Maatwebsite\\Excel\\ExcelServiceProvider"
+    ]
+}
+
                     ]
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Maatwebsite\\Excel\\": "src/"
+{
+    "files": [
+        "src/helpers.php"
+    ],
+    "psr-4": {
+        "Livewire\\": "src/",
+        "Maatwebsite\\Excel\\": "src/"
+    }
+}
+
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2276,37 +2401,37 @@
             ],
             "authors": [
                 {
-                    "name": "Patrick Brouwers",
-                    "email": "patrick@spartner.nl"
-                }
-            ],
-            "description": "Supercharged Excel exports and imports in Laravel",
-            "keywords": [
-                "PHPExcel",
-                "batch",
-                "csv",
-                "excel",
-                "export",
-                "import",
-                "laravel",
-                "php",
-                "phpspreadsheet"
-            ],
-            "support": {
-                "issues": "https://github.com/SpartnerNL/Laravel-Excel/issues",
-                "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.64"
-            },
-            "funding": [
-                {
-                    "url": "https://laravel-excel.com/commercial-support",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/patrickbrouwers",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-24T11:12:50+00:00"
+"authors": [
+    {
+        "name": "Caleb Porzio",
+        "email": "calebporzio@gmail.com"
+    },
+    {
+        "name": "Patrick Brouwers",
+        "email": "patrick@spartner.nl"
+    }
+],
+"description": "A front-end framework for Laravel (Livewire) and Supercharged Excel exports/imports in Laravel (Maatwebsite Excel).",
+"support": {
+    "issues": "https://github.com/livewire/livewire/issues",
+    "source": "https://github.com/livewire/livewire/tree/v3.6.2"
+},
+"funding": [
+    {
+        "url": "https://github.com/livewire",
+        "type": "github"
+    },
+    {
+        "url": "https://laravel-excel.com/commercial-support",
+        "type": "custom"
+    },
+    {
+        "url": "https://github.com/patrickbrouwers",
+        "type": "github"
+    }
+],
+"time": "2025-03-12T20:24:15+00:00"
+
         },
         {
             "name": "maennchen/zipstream-php",
@@ -2996,17 +3121,21 @@
             "time": "2024-11-21T10:39:51+00:00"
         },
         {
-            "name": "phpoffice/phpspreadsheet",
-            "version": "1.29.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "c80041b1628c4f18030407134fe88303661d4e4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/c80041b1628c4f18030407134fe88303661d4e4e",
-                "reference": "c80041b1628c4f18030407134fe88303661d4e4e",
+{
+    "name": "phpoffice/phpspreadsheet",
+    "version": "4.1.0",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
+        "reference": "6ff18c3a8df3a945492f75ce455d77f7ad55dd5c"
+    },
+    "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/6ff18c3a8df3a945492f75ce455d77f7ad55dd5c",
+        "reference": "6ff18c3a8df3a945492f75ce455d77f7ad55dd5c"
+    }
+}
+
                 "shasum": ""
             },
             "require": {
@@ -3024,25 +3153,31 @@
                 "ext-xmlwriter": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
+
                 "ezyang/htmlpurifier": "^4.15",
                 "maennchen/zipstream-php": "^2.1 || ^3.0",
                 "markbaker/complex": "^3.0",
                 "markbaker/matrix": "^3.0",
                 "php": "^7.4 || ^8.0",
+
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
                 "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "dev-main",
+
                 "dompdf/dompdf": "^1.0 || ^2.0 || ^3.0",
+
                 "friendsofphp/php-cs-fixer": "^3.2",
                 "mitoteam/jpgraph": "^10.3",
                 "mpdf/mpdf": "^8.1.1",
                 "phpcompatibility/php-compatibility": "^9.3",
                 "phpstan/phpstan": "^1.1",
                 "phpstan/phpstan-phpunit": "^1.0",
+
                 "phpunit/phpunit": "^8.5 || ^9.0",
+
                 "squizlabs/php_codesniffer": "^3.7",
                 "tecnickcom/tcpdf": "^6.5"
             },
@@ -3097,9 +3232,10 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.29.10"
-            },
-            "time": "2025-02-08T02:56:14+00:00"
+"source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/4.1.0"
+},
+"time": "2025-03-02T06:52:24+00:00"
+
         },
         {
             "name": "phpoption/phpoption",
@@ -6379,6 +6515,7 @@
             "time": "2022-06-03T18:03:27+00:00"
         },
         {
+
             "name": "yajra/laravel-datatables-oracle",
             "version": "v12.0.0",
             "source": {
@@ -9751,6 +9888,7 @@
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+"platform-dev": [],
+"plugin-api-version": "2.6.0"
+
 }

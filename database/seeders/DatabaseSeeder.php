@@ -49,12 +49,26 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $namaDosen = [
+            'Budi Santoso',
+            'Siti Aminah',
+            'Ahmad Fauzi',
+            'Dewi Lestari',
+            'Rudi Hartono',
+            'Nurul Hidayah',
+            'Andi Saputra',
+            'Lina Marlina',
+            'Hendra Wijaya',
+            'Fitri Ramadhani'
+        ];
+
         // Seeding 10 Dosen
         for ($i = 1; $i <= 10; $i++) {
             $nidn = '10203040' . str_pad($i, 2, '0', STR_PAD_LEFT);
+            $randomNama = $namaDosen[array_rand($namaDosen)];
             $dosen = Dosen::create([
                 'nidn' => $nidn,
-                'nama_dosen' => 'Dosen ' . $i,
+                'nama_dosen' => $randomNama,
                 'jabatan_fungsional' => 'Lektor ' . ($i % 3 == 0 ? 'Kepala' : 'Madya'),
                 'no_serdos' => 'SER' . rand(10000, 99999),
             ]);

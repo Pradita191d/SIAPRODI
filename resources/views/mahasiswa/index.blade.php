@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Change this to match your actual layout file name --}}
+@extends('layouts.app')
 
 @section('content')
     <div>
@@ -133,7 +133,6 @@
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
                                             <a href="/lihat_mahasiswa/{{ $mahasiswa->id_mahasiswa }}" class="mr-2 btn btn-sm btn-primary">Lihat</a>
-
                                              <!-- Use a unique modal ID based on mahasiswa's ID -->
                                             <button type="button" class="mr-2 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $mahasiswa->id_mahasiswa }}">
                                                 Edit
@@ -190,6 +189,7 @@
                                             <!-- Tombol Hapus -->
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                                     onclick="setDeleteData('{{ $mahasiswa->id_mahasiswa }}', '{{ $mahasiswa->nama_mahasiswa }}')">
+
                                                 Hapus
                                             </button>
 
@@ -225,11 +225,3 @@
             </div>
         </div>
     </div>
-    <script>
-        function setDeleteData(id, nama) {
-            document.getElementById("namaMahasiswa").textContent = nama;
-            document.getElementById("deleteForm").action = "/mahasiswa/" + id;
-        }
-    </script>
-
-    @endsection
