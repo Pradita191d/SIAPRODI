@@ -18,12 +18,8 @@ return new class extends Migration
             $table->string('no_hp');
             $table->text('alamat');
             $table->string('tahun_masuk');
-<<<<<<< Updated upstream
-            $table->string('status_aktif')->default('Aktif');
-=======
             $table->string('status_aktif')->default("Aktif");
             $table->string('no_ortu');
->>>>>>> Stashed changes
             $table->timestamps();
         });
     }
