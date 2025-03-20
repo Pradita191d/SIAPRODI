@@ -18,7 +18,6 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/datatables.bootstrap5.min.css') }}">
 
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -49,7 +48,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dosenprofile.css') }}">
     <!-- Make sure this path is correct -->
-    <title>{{ $title ?? 'Default Title' }}</title>
+    <title>SIAPRO</title>
+
 </head>
 
 
@@ -59,6 +59,7 @@
     <!-- DataTable CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <div class="wrapper">
+
 
         {{-- <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -80,13 +81,18 @@
                     @yield('content-header')
                 </div><!-- /.container-fluid -->
             </div>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     @yield('content')
                 </div><!-- /.container-fluid -->
             </section>
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- JavaScript Datatables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Bootstrap JS (jika menggunakan Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

@@ -35,8 +35,13 @@ class DatabaseSeeder extends Seeder
                 'nim' => $nim,
                 'nama_mahasiswa' => 'Mahasiswa ' . $i,
                 'no_hp' => '081234567' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'no_ortu' => '081234567' . str_pad($i+20, 3, '0', STR_PAD_LEFT),
                 'alamat' => 'Jl. Pendidikan No. ' . $i,
                 'tahun_masuk' => $tahunAkademikIds[array_rand($tahunAkademikIds)],
+<<<<<<< Updated upstream
+=======
+                'status_aktif' => "Aktif"
+>>>>>>> Stashed changes
             ]);
 
             // Create User for Mahasiswa
