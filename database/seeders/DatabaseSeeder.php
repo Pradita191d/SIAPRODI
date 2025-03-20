@@ -35,9 +35,10 @@ class DatabaseSeeder extends Seeder
                 'nim' => $nim,
                 'nama_mahasiswa' => 'Mahasiswa ' . $i,
                 'no_hp' => '081234567' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'no_ortu' => '081234567' . str_pad($i+20, 3, '0', STR_PAD_LEFT),
                 'alamat' => 'Jl. Pendidikan No. ' . $i,
                 'tahun_masuk' => $tahunAkademikIds[array_rand($tahunAkademikIds)],
-                'status_aktif' => true,
+                'status_aktif' => "Aktif"
             ]);
 
             // Create User for Mahasiswa
@@ -48,12 +49,26 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $namaDosen = [
+            'Budi Santoso',
+            'Siti Aminah',
+            'Ahmad Fauzi',
+            'Dewi Lestari',
+            'Rudi Hartono',
+            'Nurul Hidayah',
+            'Andi Saputra',
+            'Lina Marlina',
+            'Hendra Wijaya',
+            'Fitri Ramadhani'
+        ];
+
         // Seeding 10 Dosen
         for ($i = 1; $i <= 10; $i++) {
             $nidn = '10203040' . str_pad($i, 2, '0', STR_PAD_LEFT);
+            $randomNama = $namaDosen[array_rand($namaDosen)];
             $dosen = Dosen::create([
                 'nidn' => $nidn,
-                'nama_dosen' => 'Dosen ' . $i,
+                'nama_dosen' => $randomNama,
                 'jabatan_fungsional' => 'Lektor ' . ($i % 3 == 0 ? 'Kepala' : 'Madya'),
                 'no_serdos' => 'SER' . rand(10000, 99999),
             ]);
