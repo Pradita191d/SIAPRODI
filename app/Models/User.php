@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'users'; // Custom table name
+    protected $table = 'user'; // Custom table name
 
     protected $primaryKey = 'id_user'; // Custom primary key
 
