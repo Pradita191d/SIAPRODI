@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_hp');
             $table->text('alamat');
             $table->string('tahun_masuk');
-            $table->boolean('status_aktif')->default(true);
+            $table->string('status_aktif')->default('Aktif');
             $table->timestamps();
         });
     }
