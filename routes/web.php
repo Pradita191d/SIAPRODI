@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IpkController;
 use App\Http\Controllers\mahasiswaController;
 use App\Http\Controllers\ProfileController;
 
@@ -96,4 +97,19 @@ Route::delete('/tor/delete/{id}', [TorController::class, 'destroy'])->name('tor.
 Route::post('/tor/edit', [TorController::class, 'update'])->name('tor.update');
 Route::post('/tor', [TorController::class, 'store'])->name('tor.store');
 //fajar
+
+
+//Falah
+Route::get('/ipk', [IpkController::class, 'index'])->name('ipk.index');
+Route::post('/ipk/input', [IpkController::class, 'inputIpk'])->name('ipk.input');
+Route::put('/ipk/{id}', [IpkController::class, 'updateIpk'])->name('ipk.update');
+Route::get('/ipk/{id}/edit', [IpkController::class, 'editIpk'])->name('ipk.edit');
+Route::delete('/ipk/{id}', [IpkController::class, 'deleteIpk'])->name('ipk.delete');
+Route::post('/input-ipk', [IpkController::class, 'inputIpk']);
+Route::get('/ipk/rekapitulasi', [IpkController::class, 'getRekapitulasi'])->name('ipk.rekapitulasi');
+//Falah
+
+
+
+
 require __DIR__ . '/auth.php';

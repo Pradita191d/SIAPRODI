@@ -117,6 +117,13 @@
                             </a>
                         </li>
                     </ul>
+                <li class="nav-item">
+                    <a href="{{ route('ipk.index') }}"
+                        class="nav-link {{ request()->routeIs('ipk.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-trophy"></i>
+                        <p>Data IPK Mahasiswa</p>
+                    </a>
+                </li>
                 </li>
                 </li>
             </ul>
