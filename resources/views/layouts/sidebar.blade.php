@@ -40,15 +40,15 @@
                     <!-- Submenu -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link ml-3">
+                            <a href="{{ route('magang.mahasiswa_magang.show') }}" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Sub-Menu 1</p>
+                                <p>Data Mahasiswa Magang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link ml-3">
+                            <a href="{{ route('magang.index') }}" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Sub-Menu 2</p>
+                                <p>Tempat Magang</p>
                             </a>
                         </li>
                     </ul>
