@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Change this to match your actual layout file name --}}
+@extends('layouts.app')
 
 @section('content')
     <div>
@@ -27,7 +27,7 @@
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-sm btn-primary">Lihat</button>
                                             <button class="btn btn-sm btn-success">Edit</button>
-                                            <button class="btn btn-sm btn-danger" 
+                                            <button class="btn btn-sm btn-danger"
                                                 onclick="confirmDelete('{{ $mahasiswa->id_mahasiswa }}', '{{ $mahasiswa->nama_mahasiswa }}')">
                                                 Hapus
                                             </button>
@@ -42,4 +42,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
