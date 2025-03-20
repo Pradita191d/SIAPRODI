@@ -27,4 +27,10 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(TahunAkademik::class, 'tahun_masuk');
     }
+
+    public function ipk()
+    {
+        return $this->hasOne(Ipk::class, 'nim', 'nim');
+    }
+
 }
