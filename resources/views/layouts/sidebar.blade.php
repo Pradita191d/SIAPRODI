@@ -55,14 +55,73 @@
 
                 <li class="nav-item d-flex align-items-center">
                     <a href="/undur_diri_do" class="nav-link d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-person-circle me-2" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                            <path fill-rule="evenodd"
-                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-                        </svg>
-                        <p class="mb-0">Undur Diri / Do</p>
+                        <i class="nav-icon bi bi-person-circle"></i>
+                        <p class="">Undur Diri / Do</p>
                     </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="/tugas_akhir" class="nav-link d-flex align-items-center">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tugas Akhir</p>
+                    </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="/sertifikat" class="nav-link d-flex align-items-center">
+                        <i class="nav-icon fas fa-award"></i>
+                        <p>Sertikom Mahasiswa</p>
+                    </a>
+                </li>
+                <!-- Parent Menu -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            Menu
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <!-- Submenu -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('magang.mahasiswa_magang.show') }}" class="nav-link ml-3">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Mahasiswa Magang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('magang.index') }}" class="nav-link ml-3">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tempat Magang</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Parent Menu -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            RKA dan TOR
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <!-- Submenu -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('rka.index') }}" class="nav-link ml-3">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengajuan RKA</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tor.index') }}" class="nav-link ml-3">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengajuan TOR</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 </li>
             </ul>
         </nav>

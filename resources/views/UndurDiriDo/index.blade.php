@@ -6,7 +6,10 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-3">
                     <h3 class="h5 font-weight-bold">Daftar Mahasiswa Undur Diri/DO</h3>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">Tambah Data</button>
+                    <div>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">Tambah Data</button>
+                        <a href="{{ route('undur-diri.export') }}" class="btn btn-info">Export to Excel</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table id="undurDiriTable" class="table table-bordered">
@@ -297,10 +300,10 @@
             $('#addModal').on('shown.bs.modal', function() {
                 $('.select2nim').select2({
                     minimumInputLength: 1,
-                    dropdownParent: $('#addModal') 
+                    dropdownParent: $('#addModal')
                 });
             });
-            
+
             $('.select2nim').select2({
                 placeholder: "Cari Mahasiswa...",
                 allowClear: true,

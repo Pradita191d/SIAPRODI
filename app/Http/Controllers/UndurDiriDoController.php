@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\UndurDiriDo;
 use Illuminate\Http\Request;
+use App\Exports\UndurDiriExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UndurDiriDoController extends Controller
 {
@@ -88,5 +90,10 @@ class UndurDiriDoController extends Controller
         return redirect()->back()->with('success', 'Data mahasiswa berhasil dihapus.');
 
     }
+
+    public function exportUndurDiri()
+{
+    return Excel::download(new UndurDiriExport, 'undur_diri.xlsx');
+}
 
 }
