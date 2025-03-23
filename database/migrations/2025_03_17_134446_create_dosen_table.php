@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('dosen', function (Blueprint $table) {
             $table->id('id_dosen');
             $table->string('nidn')->unique();
+            $table->string('nip');
             $table->string('nama_dosen');
+            $table->string('alamat');
+            $table->string('no_telp');
             $table->string('jabatan_fungsional');
             $table->string('no_serdos');
             $table->timestamps();

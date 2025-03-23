@@ -40,9 +40,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="ml-3 nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sub-Menu</p>
+                            <a href="/dosen" class="nav-link ml-3">
+                                <i class="nav-icon fas fa-graduation-cap"></i>
+                                <p>Data Dosen</p>
                             </a>
                         </li>
                     </ul>
@@ -50,7 +50,7 @@
 
                 <li class="nav-item d-flex align-items-center">
                     <a href="/undur_diri_do" class="nav-link d-flex align-items-center">
-                        <i class="nav-icon bi bi-person-circle"></i>
+                        <i class="nav-icon fas fa-graduation-cap"></i>
                         <p class="">Undur Diri / Do</p>
                     </a>
                 </li>
@@ -72,7 +72,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
-                            Menu
+                            Magang
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -124,8 +124,43 @@
                         <p>Data IPK Mahasiswa</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/mou" class="nav-link">
+                        <i class="nav-icon fas fa-file-signature"></i>
+                        <p>MOU</p>
+                    </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('penelitian-dosen.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-microscope"></i>
+                        <p>Data Penelitian Dosen</p>
+                    </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/mbkm" class="nav-link">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>Data MBKM</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/data-pemanggilan" class="nav-link">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>Pemanggilan Orang Tua</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kegiatan_dosen" class="nav-link">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>Data Kegiatan Dosen Di luar</p>
+                    </a>
+                </li>
+                        <li class="nav-item">
+                            <a href="/prestasi" class="nav-link">
+                                <i class="nav-icon fas fa-trophy"></i>
+                                <p>Data Prestasi Mahasiswa</p>
+                            </a>
+                        </li>
+                
             </ul>
         </nav>
 

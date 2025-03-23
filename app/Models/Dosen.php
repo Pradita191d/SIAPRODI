@@ -15,8 +15,12 @@ class Dosen extends Model
 
     protected $fillable = [
         'nidn',
+        'nip',
         'nama_dosen',
+        'alamat',
+        'no_telp',
         'jabatan_fungsional',
         'no_serdos',
+        'status_dosen',
     ];
 }

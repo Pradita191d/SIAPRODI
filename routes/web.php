@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\IpkController;
+use App\Http\Controllers\KegiatanDosenController;
 use App\Http\Controllers\mahasiswaController;
+use App\Http\Controllers\MbkmController;
+use App\Http\Controllers\MouController;
+use App\Http\Controllers\PemanggilanOrangtuaController;
+use App\Http\Controllers\PenelitianDosenController;
+use App\Http\Controllers\PresMhsController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\MagangController;
@@ -11,7 +18,9 @@ use App\Http\Controllers\TaController;
 use App\Http\Controllers\TorController;
 use App\Http\Controllers\UndurDiriDoController;
 
+use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\PenelitianDosen;
 use App\Models\UndurDiriDo;
 use App\Models\TahunAkademik;
 use Illuminate\Support\Facades\Route;
@@ -109,7 +118,87 @@ Route::post('/input-ipk', [IpkController::class, 'inputIpk']);
 Route::get('/ipk/rekapitulasi', [IpkController::class, 'getRekapitulasi'])->name('ipk.rekapitulasi');
 //Falah
 
+//mei
+Route::get('/mou', [MouController::class, 'index'])->name('mou.index');
+Route::get('/mou/export', [MouController::class, 'exportExcel'])->name('mou.export');
+Route::get('/mou/{id}', [MouController::class, 'show'])->name('mou.show');
+Route::post('/mou/store', [MouController::class, 'store'])->name('mou.store');
+Route::delete('/mou/{id_mou}', [MouController::class, 'destroy'])->name('mou.destroy');
+Route::put('/mou/{id_mou}', [MouController::class, 'update'])->name('mou.update');
+//mei
 
 
+//afi
+// Route Data Dosen Penelitian (CRUD)
+Route::resource('penelitian-dosen', PenelitianDosenController::class);
+// Route tambahan untuk menampilkan detail penelitian
+Route::get('/penelitian-dosen/{id_penelitian}/detail', [PenelitianDosenController::class, 'detail'])->name('penelitian.detail');
+//afi
+
+//Diva
+Route::get('/mbkm', [MbkmController::class, 'tampil'])->name('mbkm.tampil');
+Route::get('/mbkm/tambah', [MbkmController::class, 'tambah'])->name('mbkm.tambah');
+Route::post('/mbkm/submit', [MbkmController::class, 'submit'])->name('mbkm.submit');
+// Ubah metode route dari POST ke PUT atau PATCH
+Route::put('/mbkm/update/{id}', [MbkmController::class, 'update'])->name('mbkm.update');
+Route::get('/mbkm/edit/{id}', [MbkmController::class, 'edit'])->name('mbkm.edit');
+// Route::post('/mbkm/update/{id}', [MbkmController::class, 'update'])->name('mbkm.update');
+Route::post('/mbkm/delete/{id}', [MbkmController::class, 'delete'])->name('mbkm.delete');
+//Route::get('/mbkm', [MbkmController::class, 'cari'])->name('mbkm.cari');
+//Diva
+
+//Chinta
+Route::get('/data-pemanggilan', [PemanggilanOrangtuaController::class, 'index'])->name('pemanggilan.index');
+Route::get('/tambah-data', [PemanggilanOrangtuaController::class, 'tambah'])->name('pemanggilan.tambah');
+Route::post('/simpan-data', [PemanggilanOrangtuaController::class, 'store'])->name('pemanggilan.store');
+Route::get('/pemanggilan/{id}/edit', [PemanggilanOrangtuaController::class, 'edit'])->name('pemanggilan.edit');
+Route::put('/pemanggilan/{id}', [PemanggilanOrangtuaController::class, 'update'])->name('pemanggilan.update');
+Route::delete('/pemanggilan/{id}', [PemanggilanOrangtuaController::class, 'destroy'])->name('pemanggilan.destroy');
+Route::get('/pemanggilan/pdf/{id}', [PemanggilanOrangtuaController::class, 'cetakPDF'])->name('pemanggilan.pdf');
+Route::get('/pemanggilan/export-excel', [PemanggilanOrangtuaController::class, 'exportExcel'])->name('pemanggilan.exportExcel');
+//Chinta
+
+//Ais
+Route::get('/kegiatan_dosen', [KegiatanDosenController::class, 'index'])->name('kegiatan_dosen.index');
+Route::get('/kegiatan_dosen/tambah', [KegiatanDosenController::class, 'create'])->name('kegiatan_dosen.create');
+Route::post('/kegiatan_dosen/store', [KegiatanDosenController::class, 'store'])->name('kegiatan_dosen.store');
+Route::get('/kegiatan_dosen/edit/{id}', [KegiatanDosenController::class, 'edit'])->name('kegiatan_dosen.edit');
+Route::put('/kegiatan_dosen/update/{id}', [KegiatanDosenController::class, 'update'])->name('kegiatan_dosen.update');
+Route::delete('/kegiatan_dosen/{id}', [KegiatanDosenController::class, 'destroy'])->name('kegiatan_dosen.destroy');
+
+Route::get('/kegiatan_dosen/search', [KegiatanDosenController::class, 'search'])->name('kegiatan_dosen.search');
+Route::get('/kegiatan_dosen/exportpdf', [KegiatanDosenController::class, 'exportpdf']);
+Route::get('/kegiatan_dosen/cetakkegiatan', [KegiatanDosenController::class, 'cetakkegiatan']);
+//Ais
+
+//Sheilya
+Route::get('/prestasi', [PresMhsController::class, 'index']);
+Route::get('/prestasi/create', [PresMhsController::class, 'create']);
+Route::post('/prestasi/store', [PresMhsController::class, 'store']);
+Route::get('/prestasi/{id}/edit', [PresMhsController::class, 'edit']);
+Route::get('/prestasi/{id}/delete', [PresMhsController::class, 'destroy']);
+Route::get('/prestasi/search', [PresMhsController::class, 'search']);
+Route::put('/prestasi/{id}/update', [PresMhsController::class, 'update']);
+
+route::get('prestasi/exportpdf', [PresMhsController::class, 'exportpdf']); //cetak pdf
+route::get('prestasi/cetakprestasi', [PresMhsController::class, 'cetakprestasi']); //cetak pdf
+//Sheilya
+
+//Adhe
+// Perbaikan: Tambahkan nama 'dosen.index' agar bisa dipanggil di Blade
+Route::get('/dosen', function () {
+    $dosen = Dosen::all();
+    return view('dosen.index', compact('dosen'));
+})->name('dosen.index');
+Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
+
+Route::get('/dosen/tambah', [DosenController::class, 'create'])->name('dosen.create');
+Route::post('/dosen/store', [DosenController::class, 'store'])->name('dosen.store');
+// Route::get('/dosen/{id}', [DosenController::class, 'show'])->name('dosen.show');
+Route::get('/dosen/edit/{id_dosen}', [DosenController::class, 'edit'])->name('dosen.edit');
+Route::put('/dosen/{id_dosen}', [DosenController::class, 'update'])->name('dosen.update');
+Route::delete('/dosen/{id_dosen}', [DosenController::class, 'destroy'])->name('dosen.destroy');
+Route::get('/dosen', [DosenController::class, 'cari'])->name('dosen.index');
+//Adhe
 
 require __DIR__ . '/auth.php';
