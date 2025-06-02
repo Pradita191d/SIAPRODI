@@ -4,6 +4,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\IpkController;
 use App\Http\Controllers\KegiatanDosenController;
 use App\Http\Controllers\mahasiswaController;
+use App\Http\Controllers\MahasiswaSemesterPerpanjanganController;
 use App\Http\Controllers\MbkmController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\PemanggilanOrangtuaController;
@@ -15,15 +16,39 @@ use App\Http\Controllers\MagangController;
 use App\Http\Controllers\RKAController;
 use App\Http\Controllers\SertMahController;
 use App\Http\Controllers\TaController;
+use App\Http\Controllers\TahunWisudaController;
 use App\Http\Controllers\TorController;
 use App\Http\Controllers\UndurDiriDoController;
 
+use App\Http\Controllers\WisudaController;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\PenelitianDosen;
 use App\Models\UndurDiriDo;
 use App\Models\TahunAkademik;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
+Route::get('/', function () {
+    return redirect('/login');
+});
+
+// Login Routes
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// CRUD User dengan Middleware Auth
+// Route::middleware(['auth'])->group(function () {
+    Route::get('/olahdata', [UserController::class, 'index'])->name('user.index');
+    Route::get('/olahdata/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/olahdata', [UserController::class, 'store'])->name('user.store');
+    Route::get('/olahdata/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/olahdata/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/olahdata/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/olahdata', [UserController::class, 'index'])->name('user.index');
+// });
 
 // UNDUR DIRI
 Route::get('/undur_diri_do', [UndurDiriDoController::class, 'index'])->name('undur_diri_do.index');
@@ -55,14 +80,7 @@ Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name(
 Route::get('/mahasiswa/cari', [MahasiswaController::class, 'cari'])->name('mahasiswa.cari');
 
 Route::get('/mahasiswa/filter', [MahasiswaController::class, 'filter'])->name('mahasiswa.filter');
-// MAHASISWA
 
-// ->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 // TA
 Route::get('/tugas_akhir', [TaController::class, 'index'])->name('tugas_akhir.index');
@@ -201,4 +219,110 @@ Route::delete('/dosen/{id_dosen}', [DosenController::class, 'destroy'])->name('d
 Route::get('/dosen', [DosenController::class, 'cari'])->name('dosen.index');
 //Adhe
 
+//astrid
+// route::get('/wisuda/laporan', [::class, 'index']);
+
+Route::get('/wisuda', function () {
+    return view('laporan.index');
+});
+
+Route::get('/wisuda/preview', function () {
+    return view('laporan.cetak');
+});
+Route::get('/wisuda/preview/hasil', function () {
+    return view('laporan.hasil');
+});
+
+route::get('wisuda/preview/cetak', [WisudaController::class, 'cetakWisuda']);
+Route::get('/wisuda', [WisudaController::class, 'index']);
+Route::get('/wisuda/preview', [WisudaController::class, 'preview']);
+route::get('/wisuda/search', [WisudaController::class, 'search']);
+route::get('wisuda/cetakWisuda', [WisudaController::class, 'cetakWisuda'])->name('wisuda.hasil');
+route::get('wisuda/exportpdf', [WisudaController::class, 'exportpdf'])->name('wisuda.exportpdf');
+
+//Route::get('/wisuda/lihat', [WisudaController::class, 'lihat'])->name('wisuda.hasil');
+//astrid
+
+
+//dita
+Route::get('/wisuda', function () {
+    return view('admin.wissuda.index');
+});
+Route::get('/wisuda/create', function () {
+    return view('admin.wisuda.create');
+});
+Route::get('/wisuda/detail', function () {
+    return view('admin.wisuda.detail');
+});
+Route::get('/wisuda/edit', function () {
+    return view('admin.wisuda.edit');
+});
+
+Route::get('/wissuda', [WisudaController::class, 'index']);
+Route::get('/wissuda/{id}/detail', [WisudaController::class, 'show']);
+Route::get('/wissuda/create', [WisudaController::class, 'create']);
+Route::post('/wissuda/store', [WisudaController::class, 'store']);
+Route::get('/wissuda/{id}/edit', [WisudaController::class, 'edit']);
+Route::put('/wissuda/{id}/update', [WisudaController::class, 'update']);
+Route::get('/wissuda/{id}/delete', [WisudaController::class, 'destroy']);
+Route::get('/wissuda/search', [WisudaController::class, 'search']);
+Route::get('/wissuda/export', [WisudaController::class, 'export']);
+
+
+Route::get('/sk', [TahunWisudaController::class, 'index']);
+Route::get('/sk/create', [TahunWisudaController::class, 'create']);
+Route::post('/sk/store', [TahunWisudaController::class, 'store']);
+Route::get('/sk/{id}/edit', [TahunWisudaController::class, 'edit']);
+Route::put('/sk/{id}/update', [TahunWisudaController::class, 'update']);
+Route::get('/sk/{id}/delete', [TahunWisudaController::class, 'destroy']);
+Route::get('/sk/search', [TahunWisudaController::class, 'search']);
+//dita
+
+
+//irma
+ Route::get('/maspan', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
+    ->name('maspan.index');
+
+    Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
+        ->name('maspan.search');
+  
+    Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
+        ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
+
+    Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
+        ->name('amspan.update');
+    
+    Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
+        ->name('maspan.destroy');
+
+   
+    Route::put('/maspan/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])->name('maspan.update'); // Untuk menyimpan perubahan
+
+    Route::get('maspan/exportpdf', [MahasiswaSemesterPerpanjanganController::class, 'exportpdf']); //cetak pdf
+    Route::get('maspan/cetakmaspan', [MahasiswaSemesterPerpanjanganController::class, 'cetakdata']); //cetak pdf
+
+// ✅ Gunakan prefix 'maspan' untuk mengelompokkan route
+    Route::prefix('maspan')->name('maspan.')->group(function () {
+        
+    // Route::get('/', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
+    //     ->name('index');
+
+    // Route::get('/maspan', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
+    // ->name('maspan');
+
+    // Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
+    //     ->name('search');
+  
+    // Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
+    //     ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
+
+    // Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
+    //     ->name('update');
+    
+    // Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
+    //     ->name('destroy');
+
+    // Route::put('/maspan/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])->name('maspan.update'); // Untuk menyimpan perubahan
+});
+//irma
 require __DIR__ . '/auth.php';

@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class WisudaModel extends Model
+{
+    protected $table = 'wisuda';
+    protected $fillable = ['nim',
+    'tahun_masuk', 'status_wisuda', 'tahun_wisuda_id']; 
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(MahasiswaModel::class, 'nim', 'nim');
+    }
+
+    public function sk()
+    {
+        return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
+    }
+}

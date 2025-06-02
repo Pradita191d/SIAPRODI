@@ -34,6 +34,12 @@
                     <!-- Submenu -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="/olahdata" class="nav-link ml-3">
+                                <i class="nav-icon fas fa-graduation-cap"></i>
+                                <p>Data Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/mahasiswa" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Mahasiswa</p>
@@ -154,13 +160,25 @@
                         <p>Data Kegiatan Dosen Di luar</p>
                     </a>
                 </li>
-                        <li class="nav-item">
-                            <a href="/prestasi" class="nav-link">
-                                <i class="nav-icon fas fa-trophy"></i>
-                                <p>Data Prestasi Mahasiswa</p>
-                            </a>
-                        </li>
-                
+                <li class="nav-item">
+                    <a href="/prestasi" class="nav-link">
+                        <i class="nav-icon fas fa-trophy"></i>
+                        <p>Data Prestasi Mahasiswa</p>
+                    </a>
+                </li>
+                <!-- Wisuda Menu -->
+                <li class="nav-item">
+                    <a href="/wissuda" class="nav-link">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>Data Wisuda</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/maspan" class="nav-link">
+                        <i class="nav-icon fas fa-hourglass-half"></i>
+                        <p>Data Mahasiswa Semester Perpanjangan</p>
+                    </a>
+                </li>
             </ul>
         </nav>
 
