@@ -19,6 +19,7 @@ class CreatePemanggilanOrangtuaTable extends Migration
             $table->string('jurusan');
             $table->string('prodi');
             $table->text('alasan_pemanggilan');
+            $table->date('tanggal_pemanggilan');
             $table->text('solusi');
             $table->timestamps(); // Kolom created_at dan updated_at
         });

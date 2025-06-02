@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nim', 9);
             $table->string('status_wisuda', 20);
-            $table->unsignedBigInteger('tahun_wisuda_id');
+            $table->unsignedBigInteger('tahun_wisuda_id')->nullable();
             $table->timestamps();
         
             // Foreign key ke tabel tahun_wisuda

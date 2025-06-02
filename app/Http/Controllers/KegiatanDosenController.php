@@ -13,7 +13,7 @@ class KegiatanDosenController extends Controller
     public function index(Request $request)
     {
         $kegiatan = KegiatanDosenModels::with ('dosen')->get(); 
-        return view('kegiatan_dosen.index', ['kegiatan_dosen_diluar' => $kegiatan]);
+        return view('kegiatan_dosen.index', ['kegiatan_dosen' => $kegiatan]);
     }
 
     public function create()
@@ -57,7 +57,7 @@ class KegiatanDosenController extends Controller
     {
         $dosen = DosenModels::all();
         $kegiatan = KegiatanDosenModels::Find($id_kegiatan_dosen);
-        return view('kegiatan_dosen.edit', ['kegiatan_dosen_diluar' => $kegiatan], ['dosen' => $dosen]);
+        return view('kegiatan_dosen.edit', ['kegiatan_dosen' => $kegiatan], ['dosen' => $dosen]);
     }
 
     public function update(Request $request, $id_kegiatan_dosen)
@@ -114,14 +114,14 @@ class KegiatanDosenController extends Controller
     {
         $search = $request->input('search');
 
-        $kegiatan = KegiatanDosenModels::join('dosen', 'kegiatan_dosen_diluar.nidn', '=', 'dosen.nidn')
+        $kegiatan = KegiatanDosenModels::join('dosen', 'kegiatan_dosen.nidn', '=', 'dosen.nidn')
             ->where('dosen.nama_dosen', 'LIKE', "%$search%")
-            ->orWhere('kegiatan_dosen_diluar.nidn', 'LIKE', "%$search%")
-            ->select('kegiatan_dosen_diluar.*', 'dosen.nama_dosen')
+            ->orWhere('kegiatan_dosen.nidn', 'LIKE', "%$search%")
+            ->select('kegiatan_dosen.*', 'dosen.nama_dosen')
             ->get();
 
         return view('kegiatan_dosen.index', [
-            'kegiatan_dosen_diluar' => $kegiatan
+            'kegiatan_dosen' => $kegiatan
         ]);
     }
 
@@ -129,7 +129,7 @@ class KegiatanDosenController extends Controller
     {
         try {
             $kegiatan = KegiatanDosenModels::all();
-            $pdf = PDF::loadView('kegiatan_dosen.cetak', ['kegiatan_dosen_diluar' => $kegiatan]);
+            $pdf = PDF::loadView('kegiatan_dosen.cetak', ['kegiatan_dosen' => $kegiatan]);
     
             // Unduh file PDF
             return $pdf->download('kegiatan-dosen-' . Carbon::now()->timestamp . '.pdf');
@@ -141,7 +141,7 @@ class KegiatanDosenController extends Controller
     }   public function cetakkegiatan()
     {
         $kegiatan = KegiatanDosenModels::all();
-        return view('kegiatan_dosen.cetak', ['kegiatan_dosen_diluar' => $kegiatan]);
+        return view('kegiatan_dosen.cetak', ['kegiatan_dosen' => $kegiatan]);
     }
 
 }

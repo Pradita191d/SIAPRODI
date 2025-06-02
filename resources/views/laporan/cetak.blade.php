@@ -54,9 +54,9 @@
             <tr>
               <td>{{ $loop->iteration }}</td>
               <td>{{ $wis->nim }}</td>
-              <td>{{ $wis->tampilMahasiswa->nama_mahasiswa }}</td>
+              <td>{{ $wis->mahasiswa->nama_mahasiswa ?? '-' }}</td>
               <td>{{ $wis->status_wisuda }}</td>
-              <td>{{ $wis->tahun_wisuda }}</td>
+              <td>{{ $wis->sk->tahun_wisuda ?? '-' }}</td>
             </tr>
             @endforeach
           </tbody>

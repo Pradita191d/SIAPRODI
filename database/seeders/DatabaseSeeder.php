@@ -24,8 +24,14 @@ class DatabaseSeeder extends Seeder
             ['tahun' => '2024/2025', 'ganjil_genap' => 'ganjil'],
             ['tahun' => '2024/2025', 'ganjil_genap' => 'genap'],
         ];
+        $tahunWisudaData = [
+            ['tahun_wisuda' => '2022', 'sk_wisuda' => '2022/2023'],
+            ['tahun_wisuda' => '2023', 'sk_wisuda' => '2023/2024'],
+            ['tahun_wisuda' => '2024', 'sk_wisuda' => '2024/2025'],
+        ];
 
         DB::table('tahun_akademik')->insert($tahunAkademikData);
+        DB::table('tahun_wisuda')->insert($tahunWisudaData);
 
         // Get Tahun Akademik IDs
         $tahunAkademikIds = TahunAkademik::pluck('id_tahun_akademik')->toArray();
@@ -68,6 +74,9 @@ class DatabaseSeeder extends Seeder
             $randomNama = $namaDosen[array_rand($namaDosen)];
             $dosen = Dosen::create([
                 'nidn' => $nidn,
+                'nip' => rand(),
+                'alamat' => rand(),
+                'no_telp' => rand(),
                 'nama_dosen' => $randomNama,
                 'jabatan_fungsional' => 'Lektor ' . ($i % 3 == 0 ? 'Kepala' : 'Madya'),
                 'no_serdos' => 'SER' . rand(10000, 99999),

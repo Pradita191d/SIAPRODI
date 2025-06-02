@@ -19,4 +19,8 @@ class WisudaModel extends Model
     {
         return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
     }
+     public function tahunWisuda()
+    {
+        return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
+    }
 }

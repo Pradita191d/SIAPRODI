@@ -11,15 +11,19 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'users'; // Custom table name
 
-    protected $primaryKey = 'id_user'; // Custom primary key
+    protected $table = 'users';         // your table name
+    protected $primaryKey = 'id_user';  // custom primary key
+    public $incrementing = true;        // true if auto-increment
+    protected $keyType = 'int';         
 
-    protected $fillable = [
-        'username',
-        'role',
-        'password',
-    ];
+    protected $fillable = ['username', 'role', 'password'];
+
+    // If you want to customize auth identifier:
+    public function getAuthIdentifierName()
+    {
+        return 'id_user';
+    }
 
     protected $hidden = [
         'password',

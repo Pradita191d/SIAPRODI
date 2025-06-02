@@ -53,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kegiatan_dosen_diluar as $kds)
+                                    @foreach ($kegiatan_dosen as $kds)
                                     <tr class="text-center">
                                         <td>{{ $kds->dosen?->nidn }}</td>
                                         <td>{{ $kds->dosen?->nama_dosen }}</td>
@@ -68,6 +68,8 @@
                                         </td>
                                         <td>{{ $kds->keterangan }}</td>
                                         <td>
+                                            @php
+                                            @endphp
                                             <div class="btn-group">
                                                 <a href="{{ route('kegiatan_dosen.edit', $kds->id_kegiatan_dosen) }}" class="btn btn-sm btn-success" title="Edit">
                                                     <i class="fas fa-edit"></i>

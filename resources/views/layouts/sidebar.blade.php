@@ -69,7 +69,13 @@
                 <li class="nav-item d-flex align-items-center">
                     <a href="/sertifikat" class="nav-link d-flex align-items-center">
                         <i class="nav-icon fas fa-award"></i>
-                        <p>Sertikom Mahasiswa</p>
+                        <p>Sertifikat Kompetensi Mahasiswa</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/sertikomcrud" class="nav-link">
+                        <i class="nav-icon fas fa-hourglass-half"></i>
+                        <p>Sertifikat Kompetensi Dosen</p>
                     </a>
                 </li>
 
@@ -177,6 +183,18 @@
                     <a href="/maspan" class="nav-link">
                         <i class="nav-icon fas fa-hourglass-half"></i>
                         <p>Data Mahasiswa Semester Perpanjangan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pkm" class="nav-link">
+                        <i class="nav-icon fas fa-trophy"></i>
+                        <p>Data PKM</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/yudisium" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>Data Yudisium</p>
                     </a>
                 </li>
             </ul>
