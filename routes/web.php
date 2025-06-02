@@ -236,7 +236,7 @@ Route::get('/wisuda/preview/hasil', function () {
 route::get('wisuda/preview/cetak', [WisudaController::class, 'cetakWisuda']);
 Route::get('/wisuda', [WisudaController::class, 'index']);
 Route::get('/wisuda/preview', [WisudaController::class, 'preview']);
-route::get('/wisuda/search', [WisudaController::class, 'search']);
+route::get('/wisuda/search', [WisudaController::class, 'searchPreview']);
 route::get('wisuda/cetakWisuda', [WisudaController::class, 'cetakWisuda'])->name('wisuda.hasil');
 route::get('wisuda/exportpdf', [WisudaController::class, 'exportpdf'])->name('wisuda.exportpdf');
 

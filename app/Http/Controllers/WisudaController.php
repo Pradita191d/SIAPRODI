@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wisuda;
 use App\Models\WisudaModel;
+use Barryvdh\DomPDF\PDF;
+use Carbon\Carbon;
 use Shuchkin\SimpleXLSXGen;
 use Illuminate\Http\Request;
 use App\Models\MahasiswaModel;
@@ -20,6 +23,115 @@ class WisudaController extends Controller
         return view('admin.wissuda.index', compact('wisuda'));
     }
 
+    public function preview()
+{
+    session()->forget(['wisuda_data', 'rekapitulasi_data']); // Hapus session sebelumnya
+
+    
+    $wisuda = Wisuda::all();
+    $tahunWisuda = $wisuda->pluck('tahun_wisuda')->unique();
+    $rekapitulasi = [];
+
+    foreach ($tahunWisuda as $tahun) {
+        $sudahWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Sudah Wisuda')->count();
+        $rekapitulasi[] = [
+            'tahun_wisuda' => $tahun,
+            'sudah_wisuda' => $sudahWisuda,
+        ];
+    }
+
+    return view('laporan.cetak', compact('wisuda', 'rekapitulasi'));
+    //$wisuda = Wisuda::all();
+//     session()->forget(['wisuda_data', 'rekapitulasi_data']); // Hapus session pencarian
+//     $wisuda = Wisuda::all();
+//     // Rekapitulasi untuk semua tahun
+//     $tahunWisuda = $wisuda->pluck('tahun_wisuda')->unique();
+//     $rekapitulasi = [];
+
+//     foreach ($tahunWisuda as $tahun) {
+//         $sudahWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Sudah Wisuda')->count();
+//         $rekapitulasi[] = [
+//             'tahun_wisuda' => $tahun,
+//             'sudah_wisuda' => $sudahWisuda,
+//         ];
+//     }
+
+//     return view('laporan.cetak', compact('wisuda', 'rekapitulasi'));
+//    // return view('laporan.cetak', ['wisuda'=> $wisuda]);
+}
+
+    // fungsi untuk cari
+    public function searchPreview(Request $request) 
+    {
+        if ($request->has('search')) {
+            $wisuda = Wisuda::where('tahun_wisuda', 'LIKE', '%' .$request->search. '%')->get();
+        } else {
+            $wisuda = Wisuda::all();
+        }
+
+        //$wisuda = $query->get();
+
+    // Buat rekapitulasi berdasarkan hasil pencarian
+    $tahunWisuda = $wisuda->pluck('tahun_wisuda')->unique();
+    $rekapitulasi = [];
+
+    foreach ($tahunWisuda as $tahun) {
+        $sudahWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Sudah Wisuda')->count();
+        $rekapitulasi[] = [
+            'tahun_wisuda' => $tahun,
+            'sudah_wisuda' => $sudahWisuda,
+        ];
+    }
+    // Simpan hasil pencarian di session agar bisa digunakan di preview
+    session(['wisuda_data' => $wisuda, 'rekapitulasi_data' => $rekapitulasi]);
+
+    return view('laporan.cetak', compact('wisuda', 'rekapitulasi'));
+
+        //return view('laporan.cetak', ['wisuda'=>$wisuda]);
+    }
+
+    public function lihat()
+{
+    // Ambil data dari session jika ada, jika tidak ambil semua data
+    // $wisuda = session('wisuda_data', Wisuda::all());
+    // $rekapitulasi = session('rekapitulasi_data', []);
+
+    // return view('laporan.hasil', compact('wisuda', 'rekapitulasi'));
+    $wisuda = session()->has('wisuda_data') ? session('wisuda_data') : Wisuda::all();
+    $rekapitulasi = session()->has('rekapitulasi_data') ? session('rekapitulasi_data') : [];
+
+    return view('laporan.hasil', compact('wisuda', 'rekapitulasi'));
+}
+
+//     public function search(Request $request) 
+// {
+//     $query = Wisuda::query();
+
+//     if ($request->has('search') && !empty($request->search)) {
+//         $query->where('tahun_wisuda', 'LIKE', '%' . $request->search . '%');
+//     }
+
+//     $wisuda = $query->get();
+
+//     // Rekapitulasi berdasarkan hasil pencarian
+//     $tahunWisuda = $wisuda->pluck('tahun_wisuda')->unique();
+//     $rekapitulasi = [];
+
+//     foreach ($tahunWisuda as $tahun) {
+//         $sudahWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Sudah Wisuda')->count();
+//         $belumWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Belum Wisuda')->count();
+//         $totalMahasiswa = $sudahWisuda + $belumWisuda;
+
+//         $rekapitulasi[] = [
+//             'tahun_wisuda' => $tahun,
+//             'sudah_wisuda' => $sudahWisuda,
+//             'belum_wisuda' => $belumWisuda,
+//             'jumlah_mahasiswa' => $totalMahasiswa,
+//         ];
+//     }
+
+//     return view('laporan.index', compact('wisuda', 'rekapitulasi'));
+// }
     /**
      * Show the form for creating a new resource.
      */
@@ -195,5 +307,84 @@ class WisudaController extends Controller
         $xlsx = SimpleXLSXGen::fromArray($data);
         return $xlsx->downloadAs('data-wisuda.xlsx');
     }
+     //fungsi cetak wisuda
+    public function cetakWisuda()
+    {
+        // $wisuda = Wisuda::all();
+        // $wisuda = session('wisuda_data', Wisuda::all());
+
+        // return view('laporan.hasil', ['wisuda' => $wisuda]);
+        // $wisuda = session()->has('wisuda_data') ? session('wisuda_data') : Wisuda::all();
+        // $rekapitulasi = session()->has('rekapitulasi_data') ? session('rekapitulasi_data') : [];
+
+        // return view('laporan.hasil', compact('wisuda', 'rekapitulasi'));
+    //     $wisuda = session()->has('wisuda_data') ? session('wisuda_data') : Wisuda::all();
+    // $rekapitulasi = session()->has('rekapitulasi_data') ? session('rekapitulasi_data') : [];
+    $wisuda = session()->get('wisuda_data', Wisuda::all());
+    $rekapitulasi = session()->get('rekapitulasi_data', []);
+
+    // Jika session tidak ada, hitung rekapitulasi ulang
+    if (empty($rekapitulasi)) {
+        $tahunWisuda = $wisuda->pluck('tahun_wisuda')->unique();
+        foreach ($tahunWisuda as $tahun) {
+            $sudahWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Sudah Wisuda')->count();
+            $rekapitulasi[] = [
+                'tahun_wisuda' => $tahun,
+                'sudah_wisuda' => $sudahWisuda,
+            ];
+        }
+    }
+
+
+    return view('laporan.hasil', compact('wisuda', 'rekapitulasi'));
+        //return view('laporan.hasil', ['wisuda' => $wisuda]);
+        // return view('laporan.hasil', ['wisuda' => $wisuda]);
+    }
+    //fungsi untuk export pdf
+    // public function exportpdf(PDF $pdf)
+    // {
+    //     $wisuda = session()->has('wisuda_data') ? session('wisuda_data') : Wisuda::all();
+    // $rekapitulasi = session()->has('rekapitulasi_data') ? session('rekapitulasi_data') : [];
+
+    // $pdf = PDF::loadView('laporan.hasil', compact('wisuda', 'rekapitulasi'));
+    // return $pdf->download('wisuda-' . Carbon::now()->timestamp . '.pdf');
+    // //     $wisuda = session('wisuda_data', null);
+    // // if (!$wisuda) {
+    // //     $wisuda = Wisuda::all();
+    // // }
+    // //
+    //     //$wisuda = Wisuda::all();
+
+    //     // $wisuda = session('wisuda_data', Wisuda::all()); // Ambil dari session jika ada, kalau tidak ambil semua
+    //     // $pdf = PDF::loadView('laporan.hasil', ['wisuda' => $wisuda]);
+
+
+    //     // $pdf = PDF::loadView('laporan.hasil', ['wisuda' => $wisuda]);
+    //     // return $pdf->download('wisuda-' . Carbon::now()->timestamp . '.pdf');
+    // }
+
+    public function exportpdf()
+{
+    // Ambil data dari session atau ambil semua jika tidak ada di session
+    $wisuda = session()->get('wisuda_data', Wisuda::all());
+    $rekapitulasi = session()->get('rekapitulasi_data', []);
+
+    // Periksa apakah session kosong
+    if (empty($rekapitulasi)) {
+        // Buat rekapitulasi ulang jika tidak ada di session
+        $tahunWisuda = $wisuda->pluck('tahun_wisuda')->unique();
+        foreach ($tahunWisuda as $tahun) {
+            $sudahWisuda = $wisuda->where('tahun_wisuda', $tahun)->where('status_wisuda', 'Sudah Wisuda')->count();
+            $rekapitulasi[] = [
+                'tahun_wisuda' => $tahun,
+                'sudah_wisuda' => $sudahWisuda,
+            ];
+        }
+    }
+
+    // Load view dan generate PDF
+    $pdf = PDF::loadView('laporan.hasil', compact('wisuda', 'rekapitulasi'));
+    return $pdf->download('wisuda-' . Carbon::now()->timestamp . '.pdf');
+}
     
 }
