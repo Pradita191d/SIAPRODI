@@ -125,7 +125,8 @@
                         <div class="modal-body">
                           <div class="form-group">
                                 <label for="nim">Mahasiswa (NIM)</label>
-                                <select class="form-control select2" id="nim" name="nim" required>
+                                <select class="form-control select2 nim-select" name="nim" required>
+
                                     <option value="">Select Mahasiswa</option>
                                     @foreach($mahasiswaList as $mahasiswaItem)
                                         <option value="{{ $mahasiswaItem->nim }}" 
@@ -208,7 +209,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nim">Mahasiswa</label>
-                        <select class="form-control select2" id="nim" name="nim" required>
+                        <select class="form-control select2 nim-select" name="nim" required>
+
                             <option value="">Select Mahasiswa</option>
                             @foreach($mahasiswaList as $mahasiswa)
                                 <option value="{{ $mahasiswa->nim }}">
@@ -248,54 +250,36 @@
 
 @push('scripts')
 <script>
-$(document).ready(function() {
-    // Initialize select2 for Mahasiswa with search enabled
-    $('#addMahasiswaMagangModal').on('shown.bs.modal', function() {
-        $('#nim').select2({
+$(document).ready(function () {
+    // Initialize Select2 globally for all nim-select elements inside modals
+    $('.nim-select').select2({
+        dropdownParent: $('#addMahasiswaMagangModal').length ? $('#addMahasiswaMagangModal') : $(document.body),
+        width: '100%',
+        placeholder: 'Select Mahasiswa',
+        allowClear: true,
+        minimumInputLength: 1
+    });
+
+    // Re-initialize for dynamically added modals (edit modals)
+    $('.modal').on('shown.bs.modal', function () {
+        $(this).find('.nim-select').select2({
+            dropdownParent: $(this),
             width: '100%',
             placeholder: 'Select Mahasiswa',
             allowClear: true,
-            minimumInputLength: 1 // Enable searching after typing 1 character
+            minimumInputLength: 1
         });
     });
 
-    // Handle form submission via AJAX
-    $('#addMahasiswaMagangForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-
-        $.ajax({
-            url: $(this).attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                $('#addMahasiswaMagangModal').modal('hide');
-                toastr.success('Mahasiswa Magang has been successfully added.');
-            },
-            error: function(xhr, status, error) {
-                toastr.error('Failed to add Mahasiswa Magang. Please try again.');
-            }
-        });
-    });
-
-    success: function(response) {
-    $('#addMahasiswaMagangModal').modal('hide');
-    toastr.success(response.success);
-    location.reload(); // Reload the page or update the content dynamically
-}
-
-    // Reset the form and select2 input when the modal is closed
-    $('#addMahasiswaMagangModal').on('hidden.bs.modal', function() {
+    // Clear on close
+    $('.modal').on('hidden.bs.modal', function () {
         $(this).find('form')[0].reset();
-        $('#nim').val(null).trigger('change');
+        $(this).find('.nim-select').val(null).trigger('change');
     });
 });
 
-
 </script>
+    
 <script>
     document.getElementById('searchBar').addEventListener('keyup', function() {
         let input = this.value.toLowerCase();
