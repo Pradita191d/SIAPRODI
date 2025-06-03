@@ -61,7 +61,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label">Keterangan (jika ada)</label>
+                                        <label class="form-label">Keterangan</label>
                                         <textarea name="keterangan" class="form-control" rows="3" required></textarea>
                                     </div>
                                 </div>

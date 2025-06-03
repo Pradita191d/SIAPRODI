@@ -32,7 +32,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($kegiatan_dosen_diluar as $kds)
+        @foreach ($kegiatan_dosen as $kds)
                                         <tr class="text-center">
                                             <td>{{ $kds->dosen?->nidn }}</td>
                                             <td>{{ $kds->dosen?->nama_dosen }}</td>
