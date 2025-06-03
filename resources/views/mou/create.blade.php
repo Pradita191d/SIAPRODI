@@ -28,7 +28,8 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal_berakhir">Tanggal Berakhir</label>
-                        <input type="date" class="form-control" id="tanggal_berakhir" name="tanggal_berakhir" required>
+                        <input type="date" class="form-control" id="tanggal_berakhir" name="tanggal_berakhir"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="tahun">Tahun Akademik</label>
