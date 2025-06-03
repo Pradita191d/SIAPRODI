@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mbkm', function (Blueprint $table) {
-            $table->integer('id');
+            $table->id();
             $table->integer('nim');
             $table->string('nama_program');
             $table->string('namaLembaga');
             $table->string('lokasi');
             $table->string('bidangProgram');
             $table->string('durasi');
-            $table->string('jmlh_sks');
             $table->timestamps();
         });
     }

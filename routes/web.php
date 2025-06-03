@@ -166,6 +166,9 @@ Route::get('/mbkm/edit/{id}', [MbkmController::class, 'edit'])->name('mbkm.edit'
 // Route::post('/mbkm/update/{id}', [MbkmController::class, 'update'])->name('mbkm.update');
 Route::post('/mbkm/delete/{id}', [MbkmController::class, 'delete'])->name('mbkm.delete');
 //Route::get('/mbkm', [MbkmController::class, 'cari'])->name('mbkm.cari');
+
+Route::get('/mbkm/cetak/{id}', [MbkmController::class, 'cetakmbkm'])->name('mbkm.cetak');
+Route::get('/mbkm/{id}', [MbkmController::class, 'detail'])->name('mbkm.detail');
 //Diva
 
 //Chinta
