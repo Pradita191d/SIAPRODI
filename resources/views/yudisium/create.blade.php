@@ -1,19 +1,16 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h2>Tambah Data Yudisium</h2>
     <form action="/yudisium/store" method="POST">
-
-       
-
-
+        @csrf
         <div class="mb-3">
         <label for="NIM">Mahasiswa</label>
         <select name="NIM" id="NIM" required class="form-control">
             <option value="">-- Pilih Mahasiswa --</option>
             @foreach($mahasiswa as $mhs)
-                <option value="{{ $mhs->NIM }}">{{ $mhs->NIM }} - {{ $mhs->nama_mahasiswa }}
+                <option value="{{ $mhs->nim }}">{{ $mhs->nim }} - {{ $mhs->nama_mahasiswa }}
                 </option>
             @endforeach
         </select>

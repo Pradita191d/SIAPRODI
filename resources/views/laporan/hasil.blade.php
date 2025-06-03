@@ -8,7 +8,7 @@
 <table width="100%">
   <tr>
       <td width="15%" align="center">
-          <img src="{{ public_path('lte/dist/img/logo_pnc.png') }}" alt="Logo PNC" style="width: 100px; height: auto;">
+          <img src="{{ public_path('dist/img/Logo-PNC.png') }}" alt="Logo PNC" style="width: 100px; height: auto;">
       </td>
       <td width="85%" align="center">
           <h2 style="margin: 0;">POLITEKNIK NEGERI CILACAP</h2>

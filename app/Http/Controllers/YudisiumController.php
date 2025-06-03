@@ -49,6 +49,7 @@ class YudisiumController extends Controller
             // Simpan data ke database
             Yudisium::create([
                 'NIM' => $request->NIM,
+                'nama_mhs' => $request->nama_mhs,
                 'semester' => $request->semester,
                 'tgl_yudisium' => $request->tgl_yudisium,
                 'lokasi' => $request->lokasi,
