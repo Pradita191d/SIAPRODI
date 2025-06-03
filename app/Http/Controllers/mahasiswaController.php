@@ -10,6 +10,11 @@ class mahasiswaController extends Controller
 {
     public $search = '';
 
+    public function index(){
+         $mahasiswas = Mahasiswa::all();
+    $tahunAkademiks = TahunAkademik::all();
+    return view('mahasiswa.index', compact('mahasiswas', 'tahunAkademiks'));
+    }
     public function store(Request $request)
     {
 
@@ -52,7 +57,6 @@ class mahasiswaController extends Controller
 
             return redirect()->back()->with('success', 'Mahasiswa berhasil diperbarui!');
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
@@ -62,9 +66,9 @@ class mahasiswaController extends Controller
         try {
             $mahasiswa = Mahasiswa::findOrFail($id);
             $mahasiswa->delete();
-
             return redirect()->back()->with('success', 'Mahasiswa berhasil dihapus!');
         } catch (\Exception $e) {
+            dd($mahasiswa);
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nidn');
             $table->string('nim');
             $table->string('judul');
+            $table->string('status');
             $table->year('tahun');
             $table->string('lokasi');
             $table->char('anggaran');

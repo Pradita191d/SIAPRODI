@@ -94,8 +94,8 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <button type="submit" class="btn btn-success px-4"><i class="fas fa-save"></i> Simpan</button>
                                 <a href="{{ url('/sertikomcrud') }}" class="btn btn-secondary px-4"><i class="fas fa-arrow-left"></i> Kembali</a>
+                                <button type="submit" class="btn btn-success px-4"><i class="fas fa-save"></i> Simpan</button>
                             </div>
                         </form>
                     </div>
