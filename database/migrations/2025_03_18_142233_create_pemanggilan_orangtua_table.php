@@ -13,7 +13,6 @@ class CreatePemanggilanOrangtuaTable extends Migration
             $table->string('nama_ortu');
             $table->string('no_telp_ortu');
             $table->string('alamat');
-            $table->string('nama_mhs');
             $table->integer('nim'); // Hapus auto_increment dari sini
             $table->unsignedInteger('semester')->default(1);
             $table->string('jurusan');

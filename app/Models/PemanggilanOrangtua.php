@@ -16,7 +16,6 @@ class PemanggilanOrangtua extends Model
         'nama_ortu',
         'no_telp_ortu',
         'alamat',
-        'nama_mhs',
         'nim',
         'semester',
         'jurusan',
@@ -25,5 +24,9 @@ class PemanggilanOrangtua extends Model
         'alasan_pemanggilan',
         'solusi'
     ];
+        public function mahasiswa()
+    {
+        return $this->belongsTo(MahasiswaModel::class, 'nim', 'nim');
+    }
 
 }

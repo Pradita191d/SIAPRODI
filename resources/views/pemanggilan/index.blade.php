@@ -68,7 +68,7 @@
                         <td class="text-nowrap">{{ $pemanggilan->nama_ortu }}</td>
                         <td>{{ $pemanggilan->no_telp_ortu }}</td>
                         <td class="text-left">{{ $pemanggilan->alamat }}</td>
-                        <td>{{ $pemanggilan->nama_mhs }}</td>
+                        <td>{{ $pemanggilan->mahasiswa->nama_mahasiswa }}</td>
                         <td>{{ $pemanggilan->nim }}</td>
                         <td>{{ $pemanggilan->semester }}</td>
                         <td>{{ $pemanggilan->jurusan }}</td>
@@ -108,7 +108,7 @@
                                     <p><strong>Nama Orang Tua:</strong> {{ $pemanggilan->nama_ortu }}</p>
                                     <p><strong>No. Telp:</strong> {{ $pemanggilan->no_telp_ortu }}</p>
                                     <p><strong>Alamat:</strong> {{ $pemanggilan->alamat }}</p>
-                                    <p><strong>Nama Mahasiswa:</strong> {{ $pemanggilan->nama_mhs }}</p>
+                                    <p><strong>Nama Mahasiswa:</strong> {{ $pemanggilan->mahasiswa->nama_mahasiswa }}</p>
                                     <p><strong>NIM:</strong> {{ $pemanggilan->nim }}</p>
                                     <p><strong>Semester:</strong> {{ $pemanggilan->semester }}</p>
                                     <p><strong>Jurusan:</strong> {{ $pemanggilan->jurusan }}</p>

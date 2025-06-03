@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use App\Models\PemanggilanOrangtua;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -15,10 +16,10 @@ class PemanggilanOrangtuaController extends Controller
     {
         $search = $request->input('search');
         $pemanggilans = PemanggilanOrangtua::when($search, function ($query) use ($search) {
-            return $query->where('nama_mhs', 'LIKE', "%{$search}%")
-                         ->orWhere('nim', 'LIKE', "%{$search}%")
-                         ->orWhere('jurusan', 'LIKE', "%{$search}%")
-                         ->orWhere('prodi', 'LIKE', "%{$search}%");
+            return $query->
+                Where('nim', 'LIKE', "%{$search}%")
+                ->orWhere('jurusan', 'LIKE', "%{$search}%")
+                ->orWhere('prodi', 'LIKE', "%{$search}%");
         })->get();
 
         return view('pemanggilan.index', compact('pemanggilans'));
@@ -26,7 +27,9 @@ class PemanggilanOrangtuaController extends Controller
 
     public function tambah()
     {
-        return view('pemanggilan.tambah');
+        $mahasiswa = Mahasiswa::all();
+
+        return view('pemanggilan.tambah',compact('mahasiswa'));
     }
 
     public function store(Request $request)
@@ -35,7 +38,6 @@ class PemanggilanOrangtuaController extends Controller
             'nama_ortu' => 'required|string|max:255',
             'no_telp_ortu' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'nama_mhs' => 'required|string|max:255',
             'nim' => 'required|string|max:10',
             'semester' => 'required|integer|min:1|max:8',
             'jurusan' => 'required|string|max:255',
@@ -53,7 +55,8 @@ class PemanggilanOrangtuaController extends Controller
     public function edit($id)
     {
         $pemanggilan = PemanggilanOrangtua::findOrFail($id);
-        return view('pemanggilan.edit', compact('pemanggilan'));
+        $mahasiswa = Mahasiswa::all();
+        return view('pemanggilan.edit', compact('pemanggilan','mahasiswa'));
     }
 
     public function update(Request $request, $id)
@@ -77,7 +80,7 @@ class PemanggilanOrangtuaController extends Controller
     {
         $pemanggilan = PemanggilanOrangtua::findOrFail($id);
         $pdf = PDF::loadView('pemanggilan.pdf', compact('pemanggilan'));
-        return $pdf->stream('Surat_Pemanggilan_' . $pemanggilan->nama_mhs . '.pdf');
+        return $pdf->stream('Surat_Pemanggilan_' . $pemanggilan->mahasiswa->nama_mhs . '.pdf');
     }
 
     // Fungsi untuk export Excel
