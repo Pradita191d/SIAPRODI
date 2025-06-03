@@ -18,7 +18,7 @@
                     <select class="form-control" id="nim" name="nim" required>
                         <option value="">Pilih NIM Mahasiswa</option>
                         @foreach($mahasiswa as $mhs)
-                        <option value="{{ $mhs->NIM }}" {{ $mbkm->nim == $mhs->NIM ? 'selected' : '' }}>{{ $mhs->nama_mahasiswa }} ({{ $mhs->NIM }})</option>
+                        <option value="{{ $mhs->nim }}" {{ $mbkm->nim == $mhs->nim ? 'selected' : '' }}>{{ $mhs->nama_mahasiswa }} ({{ $mhs->nim }})</option>
                         @endforeach
                     </select>
                 </div>
