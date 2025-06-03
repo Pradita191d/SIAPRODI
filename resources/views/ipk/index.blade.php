@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card-header bg-white text-dark">
                 <h5 class="mb-0"><b>Daftar IPK Mahasiswa</b></h5>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -17,8 +18,10 @@
                                 <th class="text-center">
                                     <select id="filter-tahun" class="form-control">
                                         <option value="">Semua Tahun</option>
-                                        @foreach ($tahun_akademik as $id => $tahun)
-                                            <option value="{{ $id }}">{{ $tahun }}</option>
+                                        @foreach ($tahun_akademik as $item)
+                                            <option value="{{ $item->id_tahun_akademik }}">
+                                                {{ $item->tahun }}/{{ $item->ganjil_genap }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </th>
@@ -32,16 +35,32 @@
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>
         </div>
 
-        <div class="card mt-4">
-            <div class="card-header bg-white text-dark">
-                <h5 class="mb-0">Rekapan IPK Mahasiswa</h5>
+       <div class="card mt-4">
+    <div class="card-header bg-white text-dark">
+        <h5 class="mb-0">Rekapan IPK Mahasiswa</h5>
+    </div>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <!-- Keterangan IPK -->
+            <div class="col-md-4">
+                <div class="border rounded p-3 bg-light shadow-sm h-100">
+                    <strong class="d-block mb-2">Keterangan IPK</strong>
+                    <ul class="mb-0" style="list-style: none; padding-left: 0;">
+                        <li><span class="badge bg-success me-2">&nbsp;</span> Cumlaude (&gt; 3.50)</li>
+                        <li><span class="badge bg-primary me-2">&nbsp;</span> Sangat Memuaskan (3.01 - 3.50)</li>
+                        <li><span class="badge bg-info text-dark me-2">&nbsp;</span> Memuaskan (2.76 - 3.00)</li>
+                        <li><span class="badge bg-warning text-dark me-2">&nbsp;</span> Kurang (≤ 2.75)</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped w-50 mx-auto">
+
+            <!-- Tabel Rekap IPK -->
+            <div class="col-md-8">
+                <table class="table table-bordered table-striped w-100">
                     <thead class="bg-dark text-white">
                         <tr>
                             <th class="text-center">Kategori</th>
@@ -52,18 +71,21 @@
                     <tbody>
                         <tr>
                             <td class="text-center">IPK ≥ 3.50</td>
-                            <td class="text-center"id="jumlahCumlaude">0</td>
-                            <td class="text-center"id="persentaseCumlaude">0 %</td>
+                            <td class="text-center" id="jumlahCumlaude">0</td>
+                            <td class="text-center" id="persentaseCumlaude">0 %</td>
                         </tr>
                         <tr>
-                            <td class="text-center">IPK < 3.0</td>
-                            <td class="text-center"id="jumlahPerluPerbaikan">0</td>
-                            <td class="text-center"id="persentasePerluPerbaikan">0 %</td>
+                            <td class="text-center">IPK &lt; 3.0</td>
+                            <td class="text-center" id="jumlahPerluPerbaikan">0</td>
+                            <td class="text-center" id="persentasePerluPerbaikan">0 %</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
     </div>
 
     <!-- Modal Input IPK -->

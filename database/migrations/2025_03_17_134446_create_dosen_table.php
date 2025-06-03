@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('no_telp');
             $table->string('jabatan_fungsional');
             $table->string('no_serdos');
+            $table->string('status_dosen')->nullable();
             $table->timestamps();
         });
     }

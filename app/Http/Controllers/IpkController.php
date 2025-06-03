@@ -21,7 +21,7 @@ class IpkController extends Controller
                 ->select(
                     'mahasiswa.nim',
                     'mahasiswa.nama_mahasiswa',
-                    'tahun_akademik.tahun as tahun_masuk',
+                    DB::raw("CONCAT(tahun_akademik.tahun, '/', tahun_akademik.ganjil_genap) as tahun_masuk"),
                     'ipk.ipk',
                     'ipk.keterangan',
                     'ipk.id_ipk'
@@ -62,7 +62,7 @@ class IpkController extends Controller
         }
 
         // Ambil data tahun akademik untuk dropdown filter
-        $tahun_akademik = DB::table('tahun_akademik')->pluck('tahun', 'id_tahun_akademik');
+        $tahun_akademik = DB::table('tahun_akademik')->select('id_tahun_akademik', 'tahun', 'ganjil_genap')->get();
 
         return view('ipk.index', compact('tahun_akademik'), ['title' => 'Data IPK Mahasiswa']);
     }
