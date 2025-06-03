@@ -66,19 +66,31 @@
                         <p>Tugas Akhir</p>
                     </a>
                 </li>
-                <li class="nav-item d-flex align-items-center">
-                    <a href="/sertifikat" class="nav-link d-flex align-items-center">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            Sertifikat
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <!-- Submenu -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/sertifikat" class="nav-link d-flex align-items-center">
                         <i class="nav-icon fas fa-award"></i>
                         <p>Sertifikat Kompetensi Mahasiswa</p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/sertikomcrud" class="nav-link">
-                        <i class="nav-icon fas fa-hourglass-half"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/sertikomcrud" class="nav-link">
+                        <i class="nav-icon fas fa-award"></i>
                         <p>Sertifikat Kompetensi Dosen</p>
                     </a>
+                        </li>
+                        
+                    </ul>
                 </li>
-
                 <!-- Parent Menu -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

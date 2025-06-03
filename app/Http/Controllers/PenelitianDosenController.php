@@ -41,6 +41,8 @@ class PenelitianDosenController extends Controller
     // Fungsi store
     public function store(Request $request)
     {
+
+       
         // Validasi input
         $request->validate([
             'judul_penelitian'          => 'required|string|max:255',
@@ -75,13 +77,13 @@ class PenelitianDosenController extends Controller
             'file_penelitian'       => $filePath,
         ]);
 
-        // Simpan data anggota jika ada
+         // Simpan data anggota jika ada
         if ($request->has('anggota')) {
             foreach ($request->anggota as $anggota) {
                 if (!empty($anggota['id_mahasiswa'])) {
                     Anggota::create([
                         'id_penelitian' => $penelitian->id_penelitian,
-                        'NIM'           => Mahasiswa::where('id_mahasiswa', $anggota['id_mahasiswa'])->value('NIM'),
+                        'NIM'           => Mahasiswa::where('id_mahasiswa', $anggota['id_mahasiswa'])->first()->nim,
                     ]);
                 }
             }

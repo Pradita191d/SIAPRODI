@@ -141,6 +141,10 @@
                 <tbody id="anggota-table-body">
                   @if($penelitian->anggota->isNotEmpty())
                       @foreach($penelitian->anggota as $index => $anggota)
+                      @php
+                          
+                          // dd($anggota->NIM);
+                      @endphp
                         <tr>
                           <td class="text-center">
                             <button type="button" class="add-row btn btn-success btn-sm">
@@ -153,11 +157,12 @@
                             @endif
                           </td>
                           <td>
-                            <select name="anggota[{{ $index }}][NIM]" class="form-control id_mahasiswa">
+                            <select name="anggota[{{ $index }}][NIM]"  class="form-control id_mahasiswa">
                               <option value=""></option>
+                              
                               @foreach($mahasiswa as $mhs)
-                                <option value="{{ $mhs->NIM }}" {{ $anggota->NIM == $mhs->NIM ? 'selected' : '' }}>
-                                  {{ $mhs->NIM }} - {{ $mhs->nama_mahasiswa }}
+                              <option value="{{ $mhs->nim }}" {{ $anggota->NIM = $mhs->nim ? 'selected' : '' }}>
+                                  {{ $mhs->nim }} - {{ $mhs->nama_mahasiswa }}{{($anggota->NIM = $mhs->nim)}}
                                 </option>
                               @endforeach
                             </select>
@@ -236,6 +241,7 @@
 
       $('#anggota-table-body').append(newRow);
       $('.id_mahasiswa').select2(); // Inisialisasi Select2 ulang
+      $('.id_dosen').select2(); // Inisialisasi Select2 ulang
     });
 
     $(document).ready(function () {
