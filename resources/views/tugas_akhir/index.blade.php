@@ -8,7 +8,8 @@
                     <h3 class="h5 font-weight-bold mb-0 mr-3">Daftar Tugas Akhir</h3>
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('tugas_akhir.export') }}" class="btn btn-primary">Export Data</a>
-                        <button class="btn btn-success ml-1" data-toggle="modal" data-target="#tambahTAModal">Tambah Data</button>
+                        <button class="btn btn-success ml-1" data-toggle="modal" data-target="#tambahTAModal">Tambah
+                            Data</button>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -139,7 +140,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     let form = document.getElementById('deleteForm');
-                    form.action = "{{ route('tugas_akhir.destroy', '') }}/" + id_ta;
+                    form.action = "/tugas_akhir/" + id_ta;
                     form.submit();
                 }
             });
