@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('magang.index') }}" class="nav-link ml-3">
+                            <a href="/magang`" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tempat Magang</p>
                             </a>
