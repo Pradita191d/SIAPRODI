@@ -21,6 +21,13 @@ class MahasiswaSemesterPerpanjanganController extends Controller
         return view('maspan.index', compact('mahasiswaSemesterPerpanjangan'));
     }
 
+    //Menampilkan view tampiltambah
+
+    public function tampiltambah()
+    {
+        return view('maspan.tambah');
+    }
+
     /**
      * Menyimpan data mahasiswa perpanjangan baru.
      */

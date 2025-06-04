@@ -74,7 +74,7 @@ class MbkmController extends Controller
         $mbkm->catatan_tambahan = $request->catatan_tambahan;
         $mbkm->save();
 
-        return redirect()->route('mbkm.tampil');
+        return redirect()->route('mbkm.tampil')->with('success', 'Data MBKM berhasil ditambahkan.');
     }
 
     function edit($id)
@@ -113,7 +113,7 @@ class MbkmController extends Controller
         $mbkm->catatan_tambahan = $request->catatan_tambahan;
         $mbkm->update();
 
-        return redirect()->route('mbkm.tampil');
+        return redirect()->route('mbkm.tampil')->with('success', 'Data MBKM berhasil diperbarui.');
     }
 
     function delete($id)
