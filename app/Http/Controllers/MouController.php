@@ -138,12 +138,6 @@ class MouController extends Controller
         return redirect()->route('mou.index')->with('success', 'MoUberhasil dihapus!');
     }
 
-    public function show($id)
-    {
-        $mou = Mou::findOrFail($id);
-        return view('mou.show', compact('mou'));
-    }
-
     public function exportExcel()
     {
         return Excel::download(new MouExport, 'data_mou.xlsx');
