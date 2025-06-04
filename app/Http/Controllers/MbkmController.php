@@ -120,7 +120,7 @@ class MbkmController extends Controller
     {
         $mbkm = Mbkm::find($id);
         $mbkm->delete();
-        return redirect()->route('mbkm.tampil');
+        return redirect()->route('mbkm.tampil')->with('success', 'Data MBKM berhasil dihapus.');;
     }
 
 
