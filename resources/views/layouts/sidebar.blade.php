@@ -77,7 +77,7 @@
                     <!-- Submenu -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/sertifikat" class="nav-link d-flex align-items-center">
+                            <a href="/sertifikat_mahasiswa" class="nav-link d-flex align-items-center">
                         <i class="nav-icon fas fa-award"></i>
                         <p>Sertifikat Kompetensi Mahasiswa</p>
                     </a>

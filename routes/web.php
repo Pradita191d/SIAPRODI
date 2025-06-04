@@ -94,7 +94,7 @@ Route::get('/tugas_akhir/export', [TaController::class, 'export'])->name('tugas_
 //TA
 
 // sertifikat mahasiswa
-Route::get('/sertifikat', [SertMahController::class, 'index'])->name('sertifikat_mahasiswa.index');
+Route::get('/sertifikat_mahasiswa', [SertMahController::class, 'index'])->name('sertifikat_mahasiswa.index');
 Route::post('/sertifikat/store', [SertMahController::class, 'store'])->name('sertifikat_mahasiswa.store');
 Route::get('/get-mahasiswa', [SertMahController::class, 'getMahasiswa'])->name('get_mahasiswa');
 Route::get('/sertifikat/{id}/edit', 'SertifikatMahasiswaController@edit')->name('sertifikat_mahasiswa.edit');
