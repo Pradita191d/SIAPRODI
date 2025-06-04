@@ -25,7 +25,7 @@
                                 @foreach ($tahunAkademiks as $x)
                                     <option value="{{ $x->id_tahun_akademik }}"
                                         {{ request('tahun_masuk') == $x->id_tahun_akademik ? 'selected' : '' }}>
-                                        {{ $x->tahun }} {{ $x->ganjil_genap }}
+                                        {{ $x->tahun }}
                                     </option>
                                 @endforeach
                             </select>
@@ -35,7 +35,7 @@
 
                     <div class="d-flex align-items-center">
                         <!-- Button trigger modal -->
-                        <button type="button" class="h-10 mr-2 btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="h-10 mb-2 mr-2 btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             Tambah Mahasiswa
                         </button>
@@ -91,13 +91,13 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <form action={{ route('mahasiswa.cari') }} method="GET"
+                        {{-- <form action={{ route('mahasiswa.cari') }} method="GET"
                             class="flex items-center p-2 space-x-2 rounded-lg">
                             <input type="text" name="cari" placeholder="Cari mahasiswa..."
                                 value="{{ old('cari') }}"
@@ -106,11 +106,11 @@
                                 class="h-10 px-4 font-semibold text-white transition duration-300 bg-blue-500 rounded-lg hover:bg-blue-600">
                                 Cari
                             </button>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="mahasiswaTable">
                         <thead class="text-white bg-primary">
                             <tr>
                                 <th class="text-center">NIM</th>
@@ -141,16 +141,71 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
-                                            <a href="/lihat_mahasiswa/{{ $mahasiswa->id_mahasiswa }}"
-                                                class="mr-2 rounded-sm btn btn-primary"><i class="fas fa-eye"></i></a>
+                                            <button type="button" class="mr-2 rounded-sm btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal-{{ $mahasiswa->id_mahasiswa }}"><i class="fas fa-eye"></i>
+                                            </button>
+
+                                            <div class="modal fade" id="modal-{{ $mahasiswa->id_mahasiswa }}" tabindex="-1"
+                                                aria-labelledby="modalLabel-{{ $mahasiswa->id_mahasiswa }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                    <div class="shadow-lg modal-content rounded-3">
+                                                        <div class=" modal-header">
+                                                            <h5 class="modal-title" id="modalLabel-{{ $mahasiswa->id_mahasiswa }}">
+                                                                Detail Mahasiswa
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-center ">Nama Mahasiswa</th>
+                                                                        <th class="text-center ">NIM</th>
+                                                                        <th class="text-center ">Tahun Masuk</th>
+                                                                        <th class="text-center ">No Hp</th>
+                                                                        <th class="text-center ">No Hp Orang Tua</th>
+                                                                        <th class="text-center ">Alamat</th>
+                                                                        <th class="text-center ">Status Mahasiswa</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                        <tr>
+                                                                            <td class="text-center">{{ $mahasiswa->nama_mahasiswa }}</td>
+                                                                            <td class="text-center">{{ $mahasiswa->nim }}</td>
+                                                                            <td class="text-center">{{ $mahasiswa->tahunMasuk->tahun ?? '-' }}</td>
+                                                                            <td class="text-center">{{ $mahasiswa->no_hp }}</td>
+                                                                            <td class="text-center">{{ $mahasiswa->no_ortu }}</td>
+                                                                            <td class="text-center">{{ $mahasiswa->alamat }}</td>
+                                                                            <td class="text-center">
+                                                                                @if ($mahasiswa->status_aktif == 'Aktif')
+                                                                                    <span class="text-sm badge bg-success">Aktif</span>
+                                                                                @elseif ($mahasiswa->status_aktif == 'Lulus')
+                                                                                    <span class="text-sm badge bg-primary">lulus</span>
+                                                                                @elseif ($mahasiswa->status_aktif == 'DO')
+                                                                                    <span class="text-sm badge bg-danger">DO</span>
+                                                                                @elseif ($mahasiswa->status_aktif == 'Undur Diri')
+                                                                                    <span class="text-sm badge bg-warning">Undur Diri</span>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <!-- Use a unique modal ID based on mahasiswa's ID -->
                                             <button type="button" class="mr-2 rounded-sm btn btn-warning"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#modal-{{ $mahasiswa->id_mahasiswa }}"><i class="fas fa-edit"></i>
+                                                data-bs-target="#modal2-{{ $mahasiswa->id_mahasiswa }}"><i class="fas fa-edit"></i>
                                             </button>
 
                                             <!-- Modal for each mahasiswa -->
-                                            <div class="modal fade" id="modal-{{ $mahasiswa->id_mahasiswa }}"
+                                            <div class="modal fade" id="modal2-{{ $mahasiswa->id_mahasiswa }}"
                                                 tabindex="-1"
                                                 aria-labelledby="modalLabel-{{ $mahasiswa->id_mahasiswa }}"
                                                 aria-hidden="true">
@@ -228,8 +283,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Save
-                                                                    changes</button>
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -279,11 +333,33 @@
                     </table>
                 </div>
             </div>
-            <div class="mt-3 d-flex justify-content-center">
+            {{-- <div class="mt-3 d-flex justify-content-center">
                 {{ $mahasiswas->links('pagination::bootstrap-4') }}
-            </div>
+            </div> --}}
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#mahasiswaTable').DataTable({
+                responsive: true,
+                paging: true,
+                ordering: true,
+                info: true,
+                lengthMenu: [10, 25, 50, 100],
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: "Awal",
+                        last: "Akhir",
+                        next: "→",
+                        previous: "←"
+                    }
+                }
+            });
+        });
+    </script>
     <script>
         function setDeleteData(id, name) {
             document.getElementById('namaMahasiswa').textContent = name;
