@@ -12,9 +12,10 @@ class mahasiswaController extends Controller
 
     public function index(){
          $mahasiswas = Mahasiswa::all();
-    $tahunAkademiks = TahunAkademik::all();
+    $tahunAkademiks = TahunAkademik::where('ganjil_genap', 'Ganjil')->get();
     return view('mahasiswa.index', compact('mahasiswas', 'tahunAkademiks'));
     }
+
     public function store(Request $request)
     {
 

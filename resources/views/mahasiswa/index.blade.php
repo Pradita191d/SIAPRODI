@@ -83,8 +83,7 @@
                                                 <select class="form-control" id="tahunInput" name="tahun_masuk" required>
                                                     <option value="" selected disabled>Pilih Tahun</option>
                                                     @foreach ($tahunAkademiks as $x)
-                                                        <option value="{{ $x->id_tahun_akademik }}">{{ $x->tahun }}
-                                                            {{ $x->ganjil_genap }}</option>
+                                                        <option value="{{ $x->id_tahun_akademik }}">{{ $x->tahun }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
