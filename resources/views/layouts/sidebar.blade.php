@@ -104,7 +104,7 @@
                     <!-- Submenu -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/mahasiswa_magang" class="nav-link ml-3">
+                            <a href="/magang/mahasiswa_magang" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Mahasiswa Magang</p>
                             </a>
