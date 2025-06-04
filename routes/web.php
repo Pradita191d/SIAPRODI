@@ -104,6 +104,7 @@ Route::resource('sertifikat_mahasiswa', SertMahController::class);
 
 // magang
 Route::get('/magang', [MagangController::class, 'index'])->name('magang.index');
+Route::resource('magang', MagangController::class);
 Route::get('/magang/{id}/edit', [MagangController::class, 'edit'])->name('magang.edit');
 Route::post('magang/{magang}/store-mahasiswa', [MagangController::class, 'storeMahasiswaMagang'])->name('magang.storeMahasiswaMagang');
 Route::put('/magang/{magang}/mahasiswa/{mahasiswa}', [MagangController::class, 'updateMahasiswaMagang'])->name('magang.updateMahasiswaMagang');
