@@ -48,11 +48,6 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('mou.show', $mou->id_mou) }}"
-                                                class="btn btn-outline-primary btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-
                                             <button class="btn btn-sm btn-outline-warning"
                                                 onclick="editMou(`{{ $mou->id_mou }}`, `{{ $mou->no_mou }}`, `{{ $mou->pihak_1 }}`, `{{ $mou->pihak_2 }}`, `{{ $mou->tanggal_mulai }}`, `{{ $mou->tanggal_berakhir }}`, `{{ $mou->tahunAkademik->id_tahun_akademik ?? '' }}`, `{{ $mou->jenis_kerjasama }}`, `{{ $mou->kontak }}`, `{{ asset('storage/' . $mou->file_mou) }}`)">
                                                 <i class="fas fa-edit"></i>
@@ -150,7 +145,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     let form = document.getElementById('deleteForm');
-                    form.action = "{{ route('mou.destroy', '') }}/" + id_mou;
+                    form.action = "/mou/" + id_mou;
                     form.submit();
                 }
             });

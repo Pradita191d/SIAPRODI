@@ -142,7 +142,6 @@ Route::get('/ipk/rekapitulasi', [IpkController::class, 'getRekapitulasi'])->name
 //mei
 Route::get('/mou', [MouController::class, 'index'])->name('mou.index');
 Route::get('/mou/export', [MouController::class, 'exportExcel'])->name('mou.export');
-Route::get('/mou/{id}', [MouController::class, 'show'])->name('mou.show');
 Route::post('/mou/store', [MouController::class, 'store'])->name('mou.store');
 Route::delete('/mou/{id_mou}', [MouController::class, 'destroy'])->name('mou.destroy');
 Route::put('/mou/{id_mou}', [MouController::class, 'update'])->name('mou.update');
@@ -301,22 +300,22 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
     Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
         ->name('maspan.search');
 
-    Route::get('/maspan/tambah', [MahasiswaSemesterPerpanjanganController::class, 'tampiltambah']) 
+    Route::get('/maspan/tambah', [MahasiswaSemesterPerpanjanganController::class, 'tampiltambah'])
     -> name ('maspan.tambah');
 
-     Route::post('/maspan/simpan', [MahasiswaSemesterPerpanjanganController::class, 'store']) 
+     Route::post('/maspan/simpan', [MahasiswaSemesterPerpanjanganController::class, 'store'])
     -> name ('maspan.simpan');
-  
+
     Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
         ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
 
     Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
         ->name('amspan.update');
-    
+
     Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
         ->name('maspan.destroy');
 
-   
+
     Route::put('/maspan/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])->name('maspan.update'); // Untuk menyimpan perubahan
 
     Route::get('maspan/exportpdf', [MahasiswaSemesterPerpanjanganController::class, 'exportpdf']); //cetak pdf
@@ -346,7 +345,7 @@ Route::put('/yudisium/{id}', [YudisiumController::class, 'update'])->name('yudis
 Route::delete('/yudisium/{id}', [YudisiumController::class, 'destroy'])->name('yudisium.destroy');
 // Route::get('/yudisium/ganjil', [YudisiumController::class, 'ganjil'])->name('yudisium.ganjil');
 // Route::get('/yudisium/genap', [YudisiumController::class, 'genap'])->name('yudisium.genap');
-Route::get('yudisium/search', [YudisiumController::class, 'search']); 
+Route::get('yudisium/search', [YudisiumController::class, 'search']);
 Route::resource('mahasiswa', MahasiswaController::class);
 
 route::get('/yudisium/exportpdf', [YudisiumController::class, 'exportpdf']); //cetak pdf
