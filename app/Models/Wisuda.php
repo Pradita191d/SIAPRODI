@@ -8,7 +8,7 @@ class Wisuda extends Model
 {
     protected $table = 'wisuda';
 
-    protected $fillable = ['nim', 'tahun_masuk', 'status_wisuda', 'tahun_wisuda','tahun_wisuda_id'];
+    protected $fillable = ['nim', 'tahun_masuk', 'status_wisuda', 'tahun_wisuda'];
 
     public function tampilMahasiswa()
     {
@@ -19,13 +19,5 @@ class Wisuda extends Model
     {
         return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
     }
-    public function mahasiswa()
-    {
-        return $this->belongsTo(MahasiswaModel::class, 'nim', 'nim');
-    }
 
-    public function sk()
-    {
-        return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
-    }
 }
