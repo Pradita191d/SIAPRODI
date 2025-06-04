@@ -11,7 +11,7 @@ class mahasiswaController extends Controller
     public $search = '';
 
     public function index(){
-         $mahasiswas = Mahasiswa::all();
+    $mahasiswas = Mahasiswa::paginate(5);
     $tahunAkademiks = TahunAkademik::where('ganjil_genap', 'Ganjil')->get();
     return view('mahasiswa.index', compact('mahasiswas', 'tahunAkademiks'));
     }

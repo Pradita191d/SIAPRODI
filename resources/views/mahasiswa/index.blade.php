@@ -142,12 +142,11 @@
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
                                             <a href="/lihat_mahasiswa/{{ $mahasiswa->id_mahasiswa }}"
-                                                class="mr-2 btn btn-sm btn-primary">Lihat</a>
+                                                class="mr-2 rounded-sm btn btn-primary"><i class="fas fa-eye"></i></a>
                                             <!-- Use a unique modal ID based on mahasiswa's ID -->
-                                            <button type="button" class="mr-2 btn btn-sm btn-primary"
+                                            <button type="button" class="mr-2 rounded-sm btn btn-warning"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#modal-{{ $mahasiswa->id_mahasiswa }}">
-                                                Edit
+                                                data-bs-target="#modal-{{ $mahasiswa->id_mahasiswa }}"><i class="fas fa-edit"></i>
                                             </button>
 
                                             <!-- Modal for each mahasiswa -->
@@ -238,11 +237,10 @@
                                             </div>
 
                                             <!-- Tombol Hapus -->
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            <button class="rounded-sm btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#confirmDeleteModal"
                                                 onclick="setDeleteData('{{ $mahasiswa->id_mahasiswa }}', '{{ $mahasiswa->nama_mahasiswa }}')">
-
-                                                Hapus
+                                                <i class="fas fa-trash-alt"></i>
                                             </button>
 
                                             <!-- Modal Konfirmasi Hapus -->
@@ -280,6 +278,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="mt-3 d-flex justify-content-center">
+                {{ $mahasiswas->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
