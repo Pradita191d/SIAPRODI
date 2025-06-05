@@ -23,7 +23,7 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td class="text-center">{{ $p_mhs->mahasiswa?->nama_mahasiswa }}</td>
-            <td class="text-center"> {{ $p_mhs->mahasiswa?->nim }} </td>
+            <td class="text-center"> {{ $p_mhs->mahasiswa?->NIM }} </td>
             <td class="text-center">{{ $p_mhs->jenis_pres }}</td>
             <td class="text-center">{{ $p_mhs->penyelenggara }}</td>
             <td class="text-center">{{ $p_mhs->tahun }}</td>

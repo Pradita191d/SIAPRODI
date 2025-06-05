@@ -16,7 +16,6 @@
                 <select class="form-control" id="role" name="role">
                     <option value="admin">Admin</option>
                     <option value="dosen">Dosen</option>
-                    <option value="mahasiswa">Mahasiswa</option>
                 </select>
             </div>
             <div class="form-group">
