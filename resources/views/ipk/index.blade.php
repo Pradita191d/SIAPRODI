@@ -441,10 +441,10 @@
             });
         });
 
-        //trigger delete
         function deleteIpk(id) {
             const deleteForm = document.getElementById('deleteForm');
-            deleteForm.action = "{{ url('ipk') }}/" + id;
+            deleteForm.action = window.location.origin + "/ipk/" + id;
+
             const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
             confirmDeleteModal.show();
         }
