@@ -50,7 +50,7 @@ class KegiatanDosenController extends Controller
             'keterangan' => $request->keterangan ?? '-', 
         ]);
 
-        return redirect()->route('kegiatan_dosen.index')->with('sukses', 'Data berhasil ditambahkan!');
+        return redirect()->route('kegiatan_dosen.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
     public function edit($id_kegiatan_dosen)
@@ -99,7 +99,7 @@ class KegiatanDosenController extends Controller
             'file_sk' => $kegiatan->file_sk, 
         ]);
 
-        return redirect()->route('kegiatan_dosen.index')->with('sukses', 'Data berhasil diperbarui!');
+        return redirect()->route('kegiatan_dosen.index')->with('success', 'Data berhasil diperbarui!');
     }
 
     public function destroy($id_kegiatan_dosen)
@@ -107,7 +107,7 @@ class KegiatanDosenController extends Controller
         $kegiatan = KegiatanDosenModels::FindOrFail($id_kegiatan_dosen);
         $kegiatan->delete();
 
-        return redirect()->route('kegiatan_dosen.index')->with('sukses', 'Data berhasil dihapus!');
+        return redirect()->route('kegiatan_dosen.index')->with('success', 'Data berhasil dihapus!');
     }
 
     public function search(Request $request)
