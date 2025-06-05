@@ -26,7 +26,7 @@
 
                     @if (!empty($tahun_wisuda->sk_wisuda) && $tahun_wisuda->sk_wisuda !== '-')
                         <p class="mt-2">File Saat Ini: 
-                            <a href="{{ asset('storage/' . urlencode($tahun_wisuda->sk_wisuda)) }}" target="_blank">Lihat SK</a>
+                            <a href="{{ asset('storage/' . $tahun_wisuda->sk_wisuda) }}" target="_blank">Lihat SK</a>
                         </p>
                     @endif
                 </div>
