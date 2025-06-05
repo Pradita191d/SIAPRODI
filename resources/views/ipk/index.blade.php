@@ -262,7 +262,7 @@
                     },
                     {
                         searchable: true,
-                        targets: [1, 2] // hanya kolom ke-2 dan ke-3 yang bisa dicari
+                        targets: [1, 2, 3] // hanya kolom ke-2 dan ke-3 yang bisa dicari
                     },
                     {
                         searchable: false,
