@@ -51,7 +51,7 @@
         @foreach ($yudisium as $ys)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $ys->mahasiswa?->nim }}</td>
+            <td>{{ $ys->NIM }}</td>
             <td>{{ $ys->mahasiswa?->nama_mahasiswa }}</td>
             <td>{{ $ys->semester }}</td>
             <td>{{ $ys->tgl_yudisium }}</td>
