@@ -271,7 +271,7 @@
                 ]
             });
 
-                $('.dataTables_filter input[type="search"]').attr('placeholder', 'Cari nama atau nim');
+            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Cari nama atau nim');
 
             // Debug fungsi filter custom
             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
@@ -302,8 +302,10 @@
 
 
         function updateRekapitulasi() {
+            var baseUrl = window.location.origin; // Ini otomatis https://ti-3d.abm.my.id
+
             $.ajax({
-                url: "{{ route('ipk.rekapitulasi') }}",
+                url: baseUrl + "/ipk/rekapitulasi",
                 type: "GET",
                 data: {
                     tahun_masuk: $('#filter-tahun').val()
