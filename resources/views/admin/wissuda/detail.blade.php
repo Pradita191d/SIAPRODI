@@ -32,7 +32,7 @@
                     <th>SK Wisuda</th>
                     <td>
                         @if($wisuda->sk?->sk_wisuda && $wisuda->sk?->sk_wisuda !== '-')
-                            <a href="{{ asset('storage/' . urlencode($wisuda->sk->sk_wisuda)) }}" target="_blank" class="btn btn-primary btn-sm">
+                            <a href="{{ asset('storage/' . $wisuda->sk->sk_wisuda) }}" target="_blank" class="btn btn-primary btn-sm">
                                 <i class="nav-icon fas fa-file"></i> Lihat SK
                             </a>
                         @else
