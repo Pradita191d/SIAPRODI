@@ -126,7 +126,7 @@
                                     <td class="text-center">{{ $mahasiswa->nim }}</td>
                                     <td class="text-center">{{ $mahasiswa->nama_mahasiswa }}</td>
                                     <td class="text-center">
-                                        {{ $mahasiswa->tahunMasuk->tahun ?? '-' }}
+                                        {{ $mahasiswa->tahunAkademik->tahun}}
                                     </td>
                                     <td class="text-center">
                                         @if ($mahasiswa->status_aktif == 'Aktif')
@@ -175,7 +175,7 @@
                                                                         <tr>
                                                                             <td class="text-center">{{ $mahasiswa->nama_mahasiswa }}</td>
                                                                             <td class="text-center">{{ $mahasiswa->nim }}</td>
-                                                                            <td class="text-center">{{ $mahasiswa->tahunMasuk->tahun ?? '-' }}</td>
+                                                                            <td class="text-center">{{ $mahasiswa->tahunAkademik->tahun}}</td>
                                                                             <td class="text-center">{{ $mahasiswa->no_hp }}</td>
                                                                             <td class="text-center">{{ $mahasiswa->no_ortu }}</td>
                                                                             <td class="text-center">{{ $mahasiswa->alamat }}</td>

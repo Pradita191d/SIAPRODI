@@ -69,7 +69,6 @@ class mahasiswaController extends Controller
             $mahasiswa->delete();
             return redirect()->back()->with('success', 'Mahasiswa berhasil dihapus!');
         } catch (\Exception $e) {
-            dd($mahasiswa);
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
