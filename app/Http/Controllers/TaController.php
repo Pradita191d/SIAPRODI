@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TugasAkhir;
 use App\Models\TahunAkademik;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TugasAkhirExport;
@@ -12,10 +13,21 @@ class TaController extends Controller
 {
     public function index()
     {
-        $tugas_akhirs = TugasAkhir::with('tahunAkademik')->get();
-        $tahunAkademik = TahunAkademik::all();
+        $tugas_akhirs = TugasAkhir::with([
+            'tahunAkademik',
+            'mahasiswa',
+            'dosenPengprop1',
+            'dosenPengprop2',
+            'dosenPemta1',
+            'dosenPemta2',
+            'dosenPengta1',
+            'dosenPengta2'
+        ])->get();
 
-        return view('tugas_akhir.index', compact('tugas_akhirs', 'tahunAkademik'));
+        $tahunAkademik = TahunAkademik::all();
+        $dosens = Dosen::all();
+
+        return view('tugas_akhir.index', compact('tugas_akhirs', 'tahunAkademik', 'dosens'));
     }
 
     public function store(Request $request)
@@ -25,15 +37,18 @@ class TaController extends Controller
             'judul_ta' => 'required|string|max:255',
             'nilai_ta' => 'required|integer',
             'tahun_akademik' => 'required|exists:tahun_akademik,id_tahun_akademik',
+            'sk_penguji_proposal' => 'required|string|max:255',
+            'dosen_pengprop_1' => 'required|exists:dosen,nidn',
+            'dosen_pengprop_2' => 'required|exists:dosen,nidn',
+            'sk_pembimbing_ta' => 'required|string|max:255',
+            'dosen_pemta_1' => 'required|exists:dosen,nidn',
+            'dosen_pemta_2' => 'required|exists:dosen,nidn',
+            'sk_penguji_ta' => 'required|string|max:255',
+            'dosen_pengta_1' => 'required|exists:dosen,nidn',
+            'dosen_pengta_2' => 'required|exists:dosen,nidn',
         ]);
 
-
-        TugasAkhir::create([
-            'nim' => $request->nim,
-            'judul_ta' => $request->judul_ta,
-            'nilai_ta' => $request->nilai_ta,
-            'tahun_akademik' => $request->tahun_akademik,
-        ]);
+        TugasAkhir::create($request->all());
 
         return redirect()->route('tugas_akhir.index')->with('success', 'Tugas Akhir berhasil ditambahkan!');
     }
@@ -45,19 +60,22 @@ class TaController extends Controller
             'judul_ta' => 'required|string|max:255',
             'nilai_ta' => 'required|integer',
             'tahun_akademik' => 'required|exists:tahun_akademik,id_tahun_akademik',
+            'sk_penguji_proposal' => 'required|string|max:255',
+            'dosen_pengprop_1' => 'required|exists:dosen,nidn',
+            'dosen_pengprop_2' => 'required|exists:dosen,nidn',
+            'sk_pembimbing_ta' => 'required|string|max:255',
+            'dosen_pemta_1' => 'required|exists:dosen,nidn',
+            'dosen_pemta_2' => 'required|exists:dosen,nidn',
+            'sk_penguji_ta' => 'required|string|max:255',
+            'dosen_pengta_1' => 'required|exists:dosen,nidn',
+            'dosen_pengta_2' => 'required|exists:dosen,nidn',
         ]);
 
         $tugasAkhir = TugasAkhir::findOrFail($id_ta);
-        $tugasAkhir->nim = $request->nim;
-        $tugasAkhir->judul_ta = $request->judul_ta;
-        $tugasAkhir->nilai_ta = $request->nilai_ta;
-        $tugasAkhir->tahun_akademik = $request->tahun_akademik;
-
-        $tugasAkhir->save();
+        $tugasAkhir->update($request->all());
 
         return redirect()->route('tugas_akhir.index')->with('success', 'Tugas Akhir berhasil diperbarui!');
     }
-
 
     public function destroy($id_ta)
     {
