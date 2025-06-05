@@ -31,60 +31,99 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Data akan diisi oleh DataTables -->
+                            @foreach ($mahasiswas as $index => $mhs)
+                                <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
+                                    <td class="text-center">{{ $mhs->nim }}</td>
+                                    <td>{{ $mhs->nama_mahasiswa }}</td>
+                                    <td class="text-center">
+                                        {{ $mhs->tahunAkademik->tahun ?? '-' }}/{{ $mhs->tahunAkademik->ganjil_genap ?? '-' }}
+                                    </td>
+                                    <td class="text-center">{{ $mhs->ipk->ipk ?? '-' }}</td>
+                                    <td class="text-center">
+                                        @php
+                                            $ipk = $mhs->ipk->ipk ?? null;
+                                        @endphp
+                                        @if (is_null($ipk))
+                                            -
+                                        @elseif ($ipk > 3.5)
+                                            <span class="badge bg-success">Cumlaude</span>
+                                        @elseif ($ipk >= 3.01 && $ipk <= 3.5)
+                                            <span class="badge bg-primary">Sangat Memuaskan</span>
+                                        @elseif ($ipk >= 2.76 && $ipk <= 3.0)
+                                            <span class="badge bg-info">Memuaskan</span>
+                                        @else
+                                            <span class="badge bg-warning">Kurang</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if (is_null($mhs->ipk))
+                                            <button
+                                                onclick="openInputIpkModal('{{ $mhs->nim }}', '{{ $mhs->nama_mahasiswa }}')"
+                                                class="btn btn-sm btn-success">Input IPK</button>
+                                        @else
+                                            <button onclick="editIpk({{ $mhs->ipk->id_ipk }})"
+                                                class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
+                                            <button onclick="deleteIpk({{ $mhs->ipk->id_ipk }})"
+                                                class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
+
                     </table>
                 </div>
 
             </div>
         </div>
 
-       <div class="card mt-4">
-    <div class="card-header bg-white text-dark">
-        <h5 class="mb-0">Rekapan IPK Mahasiswa</h5>
-    </div>
-    <div class="card-body">
-        <div class="row justify-content-center">
-            <!-- Keterangan IPK -->
-            <div class="col-md-4">
-                <div class="border rounded p-3 bg-light shadow-sm h-100">
-                    <strong class="d-block mb-2">Keterangan IPK</strong>
-                    <ul class="mb-0" style="list-style: none; padding-left: 0;">
-                        <li><span class="badge bg-success me-2">&nbsp;</span> Cumlaude (&gt; 3.50)</li>
-                        <li><span class="badge bg-primary me-2">&nbsp;</span> Sangat Memuaskan (3.01 - 3.50)</li>
-                        <li><span class="badge bg-info text-dark me-2">&nbsp;</span> Memuaskan (2.76 - 3.00)</li>
-                        <li><span class="badge bg-warning text-dark me-2">&nbsp;</span> Kurang (≤ 2.75)</li>
-                    </ul>
+        <div class="card mt-4">
+            <div class="card-header bg-white text-dark">
+                <h5 class="mb-0">Rekapan IPK Mahasiswa</h5>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <!-- Keterangan IPK -->
+                    <div class="col-md-4">
+                        <div class="border rounded p-3 bg-light shadow-sm h-100">
+                            <strong class="d-block mb-2">Keterangan IPK</strong>
+                            <ul class="mb-0" style="list-style: none; padding-left: 0;">
+                                <li><span class="badge bg-success me-2">&nbsp;</span> Cumlaude (&gt; 3.50)</li>
+                                <li><span class="badge bg-primary me-2">&nbsp;</span> Sangat Memuaskan (3.01 - 3.50)</li>
+                                <li><span class="badge bg-info text-dark me-2">&nbsp;</span> Memuaskan (2.76 - 3.00)</li>
+                                <li><span class="badge bg-warning text-dark me-2">&nbsp;</span> Kurang (≤ 2.75)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Rekap IPK -->
+                    <div class="col-md-8">
+                        <table class="table table-bordered table-striped w-100">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th class="text-center">Kategori</th>
+                                    <th class="text-center">Jumlah Mahasiswa</th>
+                                    <th class="text-center">Persentase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">IPK ≥ 3.50</td>
+                                    <td class="text-center" id="jumlahCumlaude">0</td>
+                                    <td class="text-center" id="persentaseCumlaude">0 %</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">IPK &lt; 3.0</td>
+                                    <td class="text-center" id="jumlahPerluPerbaikan">0</td>
+                                    <td class="text-center" id="persentasePerluPerbaikan">0 %</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <!-- Tabel Rekap IPK -->
-            <div class="col-md-8">
-                <table class="table table-bordered table-striped w-100">
-                    <thead class="bg-dark text-white">
-                        <tr>
-                            <th class="text-center">Kategori</th>
-                            <th class="text-center">Jumlah Mahasiswa</th>
-                            <th class="text-center">Persentase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">IPK ≥ 3.50</td>
-                            <td class="text-center" id="jumlahCumlaude">0</td>
-                            <td class="text-center" id="persentaseCumlaude">0 %</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">IPK &lt; 3.0</td>
-                            <td class="text-center" id="jumlahPerluPerbaikan">0</td>
-                            <td class="text-center" id="persentasePerluPerbaikan">0 %</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
-</div>
 
     </div>
 
@@ -191,74 +230,76 @@
 
 @push('scripts')
     <script>
-        //DataTable
+        // Buat mapping ID ke "tahun/ganjil_genap"
+        var tahunAkademikMap = @json(
+            $tahun_akademik->mapWithKeys(function ($item) {
+                return [$item->id_tahun_akademik => $item->tahun . '/' . $item->ganjil_genap];
+            }));
+    </script>
+
+    <script>
         $(document).ready(function() {
             var table = $('#ipk-table').DataTable({
-                processing: true,
-                serverSide: true,
+                responsive: true,
+                paging: true,
+                ordering: true,
+                info: true,
+                lengthMenu: [10, 25, 50, 100],
                 language: {
                     search: "Cari:",
-                    searchPlaceholder: "NIM/Nama"
-                },
-                ajax: {
-                    url: "{{ route('ipk.index') }}",
-                    data: function(d) {
-                        d.tahun_masuk = $('#filter-tahun').val();
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: "Awal",
+                        last: "Akhir",
+                        next: "→",
+                        previous: "←"
                     }
                 },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
+                columnDefs: [{
                         orderable: false,
+                        targets: 3 // kolom ke-4 tidak bisa diurutkan
+                    },
+                    {
+                        searchable: true,
+                        targets: [1, 2] // hanya kolom ke-2 dan ke-3 yang bisa dicari
+                    },
+                    {
                         searchable: false,
-                        className: 'text-center'
-                    },
-                    {
-                        data: 'nim',
-                        name: 'mahasiswa.nim',
-                        orderable: false,
-                        className: 'text-center'
-                    },
-                    {
-                        data: 'nama_mahasiswa',
-                        name: 'mahasiswa.nama_mahasiswa',
-                        className: 'text-center'
-                    },
-                    {
-                        data: 'tahun_masuk',
-                        name: 'tahun_akademik.tahun',
-                        orderable: false,
-                        searchable: false,
-                        className: 'text-center'
-                    },
-                    {
-                        data: 'ipk',
-                        name: 'ipk.ipk',
-                        className: 'text-center'
-                    },
-                    {
-                        data: 'keterangan_ipk',
-                        name: 'ipk.keterangan',
-                        orderable: false,
-                        searchable: false,
-                        className: 'text-center'
-                    },
-                    {
-                        data: 'aksi',
-                        name: 'aksi',
-                        orderable: false,
-                        searchable: false,
-                        className: 'text-center'
+                        targets: "_all" // selain kolom 1 dan 2, nonaktifkan search
                     }
                 ]
             });
 
-            // Trigger filter saat dropdown berubah
-            $('#filter-tahun').change(function() {
-                table.ajax.reload();
-                updateRekapitulasi();
+                $('.dataTables_filter input[type="search"]').attr('placeholder', 'Cari nama atau nim');
+
+            // Debug fungsi filter custom
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                var selectedId = $('#filter-tahun').val();
+                var tahunKolom = data[3]; // ganti 3 dengan index kolom tahun yang sesuai
+
+                if (selectedId === "") {
+                    return true;
+                }
+
+
+                if (tahunAkademikMap[selectedId] === tahunKolom) {
+                    return true;
+                }
+
+                return false;
+            });
+
+
+            // Ketika filter tahun berubah, redraw table (tanpa reload page)
+            $('#filter-tahun').on('change', function() {
+                table.draw();
+                updateRekapitulasi(); // kalau ada fungsi ini tetap panggil
             });
         });
+
+        //DataTable
+
 
         function updateRekapitulasi() {
             $.ajax({
