@@ -20,7 +20,7 @@
             <table class="table table-bordered" id="magangTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {{-- <th>ID</th> --}}
                         <th>NIM (Nama Mahasiswa)</th>
                         <th>Tahun Ajaran</th>
                         <th>Nama Perusahaan</th>
@@ -32,7 +32,7 @@
                 <tbody>
                     @foreach($mahasiswaMagang as $magang)
                         <tr>
-                            <td>{{ $magang->id }}</td>
+                            {{-- <td>{{ $magang->id }}</td> --}}
                             <td>{{ $magang->nim }} ({{ $magang->mahasiswa->nama_mahasiswa }})</td>
                             <td>{{$magang->tahun_ajaran}}</td>
                             <td>{{ $magang->magang->nama_perusahaan }}</td>
