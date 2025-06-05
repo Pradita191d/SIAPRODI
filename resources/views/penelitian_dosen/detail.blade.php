@@ -51,7 +51,7 @@
                                         <ul>
                                             @foreach ($penelitian->anggota as $anggota)
                                                 <li>
-                                                    {{ $anggota->mahasiswa->nama_mahasiswa ?? '-' }} - {{ $anggota->NIM ?? '-' }}
+                                                    {{ $anggota->nama_mahasiswa ?? '-' }} - {{ $anggota->NIM ?? '-' }}
                                                 </li>
                                             @endforeach
                                         </ul>

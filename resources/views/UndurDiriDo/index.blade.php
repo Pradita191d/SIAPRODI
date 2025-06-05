@@ -321,7 +321,7 @@
                 paging: true,
                 ordering: true,
                 info: true,
-                lengthMenu: [1, 2, 5, 10],
+                lengthMenu: [5, 10, 20, 50],
                 language: {
                     search: "Cari:",
                     lengthMenu: "Tampilkan _MENU_ data",
