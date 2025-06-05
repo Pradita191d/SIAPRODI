@@ -1,5 +1,5 @@
 <div class="modal fade" id="editTAModal" tabindex="-1" aria-labelledby="editTAModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- Tambahkan modal-lg -->
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Tugas Akhir</h5>
@@ -12,7 +12,7 @@
                 @method('PUT')
                 <div class="modal-body">
                     <input type="hidden" id="edit_id_ta" name="id_ta">
-                    <div class="row"> <!-- Mulai layout 2 kolom -->
+                    <div class="row">
 
                         <div class="col-md-6">
                             <div class="form-group">
@@ -122,8 +122,7 @@
                                 </select>
                             </div>
                         </div>
-
-                    </div> <!-- End .row -->
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="$('#editTAModal').modal('hide')">Batal</button>

@@ -1,5 +1,5 @@
 <div class="modal fade" id="tambahTAModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tambah Tugas Akhir</h5>
@@ -12,7 +12,6 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            {{-- Nama Mahasiswa / NIM --}}
                             <div class="form-group">
                                 <label for="nim" class="form-label fw-bold">Nama Mahasiswa / NIM</label>
                                 <select class="form-control select2" id="nim" name="nim" required>
@@ -25,20 +24,17 @@
                                 </select>
                             </div>
 
-                            {{-- Judul TA --}}
                             <div class="form-group">
                                 <label for="judul_ta">Judul TA</label>
                                 <input type="text" class="form-control" id="judul_ta" name="judul_ta" required>
                             </div>
 
-                            {{-- SK Penguji Proposal --}}
                             <div class="form-group">
                                 <label for="sk_penguji_proposal">SK Penguji Proposal</label>
                                 <input type="text" class="form-control" id="sk_penguji_proposal"
                                     name="sk_penguji_proposal" required>
                             </div>
 
-                            {{-- Dosen Penguji Proposal 1 --}}
                             <div class="form-group">
                                 <label for="dosen_pengprop_1" class="form-label fw-bold">Dosen Penguji Proposal
                                     1</label>
@@ -52,7 +48,6 @@
                                 </select>
                             </div>
 
-                            {{-- Dosen Penguji Proposal 2 --}}
                             <div class="form-group">
                                 <label for="dosen_pengprop_2" class="form-label fw-bold">Dosen Penguji Proposal
                                     2</label>
@@ -66,7 +61,6 @@
                                 </select>
                             </div>
 
-                            {{-- SK Pembimbing TA --}}
                             <div class="form-group">
                                 <label for="sk_pembimbing_ta">SK Pembimbing TA</label>
                                 <input type="text" class="form-control" id="sk_pembimbing_ta" name="sk_pembimbing_ta"
@@ -75,7 +69,6 @@
                         </div>
 
                         <div class="col-md-6">
-                            {{-- Dosen Pembimbing TA 1 --}}
                             <div class="form-group">
                                 <label for="dosen_pemta_1" class="form-label fw-bold">Dosen Pembimbing TA 1</label>
                                 <select class="form-control select2" id="dosen_pemta_1" name="dosen_pemta_1" required>
@@ -88,7 +81,6 @@
                                 </select>
                             </div>
 
-                            {{-- Dosen Pembimbing TA 2 --}}
                             <div class="form-group">
                                 <label for="dosen_pemta_2" class="form-label fw-bold">Dosen Pembimbing TA 2</label>
                                 <select class="form-control select2" id="dosen_pemta_2" name="dosen_pemta_2" required>
@@ -101,14 +93,12 @@
                                 </select>
                             </div>
 
-                            {{-- SK Penguji TA --}}
                             <div class="form-group">
                                 <label for="sk_penguji_ta">SK Penguji TA</label>
                                 <input type="text" class="form-control" id="sk_penguji_ta" name="sk_penguji_ta"
                                     required>
                             </div>
 
-                            {{-- Dosen Penguji TA 1 --}}
                             <div class="form-group">
                                 <label for="dosen_pengta_1" class="form-label fw-bold">Dosen Penguji TA 1</label>
                                 <select class="form-control select2" id="dosen_pengta_1" name="dosen_pengta_1" required>
@@ -121,7 +111,6 @@
                                 </select>
                             </div>
 
-                            {{-- Dosen Penguji TA 2 --}}
                             <div class="form-group">
                                 <label for="dosen_pengta_2" class="form-label fw-bold">Dosen Penguji TA 2</label>
                                 <select class="form-control select2" id="dosen_pengta_2" name="dosen_pengta_2" required>
@@ -134,13 +123,11 @@
                                 </select>
                             </div>
 
-                            {{-- Nilai TA --}}
                             <div class="form-group">
                                 <label for="nilai_ta">Nilai TA</label>
                                 <input type="text" class="form-control" id="nilai_ta" name="nilai_ta" required>
                             </div>
 
-                            {{-- Tahun Akademik --}}
                             <div class="form-group">
                                 <label for="tahun_akademik" class="form-label">Tahun Akademik</label>
                                 <select name="tahun_akademik"
