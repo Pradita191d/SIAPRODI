@@ -55,7 +55,10 @@
                                                 '{{ $data->tanggal_pengajuan }}',
                                                 '{{ $data->status_pengajuan }}',
                                                 '{{ $data->keterangan }}',
-                                                '{{ $data->alasan }}')">
+                                                '{{ $data->alasan }}',
+                                                '{{ $data->tanggal_disetujui }}',
+                                                '{{ $data->no_sk ?? '' }}',
+                                                '{{ $data->tanggal_sk ?? '' }}')">
                                                 Detail
                                             </button>
                                             <button class="btn btn-sm btn-warning"
@@ -66,7 +69,9 @@
                                                 '{{ $data->alasan }}',
                                                 '{{ $data->keterangan }}',
                                                 '{{ $data->status_pengajuan }}',
-                                                '{{ $data->tanggal_disetujui ?? '' }}')">
+                                                '{{ $data->tanggal_disetujui ?? '' }}
+                                                '{{ $data->no_sk ?? '' }}',
+                                                '{{ $data->tanggal_sk ?? '' }}')">
                                                 Edit
                                             </button>
                                             <form id="delete-form-{{ $data->id_undur_diri_do }}"
