@@ -156,16 +156,15 @@
 
                         <div class="mb-3" id="tanggal_disetujui_container" style="display: none;">
                             <label for="tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
-                            <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui">
+                            <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui" required>
                         </div>
                         <div class="mb-3" id="no_sk_container" style="display: none;">
                             <label for="no_sk" class="form-label">NO SK</label>
-                            <input type="date" class="form-control" id="no_sk" name="no_sk">
+                            <input type="date" class="form-control" id="no_sk" name="no_sk" required>
                         </div>
                         <div class="mb-3" id="tanggal_sk_container" style="display: none;">
                             <label for="tanggal_sk" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="tanggal_sk"
-                                name="tanggal_sk">
+                            <input type="date" class="form-control" id="tanggal_sk" name="tanggal_sk" required>
                         </div>
 
                         <div class="modal-footer">
@@ -222,7 +221,7 @@
                         <div class="mb-3">
                             <label for="edit_status_pengajuan" class="form-label">Status Pengajuan</label>
                             <select class="form-control" id="edit_status_pengajuan" name="edit_status_pengajuan">
-                                <option value="Pending">Pending</option>
+                                <option value="Menunggu Persetujuan">Menunggu Persetujuan</option>
                                 <option value="Disetujui">Disetujui</option>
                                 <option value="Ditolak">Ditolak</option>
                             </select>
@@ -231,15 +230,15 @@
                         <div class="mb-3" id="edit_tanggal_disetujui_container" style="display: none;">
                             <label for="edit_tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
                             <input type="date" class="form-control" id="edit_tanggal_disetujui"
-                                name="edit_tanggal_disetujui">
+                                name="edit_tanggal_disetujui" required>
                         </div>
                         <div class="mb-3" id="edit_no_sk_container" style="display: none;">
                             <label for="edit_no_sk" class="form-label">NO SK</label>
-                            <input type="text" class="form-control" id="edit_no_sk" name="edit_no_sk">
+                            <input type="text" class="form-control" id="edit_no_sk" name="edit_no_sk" required>
                         </div>
                         <div class="mb-3" id="edit_tanggal_sk_container" style="display: none;">
                             <label for="edit_tanggal_sk" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="edit_tanggal_sk" name="edit_tanggal_sk">
+                            <input type="date" class="form-control" id="edit_tanggal_sk" name="edit_tanggal_sk" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -471,15 +470,19 @@
     {{-- modal detail --}}
     <script>
         function showDetailModal(nama, nim, tanggal, status, keterangan, alasan, tanggal_disetujui, no_sk, tanggal_sk) {
+            function sanitize(value) {
+                return value && value.trim() !== '' ? value : '-';
+            }
+
             document.getElementById('detail_nama').innerText = nama;
             document.getElementById('detail_nim').innerText = nim;
             document.getElementById('detail_tanggal_pengajuan').innerText = tanggal;
             document.getElementById('detail_status').innerText = status;
             document.getElementById('detail_keterangan').innerText = keterangan;
             document.getElementById('detail_alasan').innerText = alasan;
-            document.getElementById('detail_tanggal_disetujui').innerText = tanggal_disetujui ?? '-';
-            document.getElementById('detail_no_sk').innerText = no_sk ?? '-';
-            document.getElementById('detail_tanggal_sk').innerText = tanggal_sk ?? '-';
+            document.getElementById('detail_tanggal_disetujui').innerText = sanitize(tanggal_disetujui);
+            document.getElementById('detail_no_sk').innerText = sanitize(no_sk);
+            document.getElementById('detail_tanggal_sk').innerText = sanitize(tanggal_sk);
 
             var detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
             detailModal.show();
