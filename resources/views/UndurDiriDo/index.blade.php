@@ -161,15 +161,15 @@
                             <label for="tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
                             <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui">
                         </div>
-                        <div class="mb-3" id="edit_no_sk_container" style="display: none;">
-                            <label for="edit_no_sk" class="form-label">NO SK</label>
-                            <input type="date" class="form-control" id="edit_no_sk"
-                                name="edit_no_sk">
+                        <div class="mb-3" id="no_sk_container" style="display: none;">
+                            <label for="no_sk_container" class="form-label">NO SK</label>
+                            <input type="date" class="form-control" id="no_sk_container"
+                                name="no_sk_container">
                         </div>
-                        <div class="mb-3" id="edit_tanggal_sk_container" style="display: none;">
-                            <label for="edit_tanggal_sk" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="edit_tanggal_sk"
-                                name="edit_tanggal_sk">
+                        <div class="mb-3" id="tanggal_sk_container" style="display: none;">
+                            <label for="tanggal_sk_container" class="form-label">Tanggal SK</label>
+                            <input type="date" class="form-control" id="tanggal_sk_container"
+                                name="tanggal_sk_container">
                         </div>
 
 
