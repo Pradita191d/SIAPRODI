@@ -409,7 +409,7 @@
 
     {{-- modal edit --}}
     <script>
-        function editData(id, nim, tanggal_pengajuan, alasan, keterangan, status_pengajuan, tanggal_disetujui) {
+        function editData(id, nim, tanggal_pengajuan, alasan, keterangan, status_pengajuan, tanggal_disetujui, no_sk, tanggal_sk) {
             document.getElementById("edit_id").value = id;
             document.getElementById("edit_nim").value = nim;
             document.getElementById("edit_tanggal_pengajuan").value = tanggal_pengajuan;
@@ -461,7 +461,7 @@
 
     {{-- modal detail --}}
     <script>
-        function showDetailModal(nama, nim, tanggal, status, keterangan, alasan) {
+        function showDetailModal(nama, nim, tanggal, status, keterangan, alasan, tanggal_disetujui, no_sk, tanggal_sk) {
             document.getElementById('detail_nama').innerText = nama;
             document.getElementById('detail_nim').innerText = nim;
             document.getElementById('detail_tanggal_pengajuan').innerText = tanggal;
