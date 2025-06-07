@@ -120,9 +120,6 @@
                             <span id="nim-error" class="text-danger"></span>
                         </div>
 
-
-
-
                         <!-- Tanggal Pengajuan -->
                         <div class="mb-3">
                             <label for="tanggal_pengajuan" class="form-label">Tanggal Pengajuan</label>
@@ -147,29 +144,22 @@
                             <textarea class="form-control" id="alasan" name="alasan" required></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="status_pengajuan" class="form-label">Status Pengajuan</label>
-                            <select class="form-control" id="status_pengajuan" name="status_pengajuan" required
-                                onchange="toggleTanggalDisetujui()">
-                                <option value="Menunggu Persetujuan">Menunggu Persetujuan</option>
-                                <option value="Disetujui">Disetujui</option>
-                                <option value="Ditolak">Ditolak</option>
-                            </select>
+                        <select id="status_pengajuan" onchange="toggleTanggalDisetujui()">
+                            <option value="Pending">Pending</option>
+                            <option value="Disetujui">Disetujui</option>
+                            <option value="Ditolak">Ditolak</option>
+                        </select>
+
+                        <div id="tanggal_disetujui_container" style="display:none;">
+                            <input type="date" id="tanggal_disetujui" name="tanggal_disetujui" />
                         </div>
 
-                        <div class="mb-3" id="tanggal_disetujui_container" style="display: none;">
-                            <label for="tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
-                            <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui">
+                        <div id="no_sk_container" style="display:none;">
+                            <input type="text" id="no_sk" name="no_sk" placeholder="Nomor SK" />
                         </div>
-                        <div class="mb-3" id="no_sk_container" style="display: none;">
-                            <label for="no_sk_container" class="form-label">NO SK</label>
-                            <input type="date" class="form-control" id="no_sk_container"
-                                name="no_sk_container">
-                        </div>
-                        <div class="mb-3" id="tanggal_sk_container" style="display: none;">
-                            <label for="tanggal_sk_container" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="tanggal_sk_container"
-                                name="tanggal_sk_container">
+
+                        <div id="tanggal_sk_container" style="display:none;">
+                            <input type="date" id="tanggal_sk" name="tanggal_sk" />
                         </div>
 
 
@@ -224,29 +214,22 @@
                             <textarea class="form-control" id="edit_alasan" name="alasan" required></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="edit_status_pengajuan" class="form-label">Status Pengajuan</label>
-                            <select class="form-control" id="edit_status_pengajuan" name="status_pengajuan" required>
-                                <option value="Menunggu Persetujuan">Menunggu Persetujuan</option>
-                                <option value="Disetujui">Disetujui</option>
-                                <option value="Ditolak">Ditolak</option>
-                            </select>
+                        <select id="edit_status_pengajuan" name="edit_status_pengajuan">
+                            <option value="Pending">Pending</option>
+                            <option value="Disetujui">Disetujui</option>
+                            <option value="Ditolak">Ditolak</option>
+                        </select>
+
+                        <div id="edit_tanggal_disetujui_container" style="display:none;">
+                            <input type="date" id="edit_tanggal_disetujui" name="edit_tanggal_disetujui" />
                         </div>
 
-                        <div class="mb-3" id="edit_tanggal_disetujui_container" style="display: none;">
-                            <label for="edit_tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
-                            <input type="date" class="form-control" id="edit_tanggal_disetujui"
-                                name="tanggal_disetujui">
+                        <div id="edit_no_sk_container" style="display:none;">
+                            <input type="text" id="edit_no_sk" name="edit_no_sk" placeholder="Nomor SK" />
                         </div>
-                        <div class="mb-3" id="edit_no_sk_container" style="display: none;">
-                            <label for="edit_no_sk" class="form-label">NO SK</label>
-                            <input type="date" class="form-control" id="edit_no_sk"
-                                name="edit_no_sk">
-                        </div>
-                        <div class="mb-3" id="edit_tanggal_sk_container" style="display: none;">
-                            <label for="edit_tanggal_sk" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="edit_tanggal_sk"
-                                name="edit_tanggal_sk">
+
+                        <div id="edit_tanggal_sk_container" style="display:none;">
+                            <input type="date" id="edit_tanggal_sk" name="edit_tanggal_sk" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -375,61 +358,57 @@
             });
         });
     </script>
-    {{-- visibility tanggal disetujui --}}
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const statusPengajuan = document.getElementById("status_pengajuan");
-            const tanggalDisetujuiContainer = document.getElementById("tanggal_disetujui_container");
-            const noSkContainer = document.getElementById("no_sk_container");
-            const tanggalSkContainer = document.getElementById("tanggal_sk_container");
-
-            // Tampilkan Tanggal Disetujui Jika Status "Disetujui"
-            statusPengajuan.addEventListener("change", function() {
-                if (this.value === "Disetujui") {
-                    tanggalDisetujuiContainer.style.display = "block";
-                    noSkContainer.style.display = "block";
-                    tanggalSkContainer.style.display = "block";
-                } else {
-                    tanggalDisetujuiContainer.style.display = "none";
-                    noSkContainer.style.display = "none";
-                    tanggalSkContainer.style.display = "none";
-                }
-            });
-        });
-
+        // For Add Modal
         function toggleTanggalDisetujui() {
-            let statusPengajuan = document.getElementById("status_pengajuan").value;
-            let tanggalDisetujuiContainer = document.getElementById("tanggal_disetujui_container");
-            let tanggalDisetujuiInput = document.getElementById("tanggal_disetujui");
-            let noSkContainer = document.getElementById("no_sk_container");
-            let noSkInput = document.getElementById("no_sk");
-            let tanggalSkContainer = document.getElementById("tanggal_sk_container");
-            let tanggalSkInput = document.getElementById("tanggal_sk");
+            const status = document.getElementById('status_pengajuan').value;
+            const tanggalDisetujuiContainer = document.getElementById('tanggal_disetujui_container');
+            const noSkContainer = document.getElementById('no_sk_container');
+            const tanggalSkContainer = document.getElementById('tanggal_sk_container');
 
-            if (statusPengajuan === "Disetujui") {
-                tanggalDisetujuiContainer.style.display = "block";
-                tanggalDisetujuiInput.setAttribute("required", "required");
-                noSkContainer.style.display = "block";
-                noSkInput.setAttribute("required", "required");
-                tanggalSkContainer.style.display = "block";
-                tanggalSkInput.setAttribute("required", "required");
+            if (status === 'Disetujui') {
+                tanggalDisetujuiContainer.style.display = 'block';
+                noSkContainer.style.display = 'block';
+                tanggalSkContainer.style.display = 'block';
             } else {
-                tanggalDisetujuiContainer.style.display = "none";
-                tanggalDisetujuiInput.removeAttribute("required");
-                tanggalDisetujuiInput.value = ""; // Kosongkan jika tidak perlu
-                noSkContainer.style.display = "none";
-                noSkInput.removeAttribute("required");
-                noSkInput.value = ""; // Kosongkan jika tidak perlu
-                tanggalSkContainer.style.display = "none";
-                tanggalSkInput.removeAttribute("required");
-                tanggalSkInput.value = ""; // Kosongkan jika tidak perlu
+                tanggalDisetujuiContainer.style.display = 'none';
+                noSkContainer.style.display = 'none';
+                tanggalSkContainer.style.display = 'none';
             }
         }
+
+        // For Edit Modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const editStatus = document.getElementById('edit_status_pengajuan');
+            const editTanggalDisetujuiContainer = document.getElementById('edit_tanggal_disetujui_container');
+            const editNoSkContainer = document.getElementById('edit_no_sk_container');
+            const editTanggalSkContainer = document.getElementById('edit_tanggal_sk_container');
+
+            function toggleEditTanggalDisetujui() {
+                if (editStatus.value === 'Disetujui') {
+                    editTanggalDisetujuiContainer.style.display = 'block';
+                    editNoSkContainer.style.display = 'block';
+                    editTanggalSkContainer.style.display = 'block';
+                } else {
+                    editTanggalDisetujuiContainer.style.display = 'none';
+                    editNoSkContainer.style.display = 'none';
+                    editTanggalSkContainer.style.display = 'none';
+                }
+            }
+
+            // Run on page load to set correct visibility
+            toggleEditTanggalDisetujui();
+
+            // Listen for changes
+            editStatus.addEventListener('change', toggleEditTanggalDisetujui);
+        });
     </script>
 
     {{-- modal edit --}}
     <script>
-        function editData(id, nim, tanggal_pengajuan, alasan, keterangan, status_pengajuan, tanggal_disetujui, no_sk, tanggal_sk) {
+        function editData(id, nim, tanggal_pengajuan, alasan, keterangan, status_pengajuan, tanggal_disetujui, no_sk,
+            tanggal_sk) {
             document.getElementById("edit_id").value = id;
             document.getElementById("edit_nim").value = nim;
             document.getElementById("edit_tanggal_pengajuan").value = tanggal_pengajuan;
