@@ -69,7 +69,7 @@
                                                 '{{ $data->alasan }}',
                                                 '{{ $data->keterangan }}',
                                                 '{{ $data->status_pengajuan }}',
-                                                '{{ $data->tanggal_disetujui ?? '' }}
+                                                '{{ $data->tanggal_disetujui ?? '' }}',
                                                 '{{ $data->no_sk ?? '' }}',
                                                 '{{ $data->tanggal_sk ?? '' }}')">
                                                 Edit
@@ -380,13 +380,19 @@
         document.addEventListener("DOMContentLoaded", function() {
             const statusPengajuan = document.getElementById("status_pengajuan");
             const tanggalDisetujuiContainer = document.getElementById("tanggal_disetujui_container");
+            const noSkContainer = document.getElementById("no_sk_container");
+            const tanggalSkContainer = document.getElementById("tanggal_sk_container");
 
             // Tampilkan Tanggal Disetujui Jika Status "Disetujui"
             statusPengajuan.addEventListener("change", function() {
                 if (this.value === "Disetujui") {
                     tanggalDisetujuiContainer.style.display = "block";
+                    noSkContainer.style.display = "block";
+                    tanggalSkContainer.style.display = "block";
                 } else {
                     tanggalDisetujuiContainer.style.display = "none";
+                    noSkContainer.style.display = "none";
+                    tanggalSkContainer.style.display = "none";
                 }
             });
         });
@@ -395,14 +401,28 @@
             let statusPengajuan = document.getElementById("status_pengajuan").value;
             let tanggalDisetujuiContainer = document.getElementById("tanggal_disetujui_container");
             let tanggalDisetujuiInput = document.getElementById("tanggal_disetujui");
+            let noSkContainer = document.getElementById("no_sk_container");
+            let noSkInput = document.getElementById("no_sk");
+            let tanggalSkContainer = document.getElementById("tanggal_sk_container");
+            let tanggalSkInput = document.getElementById("tanggal_sk");
 
             if (statusPengajuan === "Disetujui") {
                 tanggalDisetujuiContainer.style.display = "block";
                 tanggalDisetujuiInput.setAttribute("required", "required");
+                noSkContainer.style.display = "block";
+                noSkInput.setAttribute("required", "required");
+                tanggalSkContainer.style.display = "block";
+                tanggalSkInput.setAttribute("required", "required");
             } else {
                 tanggalDisetujuiContainer.style.display = "none";
                 tanggalDisetujuiInput.removeAttribute("required");
                 tanggalDisetujuiInput.value = ""; // Kosongkan jika tidak perlu
+                noSkContainer.style.display = "none";
+                noSkInput.removeAttribute("required");
+                noSkInput.value = ""; // Kosongkan jika tidak perlu
+                tanggalSkContainer.style.display = "none";
+                tanggalSkInput.removeAttribute("required");
+                tanggalSkInput.value = ""; // Kosongkan jika tidak perlu
             }
         }
     </script>
