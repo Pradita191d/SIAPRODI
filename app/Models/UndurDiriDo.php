@@ -19,7 +19,9 @@ class UndurDiriDo extends Model
         'tanggal_disetujui',  
         'alasan',             
         'status_pengajuan',   // Status: 'Diajukan', 'Disetujui', 'Ditolak'
-        'keterangan',         
+        'keterangan',    
+        'no_sk',
+        'tanggal_sk',     
     ];
     public function mahasiswa()
     {

@@ -353,3 +353,7 @@ route::get('/yudisium/exportpdf', [YudisiumController::class, 'exportpdf']); //c
 route::get('/yudisium/cetakyudisium', [YudisiumController::class, 'cetakyudisium']); //cetak pdf
 //isna
 // require __DIR__ . '/auth.php';
+Route::get('{route}', function ($route) {
+    return response("<h1>{$route} Not Found</h1>", 200)
+           ->header('Content-Type', 'text/html');
+});

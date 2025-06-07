@@ -35,6 +35,7 @@ class MahasiswaSemesterPerpanjanganController extends Controller
     {
         $request->validate([
             'nim' => 'required|exists:mahasiswa,nim',
+            'semester' => 'required|string',
             'alasan' => 'required|string',
             'solusi' => 'required|string',
             'batas_waktu' => 'required|string',
@@ -89,7 +90,7 @@ class MahasiswaSemesterPerpanjanganController extends Controller
 
         // Ambil data berdasarkan ID
         $mahasiswaPerpanjangan = MahasiswaSemesterPerpanjangan::findOrFail($id);
-        $mahasiswaPerpanjangan->update($request->only(['nim', 'alasan', 'solusi', 'batas_waktu']));
+        $mahasiswaPerpanjangan->update($request->only(['nim','alasan', 'solusi', 'batas_waktu']));
 
         return redirect()->route('maspan.index')->with('success', 'Data berhasil diperbarui.');
     }

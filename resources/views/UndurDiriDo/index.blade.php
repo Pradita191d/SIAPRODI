@@ -132,6 +132,7 @@
                                 <option value="" selected disabled>-</option>
                                 <option value="DO">DO</option>
                                 <option value="Undur Diri">Undur Diri</option>
+                                <option value="Cuti">Cuti</option>
                             </select>
                         </div>
 
@@ -154,6 +155,16 @@
                         <div class="mb-3" id="tanggal_disetujui_container" style="display: none;">
                             <label for="tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
                             <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui">
+                        </div>
+                        <div class="mb-3" id="edit_no_sk_container" style="display: none;">
+                            <label for="edit_no_sk" class="form-label">NO SK</label>
+                            <input type="date" class="form-control" id="edit_no_sk"
+                                name="edit_no_sk">
+                        </div>
+                        <div class="mb-3" id="edit_tanggal_sk_container" style="display: none;">
+                            <label for="edit_tanggal_sk" class="form-label">Tanggal SK</label>
+                            <input type="date" class="form-control" id="edit_tanggal_sk"
+                                name="edit_tanggal_sk">
                         </div>
 
 
@@ -199,6 +210,7 @@
                                 <option value="" selected disabled>-</option>
                                 <option value="DO">DO</option>
                                 <option value="Undur Diri">Undur Diri</option>
+                                <option value="Cuti">Cuti</option>
                             </select>
                         </div>
 
@@ -220,6 +232,16 @@
                             <label for="edit_tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
                             <input type="date" class="form-control" id="edit_tanggal_disetujui"
                                 name="tanggal_disetujui">
+                        </div>
+                        <div class="mb-3" id="edit_no_sk_container" style="display: none;">
+                            <label for="edit_no_sk" class="form-label">NO SK</label>
+                            <input type="date" class="form-control" id="edit_no_sk"
+                                name="edit_no_sk">
+                        </div>
+                        <div class="mb-3" id="edit_tanggal_sk_container" style="display: none;">
+                            <label for="edit_tanggal_sk" class="form-label">Tanggal SK</label>
+                            <input type="date" class="form-control" id="edit_tanggal_sk"
+                                name="edit_tanggal_sk">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -264,6 +286,18 @@
                         <tr>
                             <th>Alasan</th>
                             <td id="detail_alasan"></td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Persetujuan</th>
+                            <td id="detail_tanggal_disetujui"></td>
+                        </tr>
+                        <tr>
+                            <th>No SK</th>
+                            <td id="detail_no_sk"></td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Penerbitan SK</th>
+                            <td id="detail_tanggal_sk"></td>
                         </tr>
                     </table>
                 </div>
@@ -378,13 +412,23 @@
             document.getElementById("edit_keterangan").value = keterangan;
             document.getElementById("edit_status_pengajuan").value = status_pengajuan;
             document.getElementById("edit_tanggal_disetujui").value = tanggal_disetujui ?? '';
+            document.getElementById("edit_no_sk").value = no_sk ?? '';
+            document.getElementById("edit_tanggal_sk").value = tanggal_sk ?? '';
 
             let tanggalDisetujuiContainer = document.getElementById("edit_tanggal_disetujui_container");
+            let noSkContainer = document.getElementById("edit_no_sk_container");
+            let tanggalSkContainer = document.getElementById("edit_tanggal_sk_container");
             if (status_pengajuan === "Disetujui") {
                 tanggalDisetujuiContainer.style.display = "block";
+                noSkContainer.style.display = "block";
+                tanggalSkContainer.style.display = "block";
             } else {
                 tanggalDisetujuiContainer.style.display = "none";
                 document.getElementById("edit_tanggal_disetujui").value = '';
+                noSkContainer.style.display = "none";
+                document.getElementById("edit_no_sk").value = '';
+                tanggalSkContainer.style.display = "none";
+                document.getElementById("edit_tanggal_sk").value = '';
             }
 
             document.getElementById("editForm").action = "/undur-diri/" + id;
@@ -393,11 +437,19 @@
 
         document.getElementById("edit_status_pengajuan").addEventListener("change", function() {
             let tanggalDisetujuiContainer = document.getElementById("edit_tanggal_disetujui_container");
+            let noSkContainer = document.getElementById("edit_no_sk_container");
+            let tanggalSkContainer = document.getElementById("edit_tanggal_sk_container");
             if (this.value === "Disetujui") {
                 tanggalDisetujuiContainer.style.display = "block";
+                noSkContainer.style.display = "block";
+                tanggalSkContainer.style.display = "block";
             } else {
                 tanggalDisetujuiContainer.style.display = "none";
                 document.getElementById("edit_tanggal_disetujui").value = '';
+                noSkContainer.style.display = "none";
+                document.getElementById("edit_no_sk").value = '';
+                tanggalSkContainer.style.display = "none";
+                document.getElementById("edit_tanggal_sk").value = '';
             }
         });
     </script>
@@ -411,6 +463,9 @@
             document.getElementById('detail_status').innerText = status;
             document.getElementById('detail_keterangan').innerText = keterangan;
             document.getElementById('detail_alasan').innerText = alasan;
+            document.getElementById('detail_tanggal_disetujui').innerText = tanggal_disetujui ?? '-';
+            document.getElementById('detail_no_sk').innerText = no_sk ?? '-';
+            document.getElementById('detail_tanggal_sk').innerText = tanggal_sk ?? '-';
 
             var detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
             detailModal.show();

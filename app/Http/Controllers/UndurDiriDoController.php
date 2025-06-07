@@ -26,6 +26,8 @@ class UndurDiriDoController extends Controller
             'keterangan' => 'required|string',
             'status_pengajuan' => 'required|in:Menunggu Persetujuan,Disetujui,Ditolak',
             'tanggal_disetujui' => 'nullable|date',
+            'no_sk' => 'nullable|string',
+            'tanggal_sk' => 'nullable|date',
         ]);
 
         UndurDiriDo::create([
@@ -35,18 +37,20 @@ class UndurDiriDoController extends Controller
             'keterangan' => $request->keterangan,
             'status_pengajuan' => $request->status_pengajuan,
             'tanggal_disetujui' => $request->tanggal_disetujui ?? null,
+            'no_sk' => $request->no_sk ?? null,
+            'tanggal_sk' => $request->tanggal_sk ?? null,
         ]);
 
         if ($request->status_pengajuan === 'Disetujui') {
             $mahasiswa = Mahasiswa::where('nim', $request->nim)->first();
             $mahasiswa->status_aktif = $request->keterangan;
             $mahasiswa->save();
-        }elseif($request->status_pengajuan === 'Ditolak'){
+        } elseif ($request->status_pengajuan === 'Ditolak') {
             $mahasiswa = Mahasiswa::where('nim', $request->nim)->first();
             $mahasiswa->status_aktif = 'Aktif';
             $mahasiswa->save();
         }
-        
+
         return redirect()->back()->with('success', 'Data pengunduran diri berhasil ditambahkan.');
     }
 
@@ -58,6 +62,8 @@ class UndurDiriDoController extends Controller
             'alasan' => 'required|string',
             'status_pengajuan' => 'required|in:Menunggu Persetujuan,Disetujui,Ditolak',
             'tanggal_disetujui' => 'nullable|date',
+            'no_sk' => 'nullable|string',
+            'tanggal_sk' => 'nullable|date',
         ]);
 
         $undurDiri = UndurDiriDo::findOrFail($id);
@@ -67,12 +73,14 @@ class UndurDiriDoController extends Controller
             'alasan' => $request->alasan,
             'status_pengajuan' => $request->status_pengajuan,
             'tanggal_disetujui' => $request->status_pengajuan === 'Disetujui' ? $request->tanggal_disetujui : null,
+            'no_sk' => $request->status_pengajuan === 'Disetujui' ? $request->no_sk : null,
+            'tanggal_sk' => $request->status_pengajuan === 'Disetujui' ? $request->tanggal_sk : null,
         ]);
         if ($request->status_pengajuan === 'Disetujui') {
             $mahasiswa = Mahasiswa::where('nim', $request->nim)->first();
             $mahasiswa->status_aktif = $request->keterangan;
             $mahasiswa->save();
-        }elseif($request->status_pengajuan === 'Ditolak'){
+        } elseif ($request->status_pengajuan === 'Ditolak') {
             $mahasiswa = Mahasiswa::where('nim', $request->nim)->first();
             $mahasiswa->status_aktif = 'Aktif';
             $mahasiswa->save();
@@ -92,8 +100,8 @@ class UndurDiriDoController extends Controller
     }
 
     public function exportUndurDiri()
-{
-    return Excel::download(new UndurDiriExport, 'undur_diri.xlsx');
-}
+    {
+        return Excel::download(new UndurDiriExport, 'undur_diri.xlsx');
+    }
 
 }

@@ -72,6 +72,7 @@
                                         <th>No</th>
                                         <th>NIDN</th>
                                         <th>Nama Dosen</th>
+                                        <th>Nomor Sertifikat</th>
                                         <th>Nama Sertifikat</th>
                                         <th>Bidang Kompetensi</th>
                                         <th>Nama Lembaga</th>
@@ -87,6 +88,7 @@
                                         <td class="text-nowrap">{{ $loop->iteration }}</td>
                                         <td class="text-nowrap">{{ $s->nidn }}</td>
                                         <td class="text-nowrap">{{ $s->nama_dosen }}</td>
+                                         <td class="text-nowrap">{{$s->no_sertikom }}</td>
                                         <td class="text-nowrap">{{ $s->nama_sertifikat }}</td>
                                         <td class="text-nowrap">{{ $s->bidang_keahlian }}</td>
                                         <td class="text-nowrap">{{ $s->nama_lembaga }}</td>
