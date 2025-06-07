@@ -156,15 +156,15 @@
 
                         <div class="mb-3" id="tanggal_disetujui_container" style="display: none;">
                             <label for="tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
-                            <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui" required>
+                            <input type="date" class="form-control" id="tanggal_disetujui" name="tanggal_disetujui">
                         </div>
                         <div class="mb-3" id="no_sk_container" style="display: none;">
                             <label for="no_sk" class="form-label">NO SK</label>
-                            <input type="date" class="form-control" id="no_sk" name="no_sk" required>
+                            <input type="text" class="form-control" id="no_sk" name="no_sk">
                         </div>
                         <div class="mb-3" id="tanggal_sk_container" style="display: none;">
                             <label for="tanggal_sk" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="tanggal_sk" name="tanggal_sk" required>
+                            <input type="date" class="form-control" id="tanggal_sk" name="tanggal_sk">
                         </div>
 
                         <div class="modal-footer">
@@ -230,15 +230,15 @@
                         <div class="mb-3" id="edit_tanggal_disetujui_container" style="display: none;">
                             <label for="edit_tanggal_disetujui" class="form-label">Tanggal Disetujui</label>
                             <input type="date" class="form-control" id="edit_tanggal_disetujui"
-                                name="edit_tanggal_disetujui" required>
+                                name="edit_tanggal_disetujui" >
                         </div>
                         <div class="mb-3" id="edit_no_sk_container" style="display: none;">
                             <label for="edit_no_sk" class="form-label">NO SK</label>
-                            <input type="text" class="form-control" id="edit_no_sk" name="edit_no_sk" required>
+                            <input type="text" class="form-control" id="edit_no_sk" name="edit_no_sk">
                         </div>
                         <div class="mb-3" id="edit_tanggal_sk_container" style="display: none;">
                             <label for="edit_tanggal_sk" class="form-label">Tanggal SK</label>
-                            <input type="date" class="form-control" id="edit_tanggal_sk" name="edit_tanggal_sk" required>
+                            <input type="date" class="form-control" id="edit_tanggal_sk" name="edit_tanggal_sk">
                         </div>
                     </div>
                     <div class="modal-footer">
