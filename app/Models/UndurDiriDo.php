@@ -10,7 +10,7 @@ class UndurDiriDo extends Model
     use HasFactory;
 
     protected $table = 'undur_diri_do';
-
+////////////
     protected $primaryKey = 'id_undur_diri_do';
 
     protected $fillable = [
