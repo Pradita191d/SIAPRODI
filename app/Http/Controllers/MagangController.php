@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Magang;
 use App\Models\MahasiswaMagang;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -55,6 +56,7 @@ class MagangController extends Controller
         {
             $mahasiswaList = Mahasiswa::all();
             $magang = Magang::find($id);
+            $dosenList = Dosen::all();
             $mahasiswaMagang = MahasiswaMagang::join('mahasiswa', 'mahasiswa_magang.nim', '=', 'mahasiswa.nim')
                 ->where('id_perusahaan', $id)
                 ->orderBy('tahun_ajaran', 'desc') // Order by tahun_ajaran (newest first)
@@ -62,7 +64,7 @@ class MagangController extends Controller
                 ->select('mahasiswa_magang.*', 'mahasiswa.nama_mahasiswa') // Select relevant columns
                 ->get();
 
-            return view('Magang.edit', compact('magang', 'mahasiswaMagang','mahasiswaList'));
+            return view('Magang.edit', compact('magang', 'mahasiswaMagang','mahasiswaList','dosenList'));
         }
 
 
@@ -96,10 +98,13 @@ class MagangController extends Controller
         public function storeMahasiswaMagang(Request $request)
         {
             $request->validate([
+                'no_surat'=> 'required|string',
                 'nim' => 'required|string',
+                'dosen_id'=> 'required|string',
                 'durasi' => 'required|integer',
+                'nilai_dosen' => 'nullable|integer|max:100',
                 'bukti_nilai' => 'nullable|file|mimes:jpg,pdf|max:2048', // Limit size to 2MB
-                'nilai' => 'required|integer|max:100',
+                'nilai' => 'nullable|integer|max:100',
                 'tahun_ajaran' => 'required|string|max:10', // New validation for tahun_ajaran
             ]);
 
@@ -112,8 +117,11 @@ class MagangController extends Controller
             // Create MahasiswaMagang entry
             MahasiswaMagang::create([
                 'id_perusahaan' => $request->id_perusahaan, // Make sure id_perusahaan is passed
+                'no_surat'=>$request->no_surat,
+                'dosen_id'=>$request->dosen_id,
                 'nim' => $request->nim,
                 'durasi' => $request->durasi,
+                'nilai_dosen' =>$request->nilai_dosen,
                 'bukti_nilai' => $filePath,
                 'nilai' => $request->nilai,
                 'tahun_ajaran' => $request->tahun_ajaran, // New column to store tahun_ajaran
@@ -131,16 +139,22 @@ class MagangController extends Controller
 
             // Validate request
             $request->validate([
+                'no_surat'=> 'required|string',
                 'nim' => 'required|string|max:255',
+                'dosen_id'=> 'required|string',
                 'durasi' => 'required|integer',
+                'nilai_dosen' => 'nullable|integer|max:100',
                 'bukti_nilai' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
-                'nilai' => 'required|integer|max:100',
+                'nilai' => 'nullable|integer|max:100',
                 'tahun_ajaran' => 'required|string|max:10', // New validation for tahun_ajaran
             ]);
 
             // Update fields
+            $mahasiswaMagang->no_surat = $request->no_surat;
             $mahasiswaMagang->nim = $request->nim;
+            $mahasiswaMagang->dosen_id = $request->dosen_id;
             $mahasiswaMagang->durasi = $request->durasi;
+            $mahasiswaMagang->nilai_dosen = $request->nilai_dosen;
             $mahasiswaMagang->nilai = $request->nilai;
             $mahasiswaMagang->tahun_ajaran = $request->tahun_ajaran; // New column for tahun_ajaran
 
