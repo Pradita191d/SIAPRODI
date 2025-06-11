@@ -220,7 +220,7 @@
 
                         <div class="mb-3">
                             <label for="edit_status_pengajuan" class="form-label">Status Pengajuan</label>
-                            <select class="form-control" id="edit_status_pengajuan" name="edit_status_pengajuan">
+                            <select class="form-control" id="edit_status_pengajuan" name="status_pengajuan">
                                 <option value="Menunggu Persetujuan">Menunggu Persetujuan</option>
                                 <option value="Disetujui">Disetujui</option>
                                 <option value="Ditolak">Ditolak</option>

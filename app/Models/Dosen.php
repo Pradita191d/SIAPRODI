@@ -20,6 +20,8 @@ class Dosen extends Model
         'alamat',
         'no_telp',
         'jabatan_fungsional',
+        'pangkat',
+        'golongan',
         'no_serdos',
         'status_dosen',
     ];
