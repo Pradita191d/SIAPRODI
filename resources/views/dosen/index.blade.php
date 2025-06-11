@@ -50,6 +50,8 @@
                                         <th>Alamat</th>
                                         <th>No Telepon</th>
                                         <th>Jabatan Fungsional</th>
+                                        <th>Pangkat</th>
+                                        <th>Golongan</th>
                                         <th> No Sertifikat Dosen</th>
                                         <th> Status Dosen</th>
                                         <th>Aksi</th>
@@ -65,6 +67,8 @@
                                         <td class="text-center">{{ $dsn->alamat }}</td>
                                         <td class="text-center">{{ $dsn->no_telp }}</td>
                                         <td class="text-center">{{ $dsn->jabatan_fungsional }}</td>
+                                        <td class="text-center">{{ $dsn->pangkat }}</td>
+                                        <td class="text-center">{{ $dsn->golongan }}</td>
                                         <td class="text-center">{{ $dsn->no_serdos }}</td>
                                         <td class="text-center">{{ $dsn->status_dosen }}</td>
                                         <!-- <a href="lihat_dosen.php?id=1" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> </a> -->

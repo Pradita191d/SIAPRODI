@@ -44,13 +44,38 @@
                     <label for="jabatan_fungsional" class="form-label">Jabatan Fungsional </label>
                     <select class="form-control" name="jabatan_fungsional" id="jabatan_fungsional" required>
                         <option value="">-- Pilih Jabatan Fungsional --</option>
-                        <option value="Direktur">Direktur</option>
-                        <option value="Wakil Direktur 1">Wakil Direktur 1</option>
-                        <option value="Wakil Direktur 2">Wakil Direktur 2</option>
-                        <option value="Wakil Direktur 3">Wakil Direktur 3</option>
-                        <option value="Kepala Jurusan">Kepala Jurusan</option>
-                        <option value="Kepala Program Studi">Kepala Program Studi</option>
-                        <option value="Dosen">Dosen</option>
+                        <option value="Asisten Ahli.">Asisten Ahli.</option>
+                        <option value="Lektor.">Lektor.</option>
+                        <option value="Lektor Kepala. ">Lektor Kepala. </option>
+                        <option value="Guru Besar atau Profesor.">Guru Besar atau Profesor.</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="pangkat" class="form-label">Pangkat </label>
+                    <select class="form-control" name="pangkat" id="pangkat" required>
+                        <option value="">-- Pilih Pangkat --</option>
+                        <option value="Penata Muda Tingkat I">Penata Muda Tingkat I</option>
+                        <option value="Penata">Penata</option>
+                        <option value="Penata Tingkat I ">Penata Tingkat I</option>
+                        <option value="Pembina">Pembina</option>
+                        <option value="Pembina Tingkat I">Pembina Tingkat I</option>
+                        <option value="Pembina Utama Muda">Pembina Utama Muda</option>
+                        <option value="Pembina Utama Madya">Pembina Utama Madya</option>
+                        <option value="Pembina Utama">Pembina Utama</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="golongan" class="form-label">Golongan </label>
+                    <select class="form-control" name="golongan" id="golongan" required>
+                        <option value="">-- Pilih Golongan --</option>
+                        <option value="III/b">III/b</option>
+                        <option value="III/c">III/c</option>
+                        <option value="III/d">III/d</option>
+                        <option value="IV/a">IV/a</option>
+                        <option value="IV/b,">IV/b</option>
+                        <option value="IV/c">IV/c</option>
+                        <option value="IV/d">IV/d</option>
+                        <option value="IV/e">IV/e</option>
                     </select>
                 </div>
 
