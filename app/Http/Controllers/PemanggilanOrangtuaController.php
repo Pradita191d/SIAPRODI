@@ -15,12 +15,19 @@ class PemanggilanOrangtuaController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $pemanggilans = PemanggilanOrangtua::when($search, function ($query) use ($search) {
-            return $query->
-                Where('nim', 'LIKE', "%{$search}%")
-                ->orWhere('jurusan', 'LIKE', "%{$search}%")
-                ->orWhere('prodi', 'LIKE', "%{$search}%");
-        })->get();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $pemanggilans = PemanggilanOrangtua::query()
+            ->when($search, function ($query) use ($search) {
+                return $query->where('nim', 'LIKE', "%{$search}%")
+                    ->orWhere('jurusan', 'LIKE', "%{$search}%")
+                    ->orWhere('prodi', 'LIKE', "%{$search}%");
+            })
+            ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+                return $query->whereBetween('tanggal_pemanggilan', [$start_date, $end_date]);
+            })
+            ->get();
 
         return view('pemanggilan.index', compact('pemanggilans'));
     }
@@ -88,5 +95,28 @@ class PemanggilanOrangtuaController extends Controller
     {
         return Excel::download(new PemanggilanOrangtuaExport, 'Data_Pemanggilan.xlsx');
     }
+
+public function cetakRangePDF(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $pemanggilans = PemanggilanOrangtua::whereBetween('tanggal_pemanggilan', [
+            $request->start_date,
+            $request->end_date
+        ])->get();
+
+        $pdf = PDF::loadView('pemanggilan.cetak_range', [
+            'pemanggilans' => $pemanggilans,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date
+        ]);
+
+        return $pdf->stream('Berita Acara Pemanggilan Orang Tua'.$request->start_date.'_to_'.$request->end_date.'.pdf');
+    }
+
+
 
 }

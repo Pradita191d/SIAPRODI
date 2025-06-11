@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\PemanggilanOrangtua;
+use App\Models\Mahasiswa;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -17,7 +18,7 @@ public function collection()
                 'nama_ortu' => $item->nama_ortu,
                 'no_telp_ortu' => $item->no_telp_ortu,
                 'alamat' => $item->alamat,
-                'nama_mahasiswa' => $item->mahasiswa->nama_mahasiswa ?? '-', // via relation
+                'nama_mhs' => $item->mahasiswa->nama_mahasiswa ?? '-', // via relation
                 'nim' => $item->nim,
                 'semester' => $item->semester,
                 'jurusan' => $item->jurusan,

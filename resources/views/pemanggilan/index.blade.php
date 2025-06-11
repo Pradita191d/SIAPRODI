@@ -19,24 +19,43 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <h3 class="h5 font-weight mb-0">Data Pemanggilan Orang Tua</h3>
 
-                <form action="{{ route('pemanggilan.index') }}" method="GET" class="ml-auto" style="max-width: 400px;">
-                    <div class="input-group">
-                    <a href="{{ route('pemanggilan.exportExcel') }}" class="btn btn-success mr-2">
-            <i class="fas fa-file-excel"></i> Export to Excel
-        </a>
-                        <input type="text" class="form-control" name="search" placeholder="Search By Name & NIM..."
-                               value="{{ request('search') }}" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-info" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
+                <div class="d-flex flex-wrap">
+                    <form action="{{ route('pemanggilan.index') }}" method="GET" class="form-inline mr-2 mb-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Search By Name & NIM..."
+                                   value="{{ request('search') }}" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-                <a href="{{ route('pemanggilan.tambah') }}" class="btn btn-primary ml-2">
-                    <i class="fas fa-plus"></i> Tambah Data
-                </a>
+                    <form action="{{ route('pemanggilan.cetakRangePDF') }}" method="POST" target="_blank" class="form-inline mb-2">
+                        @csrf
+                        <div class="input-group mr-2">
+                            <input type="date" class="form-control" name="start_date" required>
+                            <div class="input-group-prepend input-group-append">
+                                <span class="input-group-text">s/d</span>
+                            </div>
+                            <input type="date" class="form-control" name="end_date" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fas fa-file-pdf"></i> Cetak PDF
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <a href="{{ route('pemanggilan.exportExcel') }}" class="btn btn-success mb-2 mr-2">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
+
+                    <a href="{{ route('pemanggilan.tambah') }}" class="btn btn-primary mb-2">
+                        <i class="fas fa-plus"></i> Tambah Data
+                    </a>
+                </div>
             </div>
         </div>
 

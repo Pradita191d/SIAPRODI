@@ -62,7 +62,7 @@
     <!-- Header / Kop Surat -->
     <div class="header">
         <div class="kop-container">
-            <img src="{{ public_path('assets/images/logo-pnc.png') }}" alt="Logo PNC">
+<img src="{{ public_path('dist/img/logo_pnc.png') }}" alt="Logo PNC">
             <div class="text">
                 <h2>POLITEKNIK NEGERI CILACAP</h2>
                 <h3>Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi</h3>
@@ -85,7 +85,7 @@
         <table class="table">
             <tr>
                 <th>Nama Mahasiswa</th>
-                <td>{{ $pemanggilan->nama_mhs }}</td>
+                <td>{{ $pemanggilan->mahasiswa->nama_mahasiswa }}</td>
             </tr>
             <tr>
                 <th>NIM</th>

@@ -180,6 +180,7 @@ Route::put('/pemanggilan/{id}', [PemanggilanOrangtuaController::class, 'update']
 Route::delete('/pemanggilan/{id}', [PemanggilanOrangtuaController::class, 'destroy'])->name('pemanggilan.destroy');
 Route::get('/pemanggilan/pdf/{id}', [PemanggilanOrangtuaController::class, 'cetakPDF'])->name('pemanggilan.pdf');
 Route::get('/pemanggilan/export-excel', [PemanggilanOrangtuaController::class, 'exportExcel'])->name('pemanggilan.exportExcel');
+Route::post('/pemanggilan/cetak-range-pdf', [PemanggilanOrangtuaController::class, 'cetakRangePDF'])->name('pemanggilan.cetakRangePDF');
 //Chinta
 
 //Ais
@@ -300,17 +301,17 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
     Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
         ->name('maspan.search');
-  
+
     Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
         ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
 
     Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
         ->name('amspan.update');
-    
+
     Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
         ->name('maspan.destroy');
 
-   
+
     Route::put('/maspan/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])->name('maspan.update'); // Untuk menyimpan perubahan
 
     Route::get('maspan/exportpdf', [MahasiswaSemesterPerpanjanganController::class, 'exportpdf']); //cetak pdf
@@ -318,7 +319,7 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
 // ✅ Gunakan prefix 'maspan' untuk mengelompokkan route
     Route::prefix('maspan')->name('maspan.')->group(function () {
-        
+
     // Route::get('/', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
     //     ->name('index');
 
@@ -327,13 +328,13 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
     // Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
     //     ->name('search');
-  
+
     // Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
     //     ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
 
     // Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
     //     ->name('update');
-    
+
     // Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
     //     ->name('destroy');
 
@@ -364,7 +365,7 @@ Route::put('/yudisium/{id}', [YudisiumController::class, 'update'])->name('yudis
 Route::delete('/yudisium/{id}', [YudisiumController::class, 'destroy'])->name('yudisium.destroy');
 // Route::get('/yudisium/ganjil', [YudisiumController::class, 'ganjil'])->name('yudisium.ganjil');
 // Route::get('/yudisium/genap', [YudisiumController::class, 'genap'])->name('yudisium.genap');
-Route::get('yudisium/search', [YudisiumController::class, 'search']); 
+Route::get('yudisium/search', [YudisiumController::class, 'search']);
 Route::resource('mahasiswa', MahasiswaController::class);
 
 route::get('/yudisium/exportpdf', [YudisiumController::class, 'exportpdf']); //cetak pdf
