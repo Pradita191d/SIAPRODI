@@ -96,27 +96,29 @@ class PemanggilanOrangtuaController extends Controller
         return Excel::download(new PemanggilanOrangtuaExport, 'Data_Pemanggilan.xlsx');
     }
 
+
 public function cetakRangePDF(Request $request)
-    {
-        $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
+{
+    $request->validate([
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+    ]);
 
-        $pemanggilans = PemanggilanOrangtua::whereBetween('tanggal_pemanggilan', [
-            $request->start_date,
-            $request->end_date
-        ])->get();
+    $pemanggilans = PemanggilanOrangtua::whereBetween('tanggal_pemanggilan', [
+        $request->start_date,
+        $request->end_date
+    ])->get();
 
-        $pdf = PDF::loadView('pemanggilan.cetak_range', [
-            'pemanggilans' => $pemanggilans,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
-        ]);
+    $noSurat = 'B/123/PNC-BAAK/VI/2025'; // Ini bisa kamu sesuaikan dinamis jika perlu
 
-        return $pdf->stream('Berita Acara Pemanggilan Orang Tua'.$request->start_date.'_to_'.$request->end_date.'.pdf');
-    }
+    $pdf = PDF::loadView('pemanggilan.cetak_range', [
+        'pemanggilans' => $pemanggilans,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'no_surat' => $noSurat
+    ]);
 
-
+    return $pdf->stream('Berita Acara Pemanggilan Orang Tua '.$request->start_date.'_to_'.$request->end_date.'.pdf');
+}
 
 }
