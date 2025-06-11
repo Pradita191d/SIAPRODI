@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
-        //     $table->string('nama_mahasiswa', 100)->after('nim'); // Tambahkan kolom nama mahasiswa
-        //     $table->string('status', 50)->after('tahun_akadamik'); // Tambahkan kolom status
-        //     $table->dropColumn('alasan'); // Hapus kolom alasan
-        // });
+        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
+            // $table->string('nama_mahasiswa', 100)->after('nim'); // Tambahkan kolom nama mahasiswa
+            // $table->string('status', 50)->after('nim'); // Tambahkan kolom status
+            $table->dropColumn('alasan'); // Hapus kolom alasan
+        });
     }
 
     /**

@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
+        Schema::table('mahasiswa_magang', function (Blueprint $table) {
+            $table->string('no_surat')->nullable()->after('nim');
+            $table->string('dosen_id')->after('no_surat');
+            $table->string('nilai_dosen')->nullable()->after('nilai');
         });
     }
 
@@ -20,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
-            // $table->renameColumn('tahun_akademik', 'tahun_akadamik');
+        Schema::table('mahasiswa_magang', function (Blueprint $table) {
+            //
         });
     }
 };

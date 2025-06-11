@@ -16,7 +16,7 @@ class Yudisium extends Model
 
  public function mahasiswa()
  {
-    return $this->belongsTo(Mahasiswa::class, 'NIM', 'NIM');
+    return $this->belongsTo(Mahasiswa::class, 'NIM', 'nim');
  }
     
 }

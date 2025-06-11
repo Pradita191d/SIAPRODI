@@ -19,7 +19,7 @@ class YudisiumController extends Controller
     public function search(Request $request)
     { 
         if ($request->has('search')) {
-            $yudisium = Yudisium::where('semester', 'LIKE', '%'.$request->search . '%')->get();
+            $yudisium = Yudisium::where('NIM', 'LIKE', '%'.$request->search . '%')->get();
         } else {
             $yudisium = Yudisium::all();
         }
@@ -27,6 +27,7 @@ class YudisiumController extends Controller
         return view('yudisium.index', ['yudisium' => $yudisium]);
     }
     
+
     public function create()
     {
         $mahasiswa = Mahasiswa::all();

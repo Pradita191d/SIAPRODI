@@ -94,15 +94,16 @@ Route::get('/tugas_akhir/export', [TaController::class, 'export'])->name('tugas_
 //TA
 
 // sertifikat mahasiswa
-Route::get('/sertifikat', [SertMahController::class, 'index'])->name('sertifikat_mahasiswa.index');
+Route::get('/sertifikat_mahasiswa', [SertMahController::class, 'index'])->name('sertifikat_mahasiswa.index');
 Route::post('/sertifikat/store', [SertMahController::class, 'store'])->name('sertifikat_mahasiswa.store');
 Route::get('/get-mahasiswa', [SertMahController::class, 'getMahasiswa'])->name('get_mahasiswa');
-Route::get('/sertifikat/{id}/edit', 'SertifikatMahasiswaController@edit')->name('sertifikat_mahasiswa.edit');
-Route::put('/sertifikat/{id}', 'SertifikatMahasiswaController@update')->name('sertifikat_mahasiswa.update');
+// Route::get('/sertifikat/{id}/edit', 'SertifikatMahasiswaController@edit')->name('sertifikat_mahasiswa.edit');
+// Route::put('/sertifikat/{id}', 'SertifikatMahasiswaController@update')->name('sertifikat_mahasiswa.update');
 Route::resource('sertifikat_mahasiswa', SertMahController::class);
 // sertifikat mahasiswa
 
 // magang
+Route::get('/magang', [MagangController::class, 'index'])->name('magang.index');
 Route::resource('magang', MagangController::class);
 Route::get('/magang/{id}/edit', [MagangController::class, 'edit'])->name('magang.edit');
 Route::post('magang/{magang}/store-mahasiswa', [MagangController::class, 'storeMahasiswaMagang'])->name('magang.storeMahasiswaMagang');
@@ -142,7 +143,6 @@ Route::get('/ipk/rekapitulasi', [IpkController::class, 'getRekapitulasi'])->name
 //mei
 Route::get('/mou', [MouController::class, 'index'])->name('mou.index');
 Route::get('/mou/export', [MouController::class, 'exportExcel'])->name('mou.export');
-Route::get('/mou/{id}', [MouController::class, 'show'])->name('mou.show');
 Route::post('/mou/store', [MouController::class, 'store'])->name('mou.store');
 Route::delete('/mou/{id_mou}', [MouController::class, 'destroy'])->name('mou.destroy');
 Route::put('/mou/{id_mou}', [MouController::class, 'update'])->name('mou.update');
@@ -296,7 +296,7 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
 
 //irma
- Route::get('/maspan', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
+  Route::get('/maspan', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
     ->name('maspan.index');
 
     Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
@@ -372,3 +372,7 @@ route::get('/yudisium/exportpdf', [YudisiumController::class, 'exportpdf']); //c
 route::get('/yudisium/cetakyudisium', [YudisiumController::class, 'cetakyudisium']); //cetak pdf
 //isna
 // require __DIR__ . '/auth.php';
+Route::get('{route}', function ($route) {
+    return response("<h1>{$route} Not Found</h1>", 200)
+           ->header('Content-Type', 'text/html');
+});

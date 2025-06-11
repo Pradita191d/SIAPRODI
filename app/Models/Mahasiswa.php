@@ -24,14 +24,20 @@ class Mahasiswa extends Model
     ];
 
 
-    public function tahunMasuk()
+    public function tahunAkademik()
     {
-        return $this->belongsTo(TahunAkademik::class, 'tahun_masuk');
+        return $this->belongsTo(TahunAkademik::class, 'tahun_masuk', 'id_tahun_akademik');
     }
-
+    public function getTahunAkademikAttribute()
+    {
+        if ($this->tahun_masuk) {
+            $tahunAwal = (int) $this->tahun_masuk;
+            return $tahunAwal . '/' . ($tahunAwal + 1);
+        }
+        return null;
+    }
     public function ipk()
     {
         return $this->hasOne(Ipk::class, 'nim', 'nim');
     }
-
 }

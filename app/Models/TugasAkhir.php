@@ -17,6 +17,15 @@ class TugasAkhir extends Model
         'tahun_akademik',
         'judul_ta',
         'nilai_ta',
+        'sk_penguji_proposal',
+        'dosen_pengprop_1',
+        'dosen_pengprop_2',
+        'sk_pembimbing_ta',
+        'dosen_pemta_1',
+        'dosen_pemta_2',
+        'sk_penguji_ta',
+        'dosen_pengta_1',
+        'dosen_pengta_2',
     ];
 
     public function tahunAkademik()
@@ -27,6 +36,36 @@ class TugasAkhir extends Model
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'nim', 'nim');
+    }
+
+    public function dosenPengprop1()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pengprop_1', 'nidn');
+    }
+
+    public function dosenPengprop2()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pengprop_2', 'nidn');
+    }
+
+    public function dosenPemta1()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pemta_1', 'nidn');
+    }
+
+    public function dosenPemta2()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pemta_2', 'nidn');
+    }
+
+    public function dosenPengta1()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pengta_1', 'nidn');
+    }
+
+    public function dosenPengta2()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pengta_2', 'nidn');
     }
 
     public $bobotNilai = [
@@ -41,10 +80,10 @@ class TugasAkhir extends Model
     {
         foreach ($this->bobotNilai as $bobot) {
             if ($nilai >= $bobot['min'] && $nilai <= $bobot['max']) {
-                return ($bobot['huruf']);
+                return $bobot['huruf'];
             }
         }
 
-        return ['huruf' => 'Error'];
+        return 'Error';
     }
 }

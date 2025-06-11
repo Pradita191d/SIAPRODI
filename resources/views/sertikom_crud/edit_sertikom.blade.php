@@ -31,6 +31,11 @@
                                 <input type="hidden" name="nidn" value="{{ $sertifikat->nidn }}">
                             </div>
 
+                             <div class="mb-3">
+                                <label for="nama_sertifikat" class="form-label fw-bold">No Sertifikat</label>
+                                <input type="text" name="no_sertikom" class="form-control" value="{{ $sertifikat->no_sertikom }}" required>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="nama_sertifikat" class="form-label fw-bold">Nama Sertifikat</label>
                                 <input type="text" name="nama_sertifikat" class="form-control" value="{{ $sertifikat->nama_sertifikat }}" required>

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('tanggal_pengajuan');
             $table->date('tanggal_disetujui')->nullable();
             $table->text('alasan');
+            $table->string('no_sk')->nullable();
+            $table->date('tanggal_sk')->nullable();
             $table->enum('status_pengajuan', ['Menunggu Persetujuan', 'Disetujui', 'Ditolak'])->default('Menunggu Persetujuan');
             $table->text('keterangan');
             $table->timestamps();

@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         DB::table('tahun_wisuda')->insert($tahunWisudaData);
 
         // Get Tahun Akademik IDs
-        $tahunAkademikIds = TahunAkademik::pluck('id_tahun_akademik')->toArray();
+        $tahunAkademikIds = TahunAkademik::where('ganjil_genap', 'Ganjil')->pluck('id_tahun_akademik')->toArray();
         for ($i = 1; $i <= 10; $i++) {
             $nim = '22010' . str_pad($i, 2, '0', STR_PAD_LEFT);
             $mahasiswa = Mahasiswa::create([

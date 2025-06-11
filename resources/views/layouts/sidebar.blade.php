@@ -23,36 +23,38 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <!-- Parent Menu -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
-                            Data Master
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                @if(auth()->user() && auth()->user()->role === 'admin')
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-bars"></i>
+                <p>
+                    Data Master
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <!-- Submenu -->
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/olahdata" class="nav-link ml-3">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>Data Users</p>
                     </a>
-                    <!-- Submenu -->
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/olahdata" class="nav-link ml-3">
-                                <i class="nav-icon fas fa-graduation-cap"></i>
-                                <p>Data Users</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/mahasiswa" class="nav-link ml-3">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Mahasiswa</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/dosen" class="nav-link ml-3">
-                                <i class="nav-icon fas fa-graduation-cap"></i>
-                                <p>Data Dosen</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="/mahasiswa" class="nav-link ml-3">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mahasiswa</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dosen" class="nav-link ml-3">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>Data Dosen</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endif
 
                 <li class="nav-item d-flex align-items-center">
                     <a href="/undur_diri_do" class="nav-link d-flex align-items-center">
@@ -77,7 +79,7 @@
                     <!-- Submenu -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/sertifikat" class="nav-link d-flex align-items-center">
+                            <a href="/sertifikat_mahasiswa" class="nav-link d-flex align-items-center">
                         <i class="nav-icon fas fa-award"></i>
                         <p>Sertifikat Kompetensi Mahasiswa</p>
                     </a>
@@ -104,13 +106,13 @@
                     <!-- Submenu -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('magang.mahasiswa_magang.show') }}" class="nav-link ml-3">
+                            <a href="/magang/mahasiswa_magang" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Mahasiswa Magang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('magang.index') }}" class="nav-link ml-3">
+                            <a href="/magang" class="nav-link ml-3">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tempat Magang</p>
                             </a>

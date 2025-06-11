@@ -11,10 +11,11 @@ class mahasiswaController extends Controller
     public $search = '';
 
     public function index(){
-         $mahasiswas = Mahasiswa::all();
-    $tahunAkademiks = TahunAkademik::all();
+    $mahasiswas = Mahasiswa::all();
+    $tahunAkademiks = TahunAkademik::where('ganjil_genap', 'ganjil')->get();
     return view('mahasiswa.index', compact('mahasiswas', 'tahunAkademiks'));
     }
+
     public function store(Request $request)
     {
 
@@ -68,7 +69,6 @@ class mahasiswaController extends Controller
             $mahasiswa->delete();
             return redirect()->back()->with('success', 'Mahasiswa berhasil dihapus!');
         } catch (\Exception $e) {
-            dd($mahasiswa);
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
@@ -84,7 +84,7 @@ class mahasiswaController extends Controller
         // mengambil data dari table mahasiswa sesuai pencarian data
         $mahasiswas = Mahasiswa::where('nama_mahasiswa', 'like', "%" . $cari . "%")
             ->orWhere('nim', 'like', "%" . $cari . "%")
-            ->orWhere('tahun_masuk', 'like', "%" . $tahun . "%")
+            ->orWhere('tahun_masuk', 'like', "%" . $cari . "%")
             ->orWhere('status_aktif', 'like', "%" . $cari . "%")
             ->paginate();
 
@@ -97,7 +97,7 @@ class mahasiswaController extends Controller
     public function filter(Request $request)
     {
         $tahun = $request->tahun_masuk;
-        $tahunAkademiks = TahunAkademik::all();
+        $tahunAkademiks = TahunAkademik::where('ganjil_genap', 'ganjil')->get();
         $mahasiswas = Mahasiswa::where('tahun_masuk', $tahun)->paginate();
         return view('mahasiswa.index', compact('mahasiswas', 'tahunAkademiks'));
     }

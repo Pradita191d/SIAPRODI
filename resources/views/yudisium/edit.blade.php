@@ -12,9 +12,9 @@
             <label for="NIM">Mahasiswa (NIM - Nama)</label>
             <select name="NIM" class="form-control" required>
                 @foreach($mahasiswa as $mhs)
-                    <option value="{{ $mhs->NIM }}" 
-                        {{ $yudisium->NIM == $mhs->NIM ? 'selected' : '' }}>
-                        {{ $mhs->NIM }} - {{ $mhs->nama_mahasiswa }}
+                    <option value="{{ $mhs->nim }}" 
+                        {{ $yudisium->NIM == $mhs->nim ? 'selected' : '' }}>
+                        {{ $mhs->nim }} - {{ $mhs->nama_mahasiswa }}
                     </option>
                 @endforeach
             </select>

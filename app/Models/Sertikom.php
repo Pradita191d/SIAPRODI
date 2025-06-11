@@ -15,6 +15,7 @@ class Sertikom extends Model
 
     protected $fillable = [
         'nidn',
+        'no_sertikom',
         'nama_sertifikat',
         'bidang_keahlian',
         'nama_lembaga',

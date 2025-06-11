@@ -19,7 +19,6 @@
                 <select class="form-control" id="role" name="role">
                     <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                     <option value="dosen" {{ $user->role == 'dosen' ? 'selected' : '' }}>Dosen</option>
-                    <option value="mahasiswa" {{ $user->role == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-warning">Update</button>

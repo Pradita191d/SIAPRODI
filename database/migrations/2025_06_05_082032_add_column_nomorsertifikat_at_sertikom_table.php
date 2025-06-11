@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
-        });
+         Schema::table('sertikom', function (Blueprint $table) {
+             $table->string('no_sertikom')->nullable()->after('nidn');
+          });
     }
 
     /**
@@ -20,8 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
-            // $table->renameColumn('tahun_akademik', 'tahun_akadamik');
-        });
+        //
     }
 };

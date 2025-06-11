@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jenis_kerjasama">Jenis Kerjasama</label>
-                        <input type="text" class="form-control" id="jenis_kerjasama" name="jenis_kerjasama" required>
+                        <textarea class="form-control" id="jenis_kerjasama" name="jenis_kerjasama" style="height: 150px;" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="kontak">Contact Person</label>

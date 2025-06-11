@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
+        Schema::table('mahasiswa_magang', function (Blueprint $table) {
+            $table->integer('nilai')->max(100)->nullable()->change(); // Max value of 100
         });
     }
 
@@ -20,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
-            // $table->renameColumn('tahun_akademik', 'tahun_akadamik');
+        Schema::table('mahasiswa_magang', function (Blueprint $table) {
+            //
         });
     }
 };

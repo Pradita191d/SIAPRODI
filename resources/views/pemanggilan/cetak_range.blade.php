@@ -70,18 +70,18 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ public_path('images/logo_universitas.png') }}" alt="Logo">
+        <img src="{{ public_path('dist/img/logo_pnc.png') }}" alt="Logo">
         <div class="header-text">
-            <h2>UNIVERSITAS EXAMPLE</h2>
-            <h3>FAKULTAS EXAMPLE</h3>
-            <p>Jl. Example No. 123, Kota Example</p>
-            <p>Telp: (021) 1234567, Email: example@univ.ac.id</p>
+            <h2>POLITEKNIK NEGERI CILACAP</h2>
+                            <h3>Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi</h3>
+                <p>Jl. Dr. Soetomo No. 1, Sidakaya, Cilacap, Jawa Tengah</p>
+            <p>Telp: (021) 1234567, Email: pnc.ac.id</p>
         </div>
         <div style="clear: both;"></div>
     </div>
 
     <div class="date-range">
-        Laporan Pemanggilan Orang Tua/Wali <br>
+        Berita Acara Pemanggilan Orang Tua <br>
         Tanggal {{ \Carbon\Carbon::parse($start_date)->format('d/m/Y') }} s/d {{ \Carbon\Carbon::parse($end_date)->format('d/m/Y') }}
     </div>
 

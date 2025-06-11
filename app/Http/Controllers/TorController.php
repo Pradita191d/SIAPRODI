@@ -33,8 +33,9 @@ class TorController extends Controller
         $tor->id_rka = $request->id_rka;
         $tor->nama_tor = $request->nama_tor;
         $tor->deskripsi = $request->deskripsi;
-        $tor->proposal = $request->file('proposal')->store('tor', 'public');
-
+        $extension = $request->file('proposal')->getClientOriginalExtension();
+        $filename = $request->nama_tor . '-' . rand(1000, 9999) . '.' . $extension;
+        $tor->proposal = $request->file('proposal')->storeAs('tor', $filename, 'public');
         $tor->save();
 
         return redirect()->route('rka.index')->with('success', 'TOR berhasil ditambahkan');
