@@ -154,8 +154,7 @@
 
     <div class="footer">
         <div class="ttd">
-            Cilacap, {{ \Carbon\Carbon::now()->format('d F Y') }}<br>
-            Mengetahui,<br>
+            Cilacap, {{ \Carbon\Carbon::now()->format('d F Y') }},<br>
             Koordinator Sub BAAK<br><br><br><br>
             <u>Endang Werdiningsih, S.E</u><br>
             NIP. 197104112021212007
