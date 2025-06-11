@@ -156,7 +156,7 @@
         <div class="ttd">
             Cilacap, {{ \Carbon\Carbon::now()->format('d F Y') }},<br>
             Koordinator Sub BAAK<br><br><br><br>
-            <u>Endang Werdiningsih, S.E</u><br>
+            <u>Endang Werdiningsih, S.E</u><br><br>
             NIP. 197104112021212007
         </div>
     </div>
