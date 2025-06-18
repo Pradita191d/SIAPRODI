@@ -82,12 +82,13 @@
         .footer {
             margin-top: 60px;
             width: 100%;
+            display: flex;
+            justify-content: space-between;
         }
 
         .footer .ttd {
-            float: right;
-            text-align: left;
-            margin-right: 80px;
+            text-align: center;
+            width: 45%;
         }
 
         .footer .ttd div {
@@ -96,68 +97,54 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="{{ public_path('dist/img/logo_pnc.png') }}" alt="Logo">
-        <div class="header-text">
-            <h2>POLITEKNIK NEGERI CILACAP</h2>
-            <h3>Kementerian Pendidikan, Kebudayaan, Riset, Teknologi</h3>
-            <p>Jl. Dr. Soetomo No. 1, Sidakaya, Cilacap, Jawa Tengah</p>
-            <p>Telp: (021) 1234567, Email: pnc.ac.id</p>
-        </div>
-        <div style="clear: both;"></div>
-    </div>
-
     <div class="date-range">
-        BERITA ACARA PEMANGGILAN ORANG TUA <br>
-        Nomor: {{ $no_surat }} <br>
-        Tanggal: {{ \Carbon\Carbon::parse($start_date)->format('d/m/Y') }} s/d {{ \Carbon\Carbon::parse($end_date)->format('d/m/Y') }}
+        BERITA ACARA <br>
+        RAPAT YUDISIUM PROGRAM STUDI D3 TEKNIK INFORMATIKA  <br>
+        SEMESTER GANJIL TAHUN AKADEMIK 2024/2025  <br>
     </div>
-
+@php
+    \Carbon\Carbon::setLocale('id');
+@endphp
     <div class="content">
-        Pada tanggal tersebut di atas, telah dilakukan pemanggilan orang tua/wali mahasiswa oleh pihak Politeknik Negeri Cilacap melalui Bagian Akademik dan Kemahasiswaan (BAAK). Kegiatan ini dilaksanakan sebagai tindak lanjut dari permasalahan akademik atau non-akademik yang melibatkan mahasiswa, yang memerlukan keterlibatan orang tua/wali untuk mendapatkan solusi terbaik.
-
-        Adapun daftar mahasiswa dan orang tua yang telah dipanggil beserta alasan pemanggilan terlampir pada tabel berikut:
-    </div>
+Pada hari ini {{ \Carbon\Carbon::now()->isoFormat('dddd') }} tanggal {{ \Carbon\Carbon::now()->format('d') }} bulan {{ \Carbon\Carbon::now()->isoFormat('MMMM') }} tahun {{ \Carbon\Carbon::now()->format('Y') }}, bertempat di Ruang Jurusan Komputer dan Bisnis telah dilaksanakan pemanggilan orang tua wali mahasiswa Tahun Akademik 2024 - 2025 untuk program studi D3 Teknik Informatika, Politeknik Negeri Cilacap dengan hasil sebagai berikut:    </div>
 
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Ortu</th>
-                <th>No Telp</th>
                 <th>Nama Mahasiswa</th>
-                <th>NIM</th>
-                <th>Jurusan/Prodi</th>
-                <th>Tanggal</th>
-                <th>Alasan</th>
+                <th>Permasalahan</th>
+                <th>Hasil</th>
             </tr>
         </thead>
         <tbody>
             @foreach($pemanggilans as $index => $pemanggilan)
             <tr>
                 <td style="text-align: center;">{{ $index + 1 }}</td>
-                <td>{{ $pemanggilan->nama_ortu }}</td>
-                <td>{{ $pemanggilan->no_telp_ortu }}</td>
                 <td>{{ $pemanggilan->mahasiswa->nama_mahasiswa }}</td>
-                <td>{{ $pemanggilan->nim }}</td>
-                <td>{{ $pemanggilan->jurusan }} / {{ $pemanggilan->prodi }}</td>
-                <td>{{ \Carbon\Carbon::parse($pemanggilan->tanggal_pemanggilan)->format('d/m/Y') }}</td>
                 <td>{{ $pemanggilan->alasan_pemanggilan }}</td>
+                <td>{{ $pemanggilan->solusi }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
     <div class="content">
-        Demikian berita acara ini dibuat sebagai dokumentasi resmi kegiatan pemanggilan orang tua/wali mahasiswa. Diharapkan dengan adanya pemanggilan ini, mahasiswa yang bersangkutan dapat memperoleh perhatian dan bimbingan yang lebih intensif dari pihak keluarga sehingga mampu memperbaiki prestasi dan sikap selama menempuh pendidikan di Politeknik Negeri Cilacap.
-    </div>
+Demikian Berita Acara ini dibuat untuk dapat dipergunakan sebagaimana mestinya.    </div>
 
     <div class="footer">
         <div class="ttd">
-            Cilacap, {{ \Carbon\Carbon::now()->format('d F Y') }},<br>
-            Koordinator Sub BAAK<br><br><br><br>
-            <u>Endang Werdiningsih, S.E</u><br><br>
-            NIP. 197104112021212007
+            Mengetahui,<br>
+            Jurusan Komputer dan Bisnis<br><br><br><br>
+            Ketua<br><br><br><br>
+            <u>Dwi Novia Prasetyanti, S.Kom, M.Cs</u><br>
+            NIP. 197911192021212009
+        </div>
+        <div class="ttd">
+           Program Studi D3 Teknik Informatika<br>
+           Koordinator<br><br><br><br>
+            <u>Cahya Vikasari, ST.M.Eng</u><br>
+            NIP.198412012018032001
         </div>
     </div>
 </body>
