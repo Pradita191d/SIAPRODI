@@ -7,6 +7,7 @@
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 14px;
+            margin: 40px;
         }
 
         .header {
@@ -79,40 +80,54 @@
             text-align: center;
         }
 
-        .footer {
+        .signature {
             margin-top: 60px;
-            width: 100%;
             display: flex;
             justify-content: space-between;
         }
 
-        .footer .ttd {
+        .ttd-block {
+            width: 48%;
             text-align: center;
-            width: 45%;
         }
 
-        .footer .ttd div {
+        .ttd-block u {
+            display: inline-block;
             margin-top: 60px;
         }
+        .ttd-container {
+    width: 100%;
+    margin-top: 60px;
+    font-size: 14px;
+}
+
+.ttd-left, .ttd-right {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    text-align: center;
+}
+
     </style>
 </head>
 <body>
+
     <div class="date-range">
         BERITA ACARA <br>
-        RAPAT YUDISIUM PROGRAM STUDI D3 TEKNIK INFORMATIKA  <br>
-        SEMESTER GANJIL TAHUN AKADEMIK 2024/2025  <br>
+        RAPAT YUDISIUM PROGRAM STUDI D3 TEKNIK INFORMATIKA <br>
+        SEMESTER GANJIL TAHUN AKADEMIK 2024/2025 <br>
     </div>
-@php
-    \Carbon\Carbon::setLocale('id');
-@endphp
+
     <div class="content">
-Pada hari ini {{ \Carbon\Carbon::now()->isoFormat('dddd') }} tanggal {{ \Carbon\Carbon::now()->format('d') }} bulan {{ \Carbon\Carbon::now()->isoFormat('MMMM') }} tahun {{ \Carbon\Carbon::now()->format('Y') }}, bertempat di Ruang Jurusan Komputer dan Bisnis telah dilaksanakan pemanggilan orang tua wali mahasiswa Tahun Akademik 2024 - 2025 untuk program studi D3 Teknik Informatika, Politeknik Negeri Cilacap dengan hasil sebagai berikut:    </div>
+        Pada hari ini {{ \Carbon\Carbon::now()->isoFormat('dddd') }} tanggal {{ \Carbon\Carbon::now()->format('d') }} bulan {{ \Carbon\Carbon::now()->isoFormat('MMMM') }} tahun {{ \Carbon\Carbon::now()->format('Y') }}, bertempat di Ruang Jurusan Komputer dan Bisnis telah dilaksanakan pemanggilan orang tua wali mahasiswa Tahun Akademik 2024 - 2025 untuk program studi D3 Teknik Informatika, Politeknik Negeri Cilacap dengan hasil sebagai berikut:
+    </div>
 
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Mahasiswa</th>
+                <th>NIM</th>
+                <th>Nama</th>
                 <th>Permasalahan</th>
                 <th>Hasil</th>
             </tr>
@@ -121,6 +136,7 @@ Pada hari ini {{ \Carbon\Carbon::now()->isoFormat('dddd') }} tanggal {{ \Carbon\
             @foreach($pemanggilans as $index => $pemanggilan)
             <tr>
                 <td style="text-align: center;">{{ $index + 1 }}</td>
+                <td>{{ $pemanggilan->mahasiswa->nim }}</td>
                 <td>{{ $pemanggilan->mahasiswa->nama_mahasiswa }}</td>
                 <td>{{ $pemanggilan->alasan_pemanggilan }}</td>
                 <td>{{ $pemanggilan->solusi }}</td>
@@ -130,22 +146,24 @@ Pada hari ini {{ \Carbon\Carbon::now()->isoFormat('dddd') }} tanggal {{ \Carbon\
     </table>
 
     <div class="content">
-Demikian Berita Acara ini dibuat untuk dapat dipergunakan sebagaimana mestinya.    </div>
-
-    <div class="footer">
-        <div class="ttd">
-            Mengetahui,<br>
-            Jurusan Komputer dan Bisnis<br><br><br><br>
-            Ketua<br><br><br><br>
-            <u>Dwi Novia Prasetyanti, S.Kom, M.Cs</u><br>
-            NIP. 197911192021212009
-        </div>
-        <div class="ttd">
-           Program Studi D3 Teknik Informatika<br>
-           Koordinator<br><br><br><br>
-            <u>Cahya Vikasari, ST.M.Eng</u><br>
-            NIP.198412012018032001
-        </div>
+        Demikian Berita Acara ini dibuat untuk dapat dipergunakan sebagaimana mestinya.
     </div>
+
+    <div class="ttd-container">
+    <div class="ttd-left">
+        Mengetahui,<br>
+        Jurusan Komputer dan Bisnis<br>
+        Ketua<br><br><br><br><br>
+        <u>Dwi Novia Prasetyanti, S.Kom, M.Cs</u><br>
+        NIP. 197911192021212009
+    </div>
+    <div class="ttd-right">
+        Program Studi D3 Teknik Informatika<br>
+        Koordinator<br><br><br><br><br><br>
+        <u>Cahya Vikasari, ST.M.Eng</u><br>
+        NIP. 198412012018032001
+    </div>
+</div>
+
 </body>
 </html>

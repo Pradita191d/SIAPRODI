@@ -53,8 +53,7 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        <div class="form-group">
+                             <div class="form-group">
                             <label>Semester <span class="text-danger">*</span></label>
                             <select class="form-control" name="semester" required>
                                 <option value="">-- Pilih Semester --</option>
