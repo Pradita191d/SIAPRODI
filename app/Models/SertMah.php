@@ -16,6 +16,7 @@ class SertMah extends Model
         'nim',
         'nm_sert',
         'lembaga',
+        'no_reg',
         'tanggal_sert',
         'masa_berlaku',
         'file',
