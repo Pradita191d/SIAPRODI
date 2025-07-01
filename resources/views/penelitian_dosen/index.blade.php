@@ -10,7 +10,7 @@
                         + Tambah Penelitian
                     </a>
                     <form action="{{ route('penelitian-dosen.index') }}" method="GET">
-                        <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari nama dosen..." value="{{ request('search') }}">
+                        <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari nama dosen, tahun" value="{{ request('search') }}">
                     </form>
                 </div>
                 <div class="table-responsive">
