@@ -113,7 +113,7 @@ class PenelitianDosenController extends Controller
             'sumber_dana'           => 'required|string|max:100',
             'dana_penelitian'       => 'required|numeric|min:0',
             'status_penelitian'     => 'required|in:Dalam proses,Selesai,Dibatalkan',
-            'file_penelitian'       => 'required|mimes:pdf|max:2048', // Max 2MB, hanya PDF
+            'file_penelitian'       => 'nullable|mimes:pdf|max:2048', // Max 2MB, hanya PDF
             'nama_anggota'          => 'nullable|string|max:255',
         ]);
 
