@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('anggota', function (Blueprint $table) {
             $table->id('id_anggota');
             $table->integer('id_penelitian');
-            $table->string('nama_anggota', 255)->nullable();
+            $table->integer('NIM'); // Relasi ke tabel mahasiswa
             $table->timestamps();
         });
     }
