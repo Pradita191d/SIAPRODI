@@ -12,7 +12,7 @@ class KegiatanDosenController extends Controller
 {
     public function index(Request $request)
     {
-        $kegiatan = KegiatanDosenModels::with ('dosen')->get(); 
+        $kegiatan = KegiatanDosenModels::with ('dosen')->get();
         return view('kegiatan_dosen.index', ['kegiatan_dosen' => $kegiatan]);
     }
 
@@ -31,8 +31,9 @@ class KegiatanDosenController extends Controller
             'lokasi_kegiatan' => 'required',
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date|after_or_equal:tgl_mulai',
+            'nomor_sk' => 'required',
             'file_sk' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // File opsional, hanya PDF/DOC max 2MB
-            'keterangan' => 'nullable', 
+            'keterangan' => 'nullable',
         ]);
 
         $dokumenPath = null;
@@ -46,11 +47,12 @@ class KegiatanDosenController extends Controller
             'lokasi_kegiatan' => $request->lokasi_kegiatan,
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
+            'nomor_sk' => $request->nomor_sk,
             'file_sk' => $dokumenPath,
-            'keterangan' => $request->keterangan ?? '-', 
+            'keterangan' => $request->keterangan ?? '-',
         ]);
 
-        return redirect()->route('kegiatan_dosen.index')->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->route('kegiatan_dosen.index')->with('sukses', 'Data berhasil ditambahkan!');
     }
 
     public function edit($id_kegiatan_dosen)
@@ -68,6 +70,7 @@ class KegiatanDosenController extends Controller
             'lokasi_kegiatan' => 'required',
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date',
+            'nomor_sk' => 'required|regex:/^SK\/\d{3}\/[A-Z]{2}\/\d{4}$/', //ex. SK/123/TI/2025
             'file_sk' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'keterangan' => 'required',
         ]);
@@ -78,28 +81,30 @@ class KegiatanDosenController extends Controller
         $kegiatan->lokasi_kegiatan = $request->lokasi_kegiatan;
         $kegiatan->tgl_mulai = $request->tgl_mulai;
         $kegiatan->tgl_selesai = $request->tgl_selesai;
+        $kegiatan->nomor_sk = $request->nomor_sk;
         $kegiatan ->keterangan = $request->keterangan;
         $kegiatan ->file_sk = $kegiatan->file_sk;
 
         // Cek apakah ada file yang diupload
         if ($request->hasFile('file_sk')) {
-        
+
         // Simpan file baru ke storage
         $dokumenPath = $request->file('file_sk')->store('public/upload_file_sk');
-        $kegiatan->file_sk = str_replace('public/', '', $dokumenPath); 
+        $kegiatan->file_sk = str_replace('public/', '', $dokumenPath);
         }
-        
+
         $kegiatan->update([
             'nama_dosen' => $request->nama_dosen,
             'jenis_kegiatan' => $request->jenis_kegiatan,
             'lokasi_kegiatan' => $request->lokasi_kegiatan,
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
+            'nomor_sk' => $request->nomor_sk,
             'keterangan' => $request->keterangan,
-            'file_sk' => $kegiatan->file_sk, 
+            'file_sk' => $kegiatan->file_sk,
         ]);
 
-        return redirect()->route('kegiatan_dosen.index')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('kegiatan_dosen.index')->with('sukses', 'Data berhasil diperbarui!');
     }
 
     public function destroy($id_kegiatan_dosen)
@@ -107,7 +112,7 @@ class KegiatanDosenController extends Controller
         $kegiatan = KegiatanDosenModels::FindOrFail($id_kegiatan_dosen);
         $kegiatan->delete();
 
-        return redirect()->route('kegiatan_dosen.index')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('kegiatan_dosen.index')->with('sukses', 'Data berhasil dihapus!');
     }
 
     public function search(Request $request)
@@ -130,10 +135,10 @@ class KegiatanDosenController extends Controller
         try {
             $kegiatan = KegiatanDosenModels::all();
             $pdf = PDF::loadView('kegiatan_dosen.cetak', ['kegiatan_dosen' => $kegiatan]);
-    
+
             // Unduh file PDF
             return $pdf->download('kegiatan-dosen-' . Carbon::now()->timestamp . '.pdf');
-    
+
         } catch (\Exception $e) {
             // Tangani error dan kembalikan response dengan pesan error
             return redirect()->back()->with('error', 'Terjadi kesalahan saat membuat PDF: ' . $e->getMessage());
