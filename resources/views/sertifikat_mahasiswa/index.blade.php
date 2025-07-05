@@ -47,6 +47,7 @@
                             <th class="text-center">Nama Mahasiswa</th>
                             <th class="text-center">Nama Sertifikat</th>
                             <th class="text-center">Nama Lembaga</th>
+                            <th class="text-center">Nomor Registrasi</th>
                             <th class="text-center">Tanggal Terbit</th>
                             <th class="text-center">Berlaku Sampai</th>
                             <th class="text-center">Dokumen</th>
@@ -61,6 +62,7 @@
                             <td>{{ $sertifikat->mahasiswa->nama_mahasiswa ?? '-' }}</td>
                             <td>{{ $sertifikat->nm_sert }}</td>
                             <td>{{ $sertifikat->lembaga }}</td>
+                            <td>{{ $sertifikat->no_reg }}</td>
                             <td>{{ $sertifikat->tanggal_sert_formatted }}</td>
                             <td>{{ $sertifikat->tanggal_expired }}</td>
                             <td>
@@ -134,6 +136,10 @@
                         <input type="text" class="form-control" id="lembaga" name="lembaga" placeholder="Masukkan Nama Lembaga" required>
                     </div>
                     <div class="form-group mb-3">
+                        <label for="no_reg">Nomor Registrasi</label>
+                        <input type="text" class="form-control" id="no_reg" name="no_reg" placeholder="Masukkan Nomor Registrasi" required>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="tanggal_sert">Tanggal Terbit</label>
                         <input type="date" class="form-control" id="tanggal_sert" name="tanggal_sert" required>
                     </div>
@@ -191,6 +197,10 @@
                     <div class="form-group mb-3">
                         <label for="edit_lembaga">Nama Lembaga</label>
                         <input type="text" class="form-control" id="edit_lembaga" name="lembaga" placeholder="Masukkan Nama Lembaga" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="edit_noreg">Nomor Registrasi</label>
+                        <input type="text" class="form-control" id="no_reg" name="no_reg" placeholder="Masukkan Nomor Registrasi" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="edit_tanggal_sert">Tanggal Terbit</label>
@@ -283,6 +293,7 @@
         $('#edit_nim').val(nim).trigger('change');
         $('#edit_nm_sert').val(nm_sert);
         $('#edit_lembaga').val(lembaga);
+        $('#edit_noreg').val(no_reg);
         $('#edit_tanggal_sert').val(tanggal_sert);
         $('#edit_masa_berlaku').val(masa_berlaku);
 

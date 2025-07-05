@@ -40,6 +40,7 @@ class SertMahController extends Controller
             'nim' => 'required|exists:mahasiswa,nim',
             'nm_sert' => 'required|string|max:255',
             'lembaga' => 'required|string|max:255',
+            'no_reg' => 'required',
             'tanggal_sert' => 'required',
             'masa_berlaku' => 'required|string|max:255',
             'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
@@ -50,6 +51,7 @@ class SertMahController extends Controller
             'nim' => $request->nim,
             'nm_sert' => $request->nm_sert,
             'lembaga' => $request->lembaga,
+            'no_reg' => $request->no_reg,
             'tanggal_sert' => $request->tanggal_sert,
             'masa_berlaku' => $request->masa_berlaku,
             'file' => $path,
@@ -75,6 +77,7 @@ class SertMahController extends Controller
             'nim' => 'required|exists:mahasiswa,nim',
             'nm_sert' => 'required|string|max:255',
             'lembaga' => 'required|string|max:255',
+            'no_reg' => 'required',
             'tanggal_sert' => 'required',
             'masa_berlaku' => 'required|string|max:255',
             'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
@@ -84,6 +87,7 @@ class SertMahController extends Controller
         $sertikoMa->nim = $request->nim;
         $sertikoMa->nm_sert = $request->nm_sert;
         $sertikoMa->lembaga = $request->lembaga;
+        $sertikoMa->no_reg = $request->no_reg;
         $sertikoMa->tanggal_sert = $request->tanggal_sert;
         $sertikoMa->masa_berlaku = $request->masa_berlaku;
         if ($request->hasFile('file')) {

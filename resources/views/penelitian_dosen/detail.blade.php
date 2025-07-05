@@ -8,7 +8,7 @@
                 <a href="{{ route('penelitian-dosen.index') }}">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <h3 class="h5 font-weight-bold text-center flex-grow-1 m-0">Detail Penelitian Dosen</h3>
+                <h3 class="h5 font-weight-bold text-center flex-grow-1 m-2">Detail Penelitian Dosen</h3>
                 <div style="width: 32px;"></div>
             </div>
 
@@ -51,7 +51,7 @@
                                         <ul>
                                             @foreach ($penelitian->anggota as $anggota)
                                                 <li>
-                                                    {{ $anggota->mahasiswa->nama_mahasiswa ?? '-' }} - {{ $anggota->NIM ?? '-' }}
+                                                    {{ $anggota->nama_anggota}}
                                                 </li>
                                             @endforeach
                                         </ul>

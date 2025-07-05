@@ -21,7 +21,8 @@ class PenelitianDosenController extends Controller
         $penelitian = PenelitianDosen::with('dosen')
         ->when($search, function ($query) use ($search) {
             return $query->whereHas('dosen', function ($q) use ($search) {
-                $q->where('nama_dosen', 'like', "%{$search}%");
+                $q->where('nama_dosen', 'like', "%{$search}%")
+                    ->orwhere('tahun_penelitian', 'like', "%{$search}%");
             });
         })
         ->get();
@@ -34,15 +35,12 @@ class PenelitianDosenController extends Controller
     public function create()
     {
         $dosen = Dosen::all(); // Ambil daftar dosen untuk dropdown
-        $mahasiswa = Mahasiswa::all(); // Ambil daftar mahasiswa untuk dropdown
-        return view('penelitian_dosen.create', compact('dosen', 'mahasiswa'));
+        return view('penelitian_dosen.create', compact('dosen'));
     }
 
     // Fungsi store
     public function store(Request $request)
     {
-
-       
         // Validasi input
         $request->validate([
             'judul_penelitian'          => 'required|string|max:255',
@@ -52,9 +50,8 @@ class PenelitianDosenController extends Controller
             'sumber_dana'               => 'required|string|max:100',
             'dana_penelitian'           => 'required|numeric|min:0',
             'status_penelitian'         => 'required|in:Dalam Proses,Selesai,Dibatalkan',
-            'file_penelitian'           => 'nullable|mimes:pdf|max:2048', // Max 2MB, hanya PDF
-            'anggota'                   => 'nullable|array',
-            'anggota.*.id_mahasiswa'    => 'nullable|exists:mahasiswa,id_mahasiswa',
+            'file_penelitian'           => 'required|mimes:pdf|max:2048', // Max 2MB, hanya PDF
+            'nama_anggota'              => 'nullable|string|max:255',
         ]);
 
         // Simpan file penelitian jika ada
@@ -77,15 +74,16 @@ class PenelitianDosenController extends Controller
             'file_penelitian'       => $filePath,
         ]);
 
-         // Simpan data anggota jika ada
-        if ($request->has('anggota')) {
-            foreach ($request->anggota as $anggota) {
-                if (!empty($anggota['id_mahasiswa'])) {
-                    Anggota::create([
-                        'id_penelitian' => $penelitian->id_penelitian,
-                        'NIM'           => Mahasiswa::where('id_mahasiswa', $anggota['id_mahasiswa'])->first()->nim,
-                    ]);
-                }
+        // Simpan anggota jika ada
+        if ($request->filled('nama_anggota')) {
+            // Pisahkan berdasarkan koma atau baris baru
+            $daftarAnggota = preg_split('/[\r\n,]+/', $request->nama_anggota, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach ($daftarAnggota as $nama) {
+                Anggota::create([
+                    'id_penelitian' => $penelitian->id_penelitian,
+                    'nama_anggota'  => trim($nama),
+                ]);
             }
         }
 
@@ -95,11 +93,10 @@ class PenelitianDosenController extends Controller
     // Tampilkan form edit penelitian
     public function edit($id_penelitian)
     {
-        $penelitian = PenelitianDosen::with('dosen', 'anggota.mahasiswa')->findOrFail($id_penelitian);
+        $penelitian = PenelitianDosen::with('dosen')->findOrFail($id_penelitian);
         $dosen = Dosen::all(); // Ambil daftar dosen untuk dropdown
-        $mahasiswa = Mahasiswa::all(); // Ambil daftar mahasiswa untuk anggota
 
-        return view('penelitian_dosen.edit', compact('penelitian', 'dosen', 'mahasiswa'));
+        return view('penelitian_dosen.edit', compact('penelitian', 'dosen'));
     }
 
     // Fungsi update
@@ -117,8 +114,7 @@ class PenelitianDosenController extends Controller
             'dana_penelitian'       => 'required|numeric|min:0',
             'status_penelitian'     => 'required|in:Dalam proses,Selesai,Dibatalkan',
             'file_penelitian'       => 'nullable|mimes:pdf|max:2048', // Max 2MB, hanya PDF
-            'anggota'               => 'nullable|array',
-            'anggota.*.NIM'         => 'nullable|exists:mahasiswa,NIM',
+            'nama_anggota'          => 'nullable|string|max:255',
         ]);
 
         // Cari data penelitian berdasarkan ID
@@ -146,34 +142,19 @@ class PenelitianDosenController extends Controller
             'file_penelitian'   => $filePath,
         ]);
 
-        // Perbarui data anggota penelitian
-        $anggotaLama = Anggota::where('id_penelitian', $penelitian->id_penelitian)
-                ->pluck('NIM')
-                ->toArray();
+        // Hapus anggota lama
+        $penelitian->anggota()->delete();
 
-        if ($request->has('anggota')) {
-            $anggotaBaru = collect($request->anggota) // Ambil hanya ID mahasiswa dari request
-                ->pluck('NIM') // Hilangkan nilai null atau kosong
-                ->filter()
-                ->toArray();
+        // Simpan ulang anggota jika ada
+        if ($request->filled('nama_anggota')) {
+            $daftarAnggota = preg_split('/[\r\n,]+/', $request->nama_anggota, -1, PREG_SPLIT_NO_EMPTY);
 
-            // Hapus anggota yang sudah tidak ada di daftar baru
-            Anggota::where('id_penelitian', $penelitian->id_penelitian)
-            ->WhereNotIn('NIM', $anggotaBaru)
-            ->delete();
-
-            // Tambah anggota baru yang belum ada
-            foreach ($anggotaBaru as $NIM) {
-                if (!in_array($NIM, $anggotaLama)) {
-                    Anggota::create([
-                        'id_penelitian' => $penelitian->id_penelitian,
-                        'NIM'           => $NIM,
-                    ]);
-                }
+            foreach ($daftarAnggota as $nama) {
+                Anggota::create([
+                    'id_penelitian' => $penelitian->id_penelitian,
+                    'nama_anggota'  => trim($nama),
+                ]);
             }
-        } else {
-            // Jika tidak ada anggota baru di request, hapus semua anggota penelitian ini
-            Anggota::where('id_penelitian', $penelitian->id_penelitian)->delete();
         }
 
         return redirect()->route('penelitian-dosen.index')->with('success', 'Penelitian berhasil diperbarui!');
@@ -183,7 +164,7 @@ class PenelitianDosenController extends Controller
     // Menampilkan detail penelitian
     public function detail($id_penelitian)
     {
-        $penelitian = PenelitianDosen::with(['dosen', 'anggota.mahasiswa'])->find($id_penelitian);
+        $penelitian = PenelitianDosen::with(['dosen'])->find($id_penelitian);
 
         if (!$penelitian) {
             return abort(404, 'Data tidak ditemukan');
