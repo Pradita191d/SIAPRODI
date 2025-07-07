@@ -10,7 +10,7 @@ class UndurDiriDo extends Model
     use HasFactory;
 
     protected $table = 'undur_diri_do';
-
+////////////
     protected $primaryKey = 'id_undur_diri_do';
 
     protected $fillable = [
@@ -19,7 +19,9 @@ class UndurDiriDo extends Model
         'tanggal_disetujui',  
         'alasan',             
         'status_pengajuan',   // Status: 'Diajukan', 'Disetujui', 'Ditolak'
-        'keterangan',         
+        'keterangan',    
+        'no_sk',
+        'tanggal_sk',     
     ];
     public function mahasiswa()
     {

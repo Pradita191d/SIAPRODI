@@ -28,7 +28,8 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal_berakhir">Tanggal Berakhir</label>
-                        <input type="date" class="form-control" id="tanggal_berakhir" name="tanggal_berakhir" required>
+                        <input type="date" class="form-control" id="tanggal_berakhir" name="tanggal_berakhir"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="tahun">Tahun Akademik</label>
@@ -44,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jenis_kerjasama">Jenis Kerjasama</label>
-                        <input type="text" class="form-control" id="jenis_kerjasama" name="jenis_kerjasama" required>
+                        <textarea class="form-control" id="jenis_kerjasama" name="jenis_kerjasama" style="height: 150px;" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="kontak">Contact Person</label>

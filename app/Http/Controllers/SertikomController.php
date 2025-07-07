@@ -67,6 +67,7 @@ class SertikomController extends Controller
         if ($request->doc_sertifikat){
             $request->validate([
                 'nidn'             => 'required|string|exists:dosen,nidn|max:20', // Pastikan NIDN ada di tabel dosen
+                'no_sertikom'      => 'required|string|max:255',
                 'nama_sertifikat'  => 'required|string|max:255',
                 'bidang_keahlian'  => 'required|string|max:255',
                 'nama_lembaga'     => 'required|string|max:255',
@@ -83,6 +84,7 @@ class SertikomController extends Controller
 
             $sert->update([
                 'nidn'             => $request->nidn,
+                'no_sertikom'      => $request->no_sertikom,
                 'nama_sertifikat'  => $request->nama_sertifikat,
                 'bidang_keahlian'  => $request->bidang_keahlian,
                 'nama_lembaga'     => $request->nama_lembaga,
@@ -93,6 +95,7 @@ class SertikomController extends Controller
         }else{
             $request->validate([
                 'nidn'             => 'required|string|exists:dosen,nidn|max:20', // Pastikan NIDN ada di tabel dosen
+                'no_sertikom'      => 'required|string|max:255',
                 'nama_sertifikat'  => 'required|string|max:255',
                 'bidang_keahlian'  => 'required|string|max:255',
                 'nama_lembaga'     => 'required|string|max:255',
@@ -103,6 +106,7 @@ class SertikomController extends Controller
 
             $sert->update([
                 'nidn'             => $request->nidn,
+                'no_sertikom'      => $request->no_sertikom,
                 'nama_sertifikat'  => $request->nama_sertifikat,
                 'bidang_keahlian'  => $request->bidang_keahlian,
                 'nama_lembaga'     => $request->nama_lembaga,
@@ -119,6 +123,7 @@ class SertikomController extends Controller
         // Validasi input
         $request->validate([
             'nidn'             => 'required|string|exists:dosen,nidn|max:20', // Pastikan NIDN ada di tabel dosen
+            'no_sertikom'      => 'required|string|max:255',
             'nama_sertifikat'  => 'required|string|max:255',
             'bidang_keahlian'  => 'required|string|max:255',
             'nama_lembaga'     => 'required|string|max:255',
@@ -138,6 +143,7 @@ class SertikomController extends Controller
         // Simpan data ke database
         Sertikom::create([
             'nidn'             => $request->nidn,
+            'no_sertikom'      => $request->no_sertikom,
             'nama_sertifikat'  => $request->nama_sertifikat,
             'bidang_keahlian'  => $request->bidang_keahlian,
             'nama_lembaga'     => $request->nama_lembaga,

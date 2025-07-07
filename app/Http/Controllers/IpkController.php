@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ipk;
 use App\Models\Mahasiswa;
+use App\Models\TahunAkademik;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -13,59 +14,76 @@ class IpkController extends Controller
 {
 
     //Fungsi Index Halaman data IPK
+    // public function index(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $query = Mahasiswa::leftJoin('ipk', 'mahasiswa.nim', '=', 'ipk.nim')
+    //             ->leftJoin('tahun_akademik', 'mahasiswa.tahun_masuk', '=', 'tahun_akademik.id_tahun_akademik')
+    //             ->select(
+    //                 'mahasiswa.nim',
+    //                 'mahasiswa.nama_mahasiswa',
+    //                 DB::raw("CONCAT(tahun_akademik.tahun, '/', tahun_akademik.ganjil_genap) as tahun_masuk"),
+    //                 'ipk.ipk',
+    //                 'ipk.keterangan',
+    //                 'ipk.id_ipk'
+    //             );
+
+    //         // Filter berdasarkan tahun akademik jika dipilih
+    //         if ($request->has('tahun_masuk') && $request->tahun_masuk != '') {
+    //             $query->where('mahasiswa.tahun_masuk', $request->tahun_masuk);
+    //         }
+
+    //         return DataTables::of($query)
+    //             ->addIndexColumn()
+    //             ->addColumn('keterangan_ipk', function ($row) {
+    //                 if (is_null($row->ipk)) {
+    //                     return '-';
+    //                 } elseif ($row->ipk > 3.5) {
+    //                     return '<span class="badge bg-success">Cumlaude</span>';
+    //                 } elseif ($row->ipk >= 3.01 && $row->ipk <= 3.50) {
+    //                     return '<span class="badge bg-primary">Sangat Memuaskan</span>';
+    //                 } elseif ($row->ipk >= 2.76 && $row->ipk <= 3.00) {
+    //                     return '<span class="badge bg-info">Memuaskan</span>';
+    //                 } else {
+    //                     return '<span class="badge bg-warning">Kurang</span>';
+    //                 }
+    //             })
+    //             ->addColumn('aksi', function ($row) {
+    //                 if (is_null($row->ipk)) {
+    //                     return '<button onclick="openInputIpkModal(\'' . $row->nim . '\', \'' . $row->nama_mahasiswa . '\')" class="btn btn-sm btn-success">Input IPK</button>';
+    //                 } else {
+    //                     return '
+    //                 <button onclick="editIpk(' . $row->id_ipk . ')" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
+    //                 <button onclick="deleteIpk(' . $row->id_ipk . ')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+    //             ';
+    //                 }
+    //             })
+    //             ->rawColumns(['keterangan_ipk', 'aksi'])
+    //             ->make(true);
+    //     }
+
+    //     // Ambil data tahun akademik untuk dropdown filter
+    //     $tahun_akademik = DB::table('tahun_akademik')->select('id_tahun_akademik', 'tahun', 'ganjil_genap')->get();
+
+    //     return view('ipk.index', compact('tahun_akademik'), ['title' => 'Data IPK Mahasiswa']);
+    // }
+
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $query = Mahasiswa::leftJoin('ipk', 'mahasiswa.nim', '=', 'ipk.nim')
-                ->leftJoin('tahun_akademik', 'mahasiswa.tahun_masuk', '=', 'tahun_akademik.id_tahun_akademik')
-                ->select(
-                    'mahasiswa.nim',
-                    'mahasiswa.nama_mahasiswa',
-                    'tahun_akademik.tahun as tahun_masuk',
-                    'ipk.ipk',
-                    'ipk.keterangan',
-                    'ipk.id_ipk'
-                );
+        $query = Mahasiswa::with(['ipk', 'tahunAkademik']);
 
-            // Filter berdasarkan tahun akademik jika dipilih
-            if ($request->has('tahun_masuk') && $request->tahun_masuk != '') {
-                $query->where('mahasiswa.tahun_masuk', $request->tahun_masuk);
-            }
-
-            return DataTables::of($query)
-                ->addIndexColumn()
-                ->addColumn('keterangan_ipk', function ($row) {
-                    if (is_null($row->ipk)) {
-                        return '-';
-                    } elseif ($row->ipk > 3.5) {
-                        return '<span class="badge bg-success">Cumlaude</span>';
-                    } elseif ($row->ipk >= 3.01 && $row->ipk <= 3.50) {
-                        return '<span class="badge bg-primary">Sangat Memuaskan</span>';
-                    } elseif ($row->ipk >= 2.76 && $row->ipk <= 3.00) {
-                        return '<span class="badge bg-info">Memuaskan</span>';
-                    } else {
-                        return '<span class="badge bg-warning">Kurang</span>';
-                    }
-                })
-                ->addColumn('aksi', function ($row) {
-                    if (is_null($row->ipk)) {
-                        return '<button onclick="openInputIpkModal(\'' . $row->nim . '\', \'' . $row->nama_mahasiswa . '\')" class="btn btn-sm btn-success">Input IPK</button>';
-                    } else {
-                        return '
-                    <button onclick="editIpk(' . $row->id_ipk . ')" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
-                    <button onclick="deleteIpk(' . $row->id_ipk . ')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                ';
-                    }
-                })
-                ->rawColumns(['keterangan_ipk', 'aksi'])
-                ->make(true);
+        if ($request->has('tahun_masuk') && $request->tahun_masuk != '') {
+            $query->where('tahun_masuk', $request->tahun_masuk);
         }
 
-        // Ambil data tahun akademik untuk dropdown filter
-        $tahun_akademik = DB::table('tahun_akademik')->pluck('tahun', 'id_tahun_akademik');
+        $mahasiswas = $query->get();
+        $tahun_akademik = TahunAkademik::all();
 
-        return view('ipk.index', compact('tahun_akademik'), ['title' => 'Data IPK Mahasiswa']);
+        return view('ipk.index', compact('mahasiswas', 'tahun_akademik'), ['title' => 'Data IPK Mahasiswa']);
     }
+
+
+
 
     //Fungsi Tabel Rekap
     public function getRekapitulasi(Request $request)

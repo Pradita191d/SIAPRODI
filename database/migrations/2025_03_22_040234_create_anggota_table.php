@@ -13,9 +13,8 @@ return new class extends Migration {
     {
         Schema::create('anggota', function (Blueprint $table) {
             $table->id('id_anggota');
-            $table->unsignedBigInteger('id_penelitian');
-            $table->foreign('id_penelitian')->references('id_penelitian')->on('penelitian_dosen')->onDelete('cascade');
-            $table->foreignId('NIM')->references('id_penelitian')->on('penelitian_dosen')->onDelete('cascade'); // Relasi ke tabel mahasiswa
+            $table->integer('id_penelitian');
+            $table->integer('NIM'); // Relasi ke tabel mahasiswa
             $table->timestamps();
         });
     }

@@ -15,17 +15,10 @@ class Anggota extends Model
 
     protected $fillable = [
         'id_penelitian',
-        'NIM',
+        'nama_anggota',
     ];
 
     public function penelitian() {
         return $this->belongsTo(PenelitianDosen::class, 'id_penelitian', 'id_penelitian');
     }
-
-    public function mahasiswa()
-    {
-        return $this->belongsTo(Mahasiswa::class, 'NIM', 'NIM');
-    }
-
-
 }

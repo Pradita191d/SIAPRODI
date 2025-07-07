@@ -49,10 +49,10 @@ class RKAController extends Controller
         $rka->id_tahun_akademik = $request->id_tahun_akademik;
         $rka->judul = $request->judul;
         $rka->deskripsi = $request->deskripsi;
-        $rka->file = $request->file('file')->store('rka', 'public');
-
+        $extension = $request->file('file')->getClientOriginalExtension();
+        $filename = $request->judul . '-' . rand(1000, 9999) . '.' . $extension;
+        $rka->file = $request->file('file')->storeAs('rka', $filename, 'public');
         $rka->save();
-
         return redirect()->route('rka.index')->with('success', 'RKA berhasil ditambahkan');
     }
 
@@ -61,9 +61,8 @@ class RKAController extends Controller
         $rka = RKA::find($id);
 
         $tor = TOR::where('id_rka', $rka->id_rka)->first();
-
         if ($tor) {
-            return redirect()->route('rka.index')->with('error', 'RKA tidak bisa dihapus karena  memiliki TOR');
+            return redirect()->route('rka.index')->with('error', 'RKA tidak dapat dihapus karena sudah memiliki TOR terkait.');
         } else {
             $rka->delete();
             return redirect()->route('rka.index')->with('success', 'RKA berhasil dihapus');
@@ -93,6 +92,9 @@ class RKAController extends Controller
         ]);
 
         $rka = RKA::find($id);
+        if (!$rka) {
+            return redirect()->route('rka.index')->with('error', 'RKA tidak ditemukan');
+        }
         $rka->id_tahun_akademik = $request->id_tahun_akademik;
         $rka->judul = $request->judul;
         $rka->deskripsi = $request->deskripsi;

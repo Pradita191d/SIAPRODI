@@ -20,7 +20,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>No</th>
             <th>Nama Perusahaan</th>
             <th>Jenis Perusahaan</th>
             <th>Alamat Perusahaan</th>
@@ -32,7 +32,7 @@
     <tbody id="magangTable">
         @foreach ($magang as $entry)
         <tr>
-            <td>{{ $entry->id }}</td>
+            <td>{{ $loop->iteration }}</td>
             <td>{{ $entry->nama_perusahaan }}</td>
             <td>{{ $entry->jenis_perusahaan }}</td>
             <td>{{ $entry->alamat_perusahaan }}</td>

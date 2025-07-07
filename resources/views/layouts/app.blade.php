@@ -99,92 +99,102 @@
                 </div><!-- /.container-fluid -->
             </section>
             {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
-    <!-- JavaScript Datatables -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <!-- Bootstrap JS (jika menggunakan Bootstrap) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-
-        <footer class="main-footer">
-            <strong>Copyright &copy; {{ date('Y') }} TID.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
+            <!-- JavaScript Datatables -->
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+            <!-- Bootstrap JS (jika menggunakan Bootstrap) -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+                <!-- /.content 
+                -->
             </div>
-        </footer>
-    </div>
-    <!-- ./wrapper -->
+            <!-- /.content-wrapper -->
 
-    <!-- jQuery -->
-    {{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
-    <!-- ChartJS -->
-    <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-    <!-- Sparkline -->
-    <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
-    <!-- JQVMap -->
-    <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-    <!-- daterangepicker -->
-    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-    <!-- Summernote -->
-    <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
-    <!-- overlayScrollbars -->
-    <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/adminlte.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('dist/js/demo.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+            <footer class="main-footer">
+                <strong>Copyright &copy; {{ date('Y') }} TID.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                </div>
+            </footer>
+            </div>
+            <!-- ./wrapper -->
+
+            <!-- jQuery -->
+            {{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
+            <!-- jQuery UI 1.11.4 -->
+            <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+            <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+            <script>
+                $.widget.bridge('uibutton', $.ui.button)
+            </script>
+            <!-- Bootstrap 4 -->
+            <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+                integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+                integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+            </script>
+            <!-- ChartJS -->
+            <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+            <!-- Sparkline -->
+            <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
+            <!-- JQVMap -->
+            <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+            <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+            <!-- jQuery Knob Chart -->
+            <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+            <!-- daterangepicker -->
+            <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+            <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+            <!-- Tempusdominus Bootstrap 4 -->
+            <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+            <!-- Summernote -->
+            <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+            <!-- overlayScrollbars -->
+            <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+            <!-- AdminLTE App -->
+            <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="{{ asset('dist/js/demo.js') }}"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 
 
 
-    {{-- Sweet Alert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            {{-- Sweet Alert --}}
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Sukses!',
-                text: "{{ session('success') }}",
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
+            @if (session('success'))
+                <script>
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: "{{ session('success') }}",
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+            @elseif (session('error'))
+                <script>
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "{{ session('error') }}",
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+            @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    @stack('scripts')
+            @stack('scripts')
 
 </body>
 

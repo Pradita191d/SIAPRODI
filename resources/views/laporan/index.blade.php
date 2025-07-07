@@ -12,9 +12,9 @@
         <br> --}}
 
         <div class="card-tools">
-          <form action="/jurusan/search" class="form-inline" method="get">
+          <form action="/wisuda/search" class="form-inline" method="get">
             <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="search" class="form-control float-right" placeholder="cari dengan nama">
+              <input type="text" name="search" class="form-control float-right" placeholder="cari tahun">
   
               <div class="input-group-append">
                 <button type="submit" class="btn btn-default">

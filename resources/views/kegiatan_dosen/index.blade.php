@@ -53,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kegiatan_dosen_diluar as $kds)
+                                    @foreach ($kegiatan_dosen as $kds)
                                     <tr class="text-center">
                                         <td>{{ $kds->dosen?->nidn }}</td>
                                         <td>{{ $kds->dosen?->nama_dosen }}</td>
@@ -68,13 +68,13 @@
                                         </td>
                                         <td>{{ $kds->keterangan }}</td>
                                         <td>
+                                            @php
+                                            @endphp
                                             <div class="btn-group">
                                                 <a href="{{ route('kegiatan_dosen.edit', $kds->id_kegiatan_dosen) }}" class="btn btn-sm btn-success" title="Edit">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button class="btn btn-sm btn-danger" title="Hapus" onclick="confirmDelete('{{ $kds->id_kegiatan_dosen }}')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
+                                                <button onclick="confirmDelete({{ $kds->id_kegiatan_dosen }}, '{{ $kds->kegiatan_dosen }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                                 <form id="delete-form-{{ $kds->id_kegiatan_dosen }}" action="{{ route('kegiatan_dosen.destroy', $kds->id_kegiatan_dosen) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
@@ -94,11 +94,22 @@
 </main>
 
 <script>
-    function confirmDelete(id) {
-        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-            document.getElementById('delete-form-' + id).submit();
-        }
+    function confirmDelete(id, kegiatan_dosen) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data ini akan dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        });
     }
 </script>
+
 
 @endsection

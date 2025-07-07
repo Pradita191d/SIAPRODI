@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('mhs_smstr_perpanjangan', function (Blueprint $table) {
-            // $table->text('alasan')->nullable()->after('status');
+            $table->text('alasan')->nullable()->after('nim');
             // $table->text('solusi')->nullable()->after('alasan');
             // $table->integer('batas_waktu')->default(0)->after('solusi'); // batas waktu dalam tahun
         });

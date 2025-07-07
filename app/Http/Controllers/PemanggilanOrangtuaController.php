@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use App\Models\PemanggilanOrangtua;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -14,19 +15,28 @@ class PemanggilanOrangtuaController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $pemanggilans = PemanggilanOrangtua::when($search, function ($query) use ($search) {
-            return $query->where('nama_mhs', 'LIKE', "%{$search}%")
-                         ->orWhere('nim', 'LIKE', "%{$search}%")
-                         ->orWhere('jurusan', 'LIKE', "%{$search}%")
-                         ->orWhere('prodi', 'LIKE', "%{$search}%");
-        })->get();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $pemanggilans = PemanggilanOrangtua::query()
+            ->when($search, function ($query) use ($search) {
+                return $query->where('nim', 'LIKE', "%{$search}%")
+                    ->orWhere('jurusan', 'LIKE', "%{$search}%")
+                    ->orWhere('prodi', 'LIKE', "%{$search}%");
+            })
+            ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+                return $query->whereBetween('tanggal_pemanggilan', [$start_date, $end_date]);
+            })
+            ->get();
 
         return view('pemanggilan.index', compact('pemanggilans'));
     }
 
     public function tambah()
     {
-        return view('pemanggilan.tambah');
+        $mahasiswa = Mahasiswa::all();
+
+        return view('pemanggilan.tambah',compact('mahasiswa'));
     }
 
     public function store(Request $request)
@@ -35,7 +45,6 @@ class PemanggilanOrangtuaController extends Controller
             'nama_ortu' => 'required|string|max:255',
             'no_telp_ortu' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'nama_mhs' => 'required|string|max:255',
             'nim' => 'required|string|max:10',
             'semester' => 'required|integer|min:1|max:8',
             'jurusan' => 'required|string|max:255',
@@ -53,7 +62,8 @@ class PemanggilanOrangtuaController extends Controller
     public function edit($id)
     {
         $pemanggilan = PemanggilanOrangtua::findOrFail($id);
-        return view('pemanggilan.edit', compact('pemanggilan'));
+        $mahasiswa = Mahasiswa::all();
+        return view('pemanggilan.edit', compact('pemanggilan','mahasiswa'));
     }
 
     public function update(Request $request, $id)
@@ -77,7 +87,7 @@ class PemanggilanOrangtuaController extends Controller
     {
         $pemanggilan = PemanggilanOrangtua::findOrFail($id);
         $pdf = PDF::loadView('pemanggilan.pdf', compact('pemanggilan'));
-        return $pdf->stream('Surat_Pemanggilan_' . $pemanggilan->nama_mhs . '.pdf');
+        return $pdf->stream('Surat_Pemanggilan_' . $pemanggilan->mahasiswa->nama_mhs . '.pdf');
     }
 
     // Fungsi untuk export Excel
@@ -85,5 +95,30 @@ class PemanggilanOrangtuaController extends Controller
     {
         return Excel::download(new PemanggilanOrangtuaExport, 'Data_Pemanggilan.xlsx');
     }
+
+
+public function cetakRangePDF(Request $request)
+{
+    $request->validate([
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+    ]);
+
+    $pemanggilans = PemanggilanOrangtua::whereBetween('tanggal_pemanggilan', [
+        $request->start_date,
+        $request->end_date
+    ])->get();
+
+    $noSurat = 'B/123/PNC-BAAK/VI/2025'; // Ini bisa kamu sesuaikan dinamis jika perlu
+
+    $pdf = PDF::loadView('pemanggilan.cetak_range', [
+        'pemanggilans' => $pemanggilans,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'no_surat' => $noSurat
+    ]);
+
+    return $pdf->stream('Berita Acara Pemanggilan Orang Tua '.$request->start_date.'_to_'.$request->end_date.'.pdf');
+}
 
 }

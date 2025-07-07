@@ -88,7 +88,10 @@
                         </form>
                     </div>
 
-                    <!-- Tombol Cetak -->
+                    <a href="{{ route ('maspan.tambah') }}" class="btn btn-primary mb-3">
+                        <i class="fas fa-print"></i> Tambah
+                    </a>
+
                     <a href="/maspan/cetakmaspan" class="btn btn-warning mb-3" target="_blank">
                         <i class="fas fa-print"></i> Cetak
                     </a>

@@ -78,23 +78,31 @@
 
 
 <!-- Table displaying Mahasiswa Magang -->
-<table class="table table-bordered mt-3">
-    <thead>
+            <table class="table table-bordered table-striped" id="mahasiswamagangTable">
+            <thead class="thead-dark">
         <tr>
+            <th>No</th>
+            <th>No Surat</th>
             <th>NIM</th>
+            <th>Dosen Lapangan</th>
             <th>Durasi (months)</th>
             <th>Tahun Ajaran</th>
+            <th>Nilai dari Dosen</th>
             <th>Bukti Nilai (File)</th>
-            <th>Nilai</th>
+            <th>Nilai dari Perusahaan</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody id="mahasiswaMagangTableBody">
         @foreach($mahasiswaMagang as $mahasiswa)
         <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $mahasiswa->no_surat }}</td>
             <td>{{ $mahasiswa->nama_mahasiswa }} ({{ $mahasiswa->nim }})</td>
+            <td>{{ $mahasiswa->dosen->nama_dosen ?? 'N/A' }}</td>
             <td>{{ $mahasiswa->durasi }}</td>
             <td>{{ $mahasiswa->tahun_ajaran }}</td>
+            <td>{{ $mahasiswa->nilai_dosen }}</td>
             <td>
                 @if ($mahasiswa->bukti_nilai)
                 <a href="{{ asset('storage/' . $mahasiswa->bukti_nilai) }}" target="_blank">View File</a>
@@ -123,14 +131,32 @@
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
-                          <div class="form-group">
+                            <div class="form-group">
+                                <label for="no_surat">No Surat</label> <!-- New Field -->
+                                <input type="text" class="form-control" id="no_surat" name="no_surat" value ="{{$mahasiswa->no_surat}}"required>
+                            </div>
+                            <div class="form-group">
                                 <label for="nim">Mahasiswa (NIM)</label>
-                                <select class="form-control select2" id="nim" name="nim" required>
+                                <select class="form-control select2 nim-select" name="nim" required>
+
                                     <option value="">Select Mahasiswa</option>
                                     @foreach($mahasiswaList as $mahasiswaItem)
                                         <option value="{{ $mahasiswaItem->nim }}" 
                                             {{ isset($mahasiswa) && $mahasiswa->nim == $mahasiswaItem->nim ? 'selected' : '' }}>
                                             {{ $mahasiswaItem->nama_mahasiswa }} ({{ $mahasiswaItem->nim }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!-- Dosen Pembimbing Select2 Field -->
+                            <div class="form-group">
+                                <label for="dosen_id">Dosen Pembimbing</label>
+                                <select class="form-control select2 dosen-select" name="dosen_id" required>
+                                    <option value="">Select Dosen Pembimbing</option>
+                                    @foreach($dosenList as $dosen)
+                                        <option value="{{ $dosen->id_dosen }}"
+                                            {{ $mahasiswa->dosen_id == $dosen->id_dosen ? 'selected' : '' }}>
+                                            {{ $dosen->nama_dosen }} ({{ $dosen->nip }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -144,6 +170,10 @@
                                 <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" value="{{ $mahasiswa->tahun_ajaran }}" required>
                             </div>
                             <div class="form-group">
+                                <label for="nilai_dosen">Nilai Dosen(Max 100)</label>
+                                <input type="number" class="form-control" id="nilai_dosen" name="nilai_dosen" max="100" value="{{ $mahasiswa->nilai_dosen }}" >
+                            </div>
+                            <div class="form-group">
                                 <label for="bukti_nilai">Bukti Nilai (File)</label>
                                 <input type="file" class="form-control" id="bukti_nilai" name="bukti_nilai" accept=".png,.jpg,.jpeg,.pdf">
                                 @if ($mahasiswa->bukti_nilai)
@@ -152,7 +182,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="nilai">Nilai (Max 100)</label>
-                                <input type="number" class="form-control" id="nilai" name="nilai" max="100" value="{{ $mahasiswa->nilai }}" required>
+                                <input type="number" class="form-control" id="nilai" name="nilai" max="100" value="{{ $mahasiswa->nilai }}" >
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -207,12 +237,28 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="no_surat">No Surat</label> <!-- New Field -->
+                        <input type="text" class="form-control" id="no_surat" name="no_surat" required>
+                    </div>
+                    <div class="form-group">
                         <label for="nim">Mahasiswa</label>
-                        <select class="form-control select2" id="nim" name="nim" required>
+                        <select class="form-control select2 nim-select" name="nim" required>
+
                             <option value="">Select Mahasiswa</option>
                             @foreach($mahasiswaList as $mahasiswa)
                                 <option value="{{ $mahasiswa->nim }}">
                                     {{ $mahasiswa->nama_mahasiswa ? $mahasiswa->nama_mahasiswa : 'Nama not found' }} ({{ $mahasiswa->nim }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosen_id">Dosen Pembimbing</label>
+                        <select class="form-control select2 dosen-select" name="dosen_id" required>
+                            <option value="">Select Dosen Pembimbing</option>
+                            @foreach($dosenList as $dosen)
+                                <option value="{{ $dosen->id_dosen }}">
+                                    {{ $dosen->nama_dosen ? $dosen->nama_dosen : 'Nama not found' }} ({{ $dosen->nip }})
                                 </option>
                             @endforeach
                         </select>
@@ -226,12 +272,16 @@
                         <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" placeholder="Enter Tahun Ajaran" required>
                     </div>
                     <div class="form-group">
+                        <label for="nilai_dosen">Nilai Dosen(Max 100)</label>
+                        <input type="number" class="form-control" id="nilai_dosen" name="nilai_dosen" max="100" placeholder="Enter Nilai" >
+                    </div>
+                    <div class="form-group">
                         <label for="bukti_nilai">Bukti Nilai (File)</label>
                         <input type="file" class="form-control" id="bukti_nilai" name="bukti_nilai" accept=".png,.jpg,.jpeg,.pdf">
                     </div>
                     <div class="form-group">
                         <label for="nilai">Nilai (Max 100)</label>
-                        <input type="number" class="form-control" id="nilai" name="nilai" max="100" placeholder="Enter Nilai" required>
+                        <input type="number" class="form-control" id="nilai" name="nilai" max="100" placeholder="Enter Nilai" >
                     </div>
                     <input type="hidden" name="id_perusahaan" value="{{ $magang->id }}">
                 </div>
@@ -248,65 +298,92 @@
 
 @push('scripts')
 <script>
-$(document).ready(function() {
-    // Initialize select2 for Mahasiswa with search enabled
-    $('#addMahasiswaMagangModal').on('shown.bs.modal', function() {
-        $('#nim').select2({
-            width: '100%',
-            placeholder: 'Select Mahasiswa',
-            allowClear: true,
-            minimumInputLength: 1 // Enable searching after typing 1 character
-        });
-    });
-
-    // Handle form submission via AJAX
-    $('#addMahasiswaMagangForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-
-        $.ajax({
-            url: $(this).attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                $('#addMahasiswaMagangModal').modal('hide');
-                toastr.success('Mahasiswa Magang has been successfully added.');
-            },
-            error: function(xhr, status, error) {
-                toastr.error('Failed to add Mahasiswa Magang. Please try again.');
-            }
-        });
-    });
-
-    success: function(response) {
-    $('#addMahasiswaMagangModal').modal('hide');
-    toastr.success(response.success);
-    location.reload(); // Reload the page or update the content dynamically
-}
-
-    // Reset the form and select2 input when the modal is closed
-    $('#addMahasiswaMagangModal').on('hidden.bs.modal', function() {
-        $(this).find('form')[0].reset();
-        $('#nim').val(null).trigger('change');
-    });
-});
-
-
-</script>
-<script>
-    document.getElementById('searchBar').addEventListener('keyup', function() {
-        let input = this.value.toLowerCase();
-        let tableBody = document.getElementById('mahasiswaMagangTableBody');
-        let rows = tableBody.getElementsByTagName('tr');
-
-        for (let i = 0; i < rows.length; i++) {
-            let rowData = rows[i].textContent.toLowerCase();
-            rows[i].style.display = rowData.includes(input) ? '' : 'none';
+    $(document).ready(function () {
+        let table = $('#mahasiswamagangTable');
+        if (table.length && !$.fn.DataTable.isDataTable(table)) {
+            table.DataTable({
+                order: [],
+                responsive: true
+            });
         }
     });
 </script>
+<script>
+$(document).ready(function () {
+    // Initialize Select2 globally for all nim-select elements inside modals
+    $('.nim-select').select2({
+        dropdownParent: $('#addMahasiswaMagangModal').length ? $('#addMahasiswaMagangModal') : $(document.body),
+        width: '100%',
+        placeholder: 'Select Mahasiswa',
+        allowClear: true,
+        minimumInputLength: 1
+    });
 
+    // Re-initialize for dynamically added modals (edit modals)
+    $('.modal').on('shown.bs.modal', function () {
+        $(this).find('.nim-select').select2({
+            dropdownParent: $(this),
+            width: '100%',
+            placeholder: 'Select Mahasiswa',
+            allowClear: true,
+            minimumInputLength: 1
+        });
+    });
+
+    // Clear on close
+    $('.modal').on('hidden.bs.modal', function () {
+        $(this).find('form')[0].reset();
+        $(this).find('.nim-select').val(null).trigger('change');
+    });
+});
+</script>
+<script>
+$(document).ready(function () {
+    // Initialize Select2 for dosen-select elements
+    $('.dosen-select').select2({
+        dropdownParent: $('#addMahasiswaMagangModal').length ? $('#addMahasiswaMagangModal') : $(document.body),
+        width: '100%',
+        placeholder: 'Select Dosen Pembimbing',
+        allowClear: true,
+        minimumInputLength: 1,
+        ajax: {
+            url: '/search-dosen', // Route for AJAX search
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term // search term
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.nama_dosen + ' (' + item.id_dosen + ')',
+                            id: item.id_dosen
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    // Re-initialize for dynamically added modals (edit modals)
+    $('.modal').on('shown.bs.modal', function () {
+        $(this).find('.dosen-select').select2({
+            dropdownParent: $(this),
+            width: '100%',
+            placeholder: 'Select Dosen Pembimbing',
+            allowClear: true,
+            minimumInputLength: 1
+        });
+    });
+
+    // Clear on close
+    $('.modal').on('hidden.bs.modal', function () {
+        $(this).find('.dosen-select').val(null).trigger('change');
+    });
+});
+</script>
 @endpush

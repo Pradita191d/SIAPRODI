@@ -114,81 +114,33 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label>Status Penelitian</label>
-              <div class="radio-group">
-                @foreach(['Dalam proses', 'Selesai', 'Dibatalkan'] as $status)
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status_penelitian" value="{{ $status }}" {{ $penelitian->status_penelitian == $status ? 'checked' : '' }}>
-                    <label class="form-check-label">{{ $status }}</label>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Status Penelitian</label>
+                  <div class="radio-group">
+                    @foreach(['Dalam proses', 'Selesai', 'Dibatalkan'] as $status)
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status_penelitian" value="{{ $status }}" {{ $penelitian->status_penelitian == $status ? 'checked' : '' }}>
+                        <label class="form-check-label">{{ $status }}</label>
+                      </div>
+                    @endforeach
                   </div>
-                @endforeach
+                  @error('status_penelitian')
+                    <div class="text-danger">{{ $message }}</div>
+                  @enderror
+                </div>
               </div>
-              @error('status_penelitian')
-                <div class="text-danger">{{ $message }}</div>
-              @enderror
-            </div>
-            
-            <div class="form-group">
-              <label>Tambah Anggota</label>
-              <table class="table table-bordered" id="anggota-table">
-                <thead>
-                  <tr>
-                    <th>Aksi</th>
-                    <th>Nama Anggota</th>
-                  </tr>
-                </thead>
-                <tbody id="anggota-table-body">
-                  @if($penelitian->anggota->isNotEmpty())
-                      @foreach($penelitian->anggota as $index => $anggota)
-                        <tr>
-                          <td class="text-center">
-                            <button type="button" class="add-row btn btn-success btn-sm">
-                              <i class="fas fa-plus-circle"></i>
-                            </button>
-                            @if(!$loop->first) 
-                              <button type="button" class="remove-row btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                              </button>
-                            @endif
-                          </td>
-                          <td>
-                            <select name="anggota[{{ $index }}][NIM]" class="form-control id_mahasiswa">
-                              <option value=""></option>
-                              @foreach($mahasiswa as $mhs)
-                                <option value="{{ $mhs->NIM }}" {{ $anggota->NIM == $mhs->NIM ? 'selected' : '' }}>
-                                  {{ $mhs->NIM }} - {{ $mhs->nama_mahasiswa }}
-                                </option>
-                              @endforeach
-                            </select>
-                            @error("anggota.$index.NIM")
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                          </td>
-                        </tr>
-                      @endforeach
-                    @else
-                      @php $index = 0; @endphp
-                      <tr>
-                          <td class="text-center">
-                              <button type="button" class="add-row btn btn-success btn-sm">
-                                  <i class="fas fa-plus-circle"></i>
-                              </button>
-                          </td>
-                          <td>
-                              <select name="anggota[{{ $index }}][NIM]" class="form-control id_mahasiswa">
-                                  <option value=""></option>
-                                  @foreach($mahasiswa as $mhs)
-                                      <option value="{{ $mhs->NIM }}">
-                                          {{ $mhs->NIM }} - {{ $mhs->nama_mahasiswa }}
-                                      </option>
-                                  @endforeach
-                              </select>
-                          </td>
-                      </tr>
-                  @endif                
-                </tbody>
-              </table>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Nama Anggota</label>
+                  <textarea name="nama_anggota" class="form-control" rows="4" placeholder="Pisahkan dengan baris baru">{{ old('nama_anggota', $penelitian->anggota->pluck('nama_anggota')->implode("\n")) }}</textarea>
+                  @error('nama_anggota')
+                    <div class="text-danger">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
             </div>
 
             <div class="button-container">
@@ -210,42 +162,12 @@
           });
       });
 
-    $(document).on('click', '.add-row', function () {
-      let index = $('#anggota-table-body tr').length;
-      const newRow = `
-          <tr>
-              <td class="p-1 text-center">
-                  <button type="button" class="add-row btn btn-success btn-sm">
-                      <i class="fas fa-plus-circle"></i>
-                  </button>
-                  <button type="button" class="remove-row btn btn-danger btn-sm">
-                      <i class="fas fa-trash"></i>
-                  </button>
-              </td>
-              <td>
-                  <select name="anggota[${index}][NIM]" class="form-control id_mahasiswa">
-                      <option value=""></option>
-                      @foreach($mahasiswa as $mhs)
-                          <option value="{{ $mhs->NIM }}">
-                              {{ $mhs->NIM }} - {{ $mhs->nama_mahasiswa }}
-                          </option>
-                      @endforeach
-                  </select>
-              </td>
-          </tr>`;
-
-      $('#anggota-table-body').append(newRow);
-      $('.id_mahasiswa').select2(); // Inisialisasi Select2 ulang
-    });
-
     $(document).ready(function () {
-      $('.id_dosen').select2();
-
-      $('.id_mahasiswa').select2();
+      $('.id_dosen').select2({
+        placeholder: 'Pilih Dosen',
+        width: '100%'
+      });
     });
-
-    $(document).on('click', '.remove-row', function () {
-      $(this).closest('tr').remove();
-    });
+    
   </script>
 @endsection

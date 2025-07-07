@@ -30,6 +30,8 @@ class DosenController extends Controller
             'alamat' => 'required|string|max:255',
             'no_telp' => 'required|numeric',
             'jabatan_fungsional' => 'required|string|max:255',
+            'pangkat' => 'required|string|max:255',
+            'golongan' => 'required|string|max:255',
             'no_serdos' => 'required|numeric',
             'status_dosen' => 'required|string|max:255',
         ]);
@@ -42,6 +44,8 @@ class DosenController extends Controller
             'alamat' => $request->alamat, // Diperbaiki
             'no_telp' => $request->no_telp, // Diperbaiki
             'jabatan_fungsional' => $request->jabatan_fungsional,
+            'pangkat' => $request->pangkat,
+            'golongan' => $request->golongan,
             'no_serdos' => $request->no_serdos,
             'status_dosen' => $request->status_dosen,
         ]);
@@ -67,6 +71,8 @@ class DosenController extends Controller
             'alamat' => 'nullable|string|max:255',
             'no_telp' => 'nullable|string|max:15',
             'jabatan_fungsional' => 'nullable|string|max:100',
+            'pangkat' => 'nullable|string|max:100',
+            'golongan' => 'nullable|string|max:100',
             'no_serdos' => 'nullable|string|max:50',
             'status_dosen' => 'required|string|max:50',
         ]);

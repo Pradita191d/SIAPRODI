@@ -48,7 +48,7 @@ class MbkmController extends Controller
     function submit(Request $request)
     {
         // Ambil data mahasiswa berdasarkan NIM
-        $mahasiswa = Mahasiswa::where('NIM', $request->nim)->first();
+        $mahasiswa = Mahasiswa::where('nim', $request->nim)->first();
 
         // Simpan data MBKM
         $mbkm = new Mbkm();
@@ -74,7 +74,7 @@ class MbkmController extends Controller
         $mbkm->catatan_tambahan = $request->catatan_tambahan;
         $mbkm->save();
 
-        return redirect()->route('mbkm.tampil');
+        return redirect()->route('mbkm.tampil')->with('success', 'Data MBKM berhasil ditambahkan.');
     }
 
     function edit($id)
@@ -87,7 +87,7 @@ class MbkmController extends Controller
     function update(Request $request, $id)
     {
         // Ambil data mahasiswa berdasarkan NIM
-        $mahasiswa = Mahasiswa::where('NIM', $request->nim)->first();
+        $mahasiswa = Mahasiswa::where('nim', $request->nim)->first();
 
         // Update data MBKM
         $mbkm = Mbkm::find($id);
@@ -113,14 +113,14 @@ class MbkmController extends Controller
         $mbkm->catatan_tambahan = $request->catatan_tambahan;
         $mbkm->update();
 
-        return redirect()->route('mbkm.tampil');
+        return redirect()->route('mbkm.tampil')->with('success', 'Data MBKM berhasil diperbarui.');
     }
 
     function delete($id)
     {
         $mbkm = Mbkm::find($id);
         $mbkm->delete();
-        return redirect()->route('mbkm.tampil');
+        return redirect()->route('mbkm.tampil')->with('success', 'Data MBKM berhasil dihapus.');;
     }
 
 

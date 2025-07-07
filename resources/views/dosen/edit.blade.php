@@ -44,14 +44,41 @@
                 <div class="mb-3">
                     <label for="jabatan_fungsional" class="form-label">Jabatan Fungsional</label>
                     <select class="form-control" name="jabatan_fungsional" id="jabatan_fungsional" required>
-                        <option value="">-- Pilih Jabatan Fungsiona; --</option>
-                        <option value="Direktur" {{ $dosen->status_dosen == 'Direktur' ? 'selected' : '' }}>Direktur</option>
-                        <option value="Wakil Direktur 1" {{ $dosen->jabatan_fungsional == 'Wakil Direktur 1' ? 'selected' : '' }}>Wakil Direktur 1</option>
-                        <option value="Wakil Direktur 2" {{ $dosen->jabatan_fungsional == 'Wakil Direktur 2' ? 'selected' : '' }}>Wakil Direktur 2</option>
-                        <option value="Wakil Direktur 3" {{ $dosen->jabatan_fungsional == 'Wakil Direktur 3' ? 'selected' : '' }}>Wakil Direktur 3</option>
-                        <option value="Kepala Jurusan" {{ $dosen->jabatan_fungsional == 'Kepala Jurusan' ? 'selected' : '' }}>Kepala Jurusan</option>
-                        <option value="Kepala Program Studi" {{ $dosen->jabatan_fungsional == 'Kepala Program Studi' ? 'selected' : '' }}>Kepala Program Studi</option>
-                        <option value="Dosen" {{ $dosen->jabatan_fungsional == 'Dosen' ? 'selected' : '' }}>Dosen</option>
+                        <option value="">-- Pilih Jabatan Fungsional --</option>
+                        <option value="Asisten Ahli" {{ $dosen->jabatan_fungsional == 'Asisten Ahli' ? 'selected' : '' }}>Asisten Ahli</option>
+                        <option value="Lektor" {{ $dosen->jabatan_fungsional == 'Lektor' ? 'selected' : '' }}>Lektor</option>
+                        <option value="Lektor Kepala" {{ $dosen->jabatan_fungsional == 'Lektor Kepala' ? 'selected' : '' }}>Lektor Kepala</option>
+                        <option value="Guru Besar/Profesor" {{ $dosen->jabatan_fungsional == 'Guru Besar/Profesor' ? 'selected' : '' }}>Guru Besar/Profesor</option>
+
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="pangkat" class="form-label">Pangkat</label>
+                    <select class="form-control" name="pangkat" id="pangkat" required>
+                        <option value="">-- Pilih Pangkat --</option>
+                        <option value="Penata Muda Tingkat I" {{ $dosen->pangkat == 'Penata Muda Tingkat I' ? 'selected' : '' }}>Penata Muda Tingkat I</option>
+                        <option value="Penata" {{ $dosen->pangkat == 'Penata' ? 'selected' : '' }}>Penata</option>
+                        <option value="Penata Tingkat I" {{ $dosen->pangkat == 'Penata Tingkat I' ? 'selected' : '' }}>Penata Tingkat I</option>
+                        <option value="Pembina" {{ $dosen->pangkat == 'Pembina' ? 'selected' : '' }}>Pembina</option>
+                        <option value="Pembina Tingkat I" {{ $dosen->pangkat == 'Pembina Tingkat I' ? 'selected' : '' }}>Pembina Tingkat I</option>
+                        <option value="Pembina Utama Muda" {{ $dosen->pangkat == 'Pembina Utama Muda' ? 'selected' : '' }}>Pembina Utama Muda</option>
+                        <option value="Pembina Utama Madya" {{ $dosen->pangkat == 'Pembina Utama Madya' ? 'selected' : '' }}>Pembina Utama Madya</option>
+                        <option value="Pembina Utama" {{ $dosen->pangkat == 'Pembina Utama' ? 'selected' : '' }}>Pembina Utama</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="golongan" class="form-label">Golongan</label>
+                    <select class="form-control" name="golongan" id="golongan" required>
+                        <option value="">-- Pilih Golongan --</option>
+                        <option value="III/b" {{ $dosen->golongan == 'III/b' ? 'selected' : '' }}>III/b</option>
+                        <option value="III/c" {{ $dosen->golongan == 'III/c' ? 'selected' : '' }}>III/c</option>
+                        <option value="III/d" {{ $dosen->golongan == 'III/d' ? 'selected' : '' }}>III/d</option>
+                        <option value="IV/a" {{ $dosen->golongan == 'IV/a' ? 'selected' : '' }}>IV/a</option>
+                        <option value="IV/b" {{ $dosen->golongan == 'IV/b' ? 'selected' : '' }}>IV/b</option>
+                        <option value="IV/c" {{ $dosen->golongan == 'IV/c' ? 'selected' : '' }}>IV/c</option>
+                        <option value="IV/d" {{ $dosen->golongan == 'IV/d' ? 'selected' : '' }}>IV/d</option>
+                        <option value="IV/e" {{ $dosen->golongan == 'IV/d' ? 'selected' : '' }}>IV/e</option>
+                       
                     </select>
                 </div>
                 <div class="mb-3">

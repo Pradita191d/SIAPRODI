@@ -40,6 +40,13 @@
                                         <label for="nama_dosen" class="form-label fw-bold">Nama Dosen</label>
                                         <input type="text" class="form-control" id="nama_dosen" disabled>
                                     </div>
+                                     <div class="mb-3">
+                                        <label for="no_sertikom" class="form-label fw-bold">Nomor Sertifikat</label>
+                                        <input type="text" class="form-control @error('no_sertikom') is-invalid @enderror" name="no_sertikom" id="no_sertikom" value="{{ old('no_sertikom') }}" required>
+                                        @error('no_sertikom')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                     </div>
 
                                     <div class="mb-3">
                                         <label for="nama_sertifikat" class="form-label fw-bold">Nama Sertifikat</label>
@@ -94,8 +101,8 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <button type="submit" class="btn btn-success px-4"><i class="fas fa-save"></i> Simpan</button>
                                 <a href="{{ url('/sertikomcrud') }}" class="btn btn-secondary px-4"><i class="fas fa-arrow-left"></i> Kembali</a>
+                                <button type="submit" class="btn btn-success px-4"><i class="fas fa-save"></i> Simpan</button>
                             </div>
                         </form>
                     </div>

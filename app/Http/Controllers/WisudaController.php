@@ -9,7 +9,7 @@ use App\Models\WisudaModel;
 use Shuchkin\SimpleXLSXGen;
 use Illuminate\Http\Request;
 use App\Models\MahasiswaModel;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\TahunWisudaModel;
 use Illuminate\Support\Facades\DB;
 

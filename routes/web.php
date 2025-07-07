@@ -9,11 +9,13 @@ use App\Http\Controllers\MbkmController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\PemanggilanOrangtuaController;
 use App\Http\Controllers\PenelitianDosenController;
+use App\Http\Controllers\PkmController;
 use App\Http\Controllers\PresMhsController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\RKAController;
+use App\Http\Controllers\SertikomController;
 use App\Http\Controllers\SertMahController;
 use App\Http\Controllers\TaController;
 use App\Http\Controllers\TahunWisudaController;
@@ -21,6 +23,7 @@ use App\Http\Controllers\TorController;
 use App\Http\Controllers\UndurDiriDoController;
 
 use App\Http\Controllers\WisudaController;
+use App\Http\Controllers\YudisiumController;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\PenelitianDosen;
@@ -73,7 +76,7 @@ Route::get('/lihat_mahasiswa/{id_mahasiswa}', function ($id_mahasiswa) {
 
 Route::post('/tambah_mahasiswa', [mahasiswaController::class, 'store'])->name('mahasiswa.store');
 
-Route::post('/mahasiswa/edit/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+Route::post('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
 
 Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
 
@@ -91,15 +94,16 @@ Route::get('/tugas_akhir/export', [TaController::class, 'export'])->name('tugas_
 //TA
 
 // sertifikat mahasiswa
-Route::get('/sertifikat', [SertMahController::class, 'index'])->name('sertifikat_mahasiswa.index');
+Route::get('/sertifikat_mahasiswa', [SertMahController::class, 'index'])->name('sertifikat_mahasiswa.index');
 Route::post('/sertifikat/store', [SertMahController::class, 'store'])->name('sertifikat_mahasiswa.store');
 Route::get('/get-mahasiswa', [SertMahController::class, 'getMahasiswa'])->name('get_mahasiswa');
-Route::get('/sertifikat/{id}/edit', 'SertifikatMahasiswaController@edit')->name('sertifikat_mahasiswa.edit');
-Route::put('/sertifikat/{id}', 'SertifikatMahasiswaController@update')->name('sertifikat_mahasiswa.update');
+// Route::get('/sertifikat/{id}/edit', 'SertifikatMahasiswaController@edit')->name('sertifikat_mahasiswa.edit');
+// Route::put('/sertifikat/{id}', 'SertifikatMahasiswaController@update')->name('sertifikat_mahasiswa.update');
 Route::resource('sertifikat_mahasiswa', SertMahController::class);
 // sertifikat mahasiswa
 
 // magang
+Route::get('/magang', [MagangController::class, 'index'])->name('magang.index');
 Route::resource('magang', MagangController::class);
 Route::get('/magang/{id}/edit', [MagangController::class, 'edit'])->name('magang.edit');
 Route::post('magang/{magang}/store-mahasiswa', [MagangController::class, 'storeMahasiswaMagang'])->name('magang.storeMahasiswaMagang');
@@ -139,7 +143,6 @@ Route::get('/ipk/rekapitulasi', [IpkController::class, 'getRekapitulasi'])->name
 //mei
 Route::get('/mou', [MouController::class, 'index'])->name('mou.index');
 Route::get('/mou/export', [MouController::class, 'exportExcel'])->name('mou.export');
-Route::get('/mou/{id}', [MouController::class, 'show'])->name('mou.show');
 Route::post('/mou/store', [MouController::class, 'store'])->name('mou.store');
 Route::delete('/mou/{id_mou}', [MouController::class, 'destroy'])->name('mou.destroy');
 Route::put('/mou/{id_mou}', [MouController::class, 'update'])->name('mou.update');
@@ -163,6 +166,9 @@ Route::get('/mbkm/edit/{id}', [MbkmController::class, 'edit'])->name('mbkm.edit'
 // Route::post('/mbkm/update/{id}', [MbkmController::class, 'update'])->name('mbkm.update');
 Route::post('/mbkm/delete/{id}', [MbkmController::class, 'delete'])->name('mbkm.delete');
 //Route::get('/mbkm', [MbkmController::class, 'cari'])->name('mbkm.cari');
+
+Route::get('/mbkm/cetak/{id}', [MbkmController::class, 'cetakmbkm'])->name('mbkm.cetak');
+Route::get('/mbkm/{id}', [MbkmController::class, 'detail'])->name('mbkm.detail');
 //Diva
 
 //Chinta
@@ -174,6 +180,7 @@ Route::put('/pemanggilan/{id}', [PemanggilanOrangtuaController::class, 'update']
 Route::delete('/pemanggilan/{id}', [PemanggilanOrangtuaController::class, 'destroy'])->name('pemanggilan.destroy');
 Route::get('/pemanggilan/pdf/{id}', [PemanggilanOrangtuaController::class, 'cetakPDF'])->name('pemanggilan.pdf');
 Route::get('/pemanggilan/export-excel', [PemanggilanOrangtuaController::class, 'exportExcel'])->name('pemanggilan.exportExcel');
+Route::post('/pemanggilan/cetak-range-pdf', [PemanggilanOrangtuaController::class, 'cetakRangePDF'])->name('pemanggilan.cetakRangePDF');
 //Chinta
 
 //Ais
@@ -202,7 +209,16 @@ route::get('prestasi/exportpdf', [PresMhsController::class, 'exportpdf']); //cet
 route::get('prestasi/cetakprestasi', [PresMhsController::class, 'cetakprestasi']); //cetak pdf
 //Sheilya
 
-//Adhe
+//indah
+Route::get('/sertikomcrud', [SertikomController::class, 'index'])->name('index');
+Route::get('/sertikom/tambah', [SertikomController::class, 'create'])->name('sertikom.create');
+Route::post('/sertikom/tambah', [SertikomController::class, 'store'])->name('sertikom.store');
+Route::get('/sertikom/{id_sertikom}/edit', [SertikomController::class, 'edit'])->name('sertikom.edit');
+Route::put('/sertikom/{id_sertikom}', [SertikomController::class, 'update'])->name('sertikom.update');
+Route::delete('/sertikom/{id_sertikom}', [SertikomController::class, 'destroy'])->name('sertikom.destroy');
+//indah
+
+// Adhe
 // Perbaikan: Tambahkan nama 'dosen.index' agar bisa dipanggil di Blade
 Route::get('/dosen', function () {
     $dosen = Dosen::all();
@@ -266,22 +282,22 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
 
 //irma
- Route::get('/maspan', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
+  Route::get('/maspan', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
     ->name('maspan.index');
 
     Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
         ->name('maspan.search');
-  
+
     Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
         ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
 
     Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
         ->name('amspan.update');
-    
+
     Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
         ->name('maspan.destroy');
 
-   
+
     Route::put('/maspan/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])->name('maspan.update'); // Untuk menyimpan perubahan
 
     Route::get('maspan/exportpdf', [MahasiswaSemesterPerpanjanganController::class, 'exportpdf']); //cetak pdf
@@ -289,7 +305,7 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
 // ✅ Gunakan prefix 'maspan' untuk mengelompokkan route
     Route::prefix('maspan')->name('maspan.')->group(function () {
-        
+
     // Route::get('/', [MahasiswaSemesterPerpanjanganController::class, 'tampil_mahasiswa_perpanjangan'])
     //     ->name('index');
 
@@ -298,17 +314,51 @@ Route::get('/sk/search', [TahunWisudaController::class, 'search']);
 
     // Route::get('/search', [MahasiswaSemesterPerpanjanganController::class, 'search'])
     //     ->name('search');
-  
+
     // Route::get('/maspan/{id}/edit', [MahasiswaSemesterPerpanjanganController::class, 'edit'])
     //     ->name('maspan.edit'); // Sesuai dengan yang dipakai di Blade
 
     // Route::put('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])
     //     ->name('update');
-    
+
     // Route::delete('/{id}', [MahasiswaSemesterPerpanjanganController::class, 'destroy'])
     //     ->name('destroy');
 
     // Route::put('/maspan/{id}', [MahasiswaSemesterPerpanjanganController::class, 'update'])->name('maspan.update'); // Untuk menyimpan perubahan
 });
 //irma
-require __DIR__ . '/auth.php';
+
+//yuni
+Route::get('/pkm', [PkmController::class, 'index'])->name('index');
+Route::get('/pkm/tambah', [PkmController::class, 'create'])->name('pkm.create');
+Route::post('/pkm/tambah', [PkmController::class, 'store'])->name('pkm.store');
+Route::post('/pkm/edit', [PkmController::class, 'store'])->name('pkm.edit');
+// Route::delete('/pkm/{id_pkm}', [PkmController::class, 'destroy'])->name('pkm.destroy');
+Route::delete('/pkm/{id}', [PkmController::class, 'destroy'])->name('pkm.destroy');
+Route::get('/pkm', [PkmController::class, 'index'])->name('pkm.index');
+Route::get('/pkm/{id}/edit', [PkmController::class, 'edit'])->name('pkm.edit');
+Route::put('/pkm/{id}', [PkmController::class, 'update'])->name('pkm.update');
+//
+
+//isna
+Route::get('/yudisium', [YudisiumController::class, 'index'])->name('yudisium.index'); // Halaman utama
+Route::get('/yudisium/create', [YudisiumController::class, 'create']); // Form tambah data
+Route::post('/yudisium/store', [YudisiumController::class, 'store']); //name('yudisium.store');
+
+// Route::post('yudisium/store', [YudisiumController::class, 'store']); // Simpan data
+Route::get('/yudisium/{id}/edit', [YudisiumController::class, 'edit'])->name('yudisium.edit');
+Route::put('/yudisium/{id}', [YudisiumController::class, 'update'])->name('yudisium.update');
+Route::delete('/yudisium/{id}', [YudisiumController::class, 'destroy'])->name('yudisium.destroy');
+// Route::get('/yudisium/ganjil', [YudisiumController::class, 'ganjil'])->name('yudisium.ganjil');
+// Route::get('/yudisium/genap', [YudisiumController::class, 'genap'])->name('yudisium.genap');
+Route::get('yudisium/search', [YudisiumController::class, 'search']);
+Route::resource('mahasiswa', MahasiswaController::class);
+
+route::get('/yudisium/exportpdf', [YudisiumController::class, 'exportpdf']); //cetak pdf
+route::get('/yudisium/cetakyudisium', [YudisiumController::class, 'cetakyudisium']); //cetak pdf
+//isna
+// require __DIR__ . '/auth.php';
+Route::get('{route}', function ($route) {
+    return response("<h1>{$route} Not Found</h1>", 200)
+           ->header('Content-Type', 'text/html');
+});
