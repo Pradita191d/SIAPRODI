@@ -34,4 +34,5 @@ class Mahasiswa extends Model
         return $this->hasOne(Ipk::class, 'nim', 'nim');
     }
 
+
 }

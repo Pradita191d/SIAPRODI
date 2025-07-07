@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header bg-success text-white">
+        <div class="card-header bg-dark text-white">
             <h5 class="mb-0">Tambah Data Wisuda</h5>
         </div>
         <div class="card-body">
@@ -21,6 +21,14 @@
                         @endforeach
                     </select>
                     @error('nim')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="semester" class="form-label">Semester</label>
+                    <input type="number" class="form-control" id="semester" name="semester" value="{{ old('semester') }}" min="1" max="14" placeholder="Contoh: 6">
+                    @error('semester')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
@@ -93,7 +101,7 @@
             placeholder: "Pilih Data",
             allowClear: true,
             width: '100%',
-            minimumInputLength: 1
+            minimumInputLength: 0
         });
     });
 </script>

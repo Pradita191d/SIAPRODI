@@ -62,7 +62,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $tw->tahun_wisuda }}</td>
                   <td>
-                        @if($tw->sk_wisuda !== '-' && $tw->sk_wisuda !== null)
+                        @if($tw->sk_wisuda !== '-' && $tw->sk_wisuda !== null) 
                             <a href="{{ asset('storage/' . $tw->sk_wisuda) }}" target="_blank" class="btn btn-primary btn-sm">
                                 Lihat SK
                             </a>

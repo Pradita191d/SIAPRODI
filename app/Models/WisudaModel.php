@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WisudaModel extends Model
 {
     protected $table = 'wisuda';
-    protected $fillable = ['nim',
+    protected $fillable = ['nim', 'semester',
     'tahun_masuk', 'status_wisuda', 'tahun_wisuda_id']; 
 
     public function mahasiswa()
@@ -16,6 +16,10 @@ class WisudaModel extends Model
     }
 
     public function sk()
+    {
+        return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
+    }
+     public function tahunWisuda()
     {
         return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
     }

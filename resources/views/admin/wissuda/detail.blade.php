@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header bg-info text-white">
+        <div class="card-header bg-dark text-white">
             <h5 class="mb-0">Detail Data Wisuda</h5>
         </div>
         <div class="card-body">
@@ -17,8 +17,8 @@
                     <td>{{ $wisuda->mahasiswa->nama_mahasiswa }}</td>
                 </tr>
                 <tr>
-                    <th>Tahun Masuk</th>
-                    <td>{{ $wisuda->mahasiswa->tahun_masuk }}</td>
+                    <th>Semester</th>
+                    <td>{{ $wisuda->semester }}</td>
                 </tr>
                 <tr>
                     <th>Status Wisuda</th>
@@ -33,8 +33,7 @@
                     <td>
                         @if($wisuda->sk?->sk_wisuda && $wisuda->sk?->sk_wisuda !== '-')
                             <a href="{{ asset('storage/' . $wisuda->sk->sk_wisuda) }}" target="_blank" class="btn btn-primary btn-sm">
-                                <i class="nav-icon fas fa-file"></i>
-                                Lihat SK
+                                <i class="nav-icon fas fa-file"></i> Lihat SK
                             </a>
                         @else
                             <span class="text-danger">Belum ada SK Wisuda</span>

@@ -14,4 +14,10 @@ class Wisuda extends Model
     {
         return $this->belongsTo(Mahasiswa::class, 'nim', 'nim'); // Pastikan foreign key benar
     }
+    
+    public function tahunWisuda()
+    {
+        return $this->belongsTo(TahunWisudaModel::class, 'tahun_wisuda_id', 'id');
+    }
+
 }

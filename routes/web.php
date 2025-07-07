@@ -220,21 +220,19 @@ Route::get('/dosen', [DosenController::class, 'cari'])->name('dosen.index');
 //Adhe
 
 //astrid
-// route::get('/wisuda/laporan', [::class, 'index']);
 
-Route::get('/wisuda', function () {
-    return view('laporan.index');
-});
+// Route::get('/wisuda', function () {
+//     return view('laporan.index');
+// });
 
-Route::get('/wisuda/preview', function () {
-    return view('laporan.cetak');
-});
-Route::get('/wisuda/preview/hasil', function () {
-    return view('laporan.hasil');
-});
+// Route::get('/wisuda/preview', function () {
+//     return view('laporan.cetak');
+// });
+// Route::get('/wisuda/preview/hasil', function () {
+//     return view('laporan.hasil');
+// });
 
 route::get('wisuda/preview/cetak', [WisudaController::class, 'cetakWisuda']);
-Route::get('/wisuda', [WisudaController::class, 'index']);
 Route::get('/wisuda/preview', [WisudaController::class, 'preview']);
 route::get('/wisuda/search', [WisudaController::class, 'searchPreview']);
 route::get('wisuda/cetakWisuda', [WisudaController::class, 'cetakWisuda'])->name('wisuda.hasil');
@@ -245,18 +243,6 @@ route::get('wisuda/exportpdf', [WisudaController::class, 'exportpdf'])->name('wi
 
 
 //dita
-Route::get('/wisuda', function () {
-    return view('admin.wissuda.index');
-});
-Route::get('/wisuda/create', function () {
-    return view('admin.wisuda.create');
-});
-Route::get('/wisuda/detail', function () {
-    return view('admin.wisuda.detail');
-});
-Route::get('/wisuda/edit', function () {
-    return view('admin.wisuda.edit');
-});
 
 Route::get('/wissuda', [WisudaController::class, 'index']);
 Route::get('/wissuda/{id}/detail', [WisudaController::class, 'show']);
